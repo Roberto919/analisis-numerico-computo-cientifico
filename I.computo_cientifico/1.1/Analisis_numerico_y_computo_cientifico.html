@@ -105,8 +105,8 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../1.5/Definicion_de_funcion_derivada_de_una_funcion.html">
-   1.5 Definición de función y derivada de una función
+  <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html">
+   1.5 Definición de función, continuidad y derivada
   </a>
  </li>
  <li class="toctree-l1">
@@ -117,6 +117,18 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../1.7/Integracion_numerica.html">
    1.7 Integración Numérica
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  II. Cómputo matricial
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.1/Operaciones_y_transformaciones_basicas_del_Algebra_Lineal_Numerica.html">
+   2.1 Operaciones y transformaciones básicas del Álgebra Lineal Numérica
   </a>
  </li>
 </ul>
@@ -246,7 +258,7 @@
                 
   <p>Nota generada a partir de <a class="reference external" href="https://www.dropbox.com/s/z5ifw3ti66gukdy/1.1.Analisis_numerico_y_computo_cientifico.pdf?dl=0">liga</a></p>
 <div class="section" id="analisis-numerico-y-computo-cientifico">
-<h1>1.1 Análisis numérico y cómputo científico<a class="headerlink" href="#analisis-numerico-y-computo-cientifico" title="Permalink to this headline">¶</a></h1>
+<span id="ancc"></span><h1>1.1 Análisis numérico y cómputo científico<a class="headerlink" href="#analisis-numerico-y-computo-cientifico" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="introduccion">
 <h2>Introducción<a class="headerlink" href="#introduccion" title="Permalink to this headline">¶</a></h2>
 <p>El cómputo científico (ver <a class="reference external" href="https://en.wikipedia.org/wiki/Computational_science">liga</a>) es parte de lo que se conoce como ciencia de la computación, cuya investigación incluye las fases:</p>
@@ -267,6 +279,9 @@
 <p>Tales cantidades las encontramos en muchos problemas de matemáticas los cuales no se resuelven en principio con un número finito de pasos, sino que deben resolverse por un proceso iterativo que converja a la solución, teóricamente infinito. Sin embargo, en la práctica, no se realizan procesos infinitos y además no se resuelven problemas de manera exacta; se obtienen respuestas aproximadamente correctas, “suficientemente cercanas o precisas” al resultado deseado. Así, el análisis numérico debe trabajar con recursos finitos y cantidades discretas.</p>
 <p>Lo anterior subraya uno de los aspectos más importantes del cómputo científico: encontrar algoritmos iterativos que <strong>converjan</strong> “rápidamente”, así como dar una estimación de la <strong>exactitud</strong> de las aproximaciones calculadas. Así, un segundo tema que distingue al análisis numérico de otras áreas de la ciencia de la computación es el relacionado con las <strong>aproximaciones</strong> y sus efectos. Es indispensable que tales aproximaciones sean controladas por algoritmos “buenos”, esto es, que sean <strong>eficientes</strong> (hacer más con menos), sean <strong>confiables</strong> y <strong>exactos</strong> ante la serie de aproximaciones realizadas: sean <strong>estables</strong>.</p>
 <p>La eficiencia se relaciona directamente con el <strong>costo computacional</strong>, el cual típicamente se mide a partir del número de operaciones que realiza el algoritmo (aunque otra componente común para medir el costo computacional, es la transferencia de datos entre las diferentes jerarquías de memoria en una máquina) y la <strong>estabilidad</strong> se refiere a no amplificar los <strong>errores</strong> generados por las aproximaciones o resultados calculados durante la ejecución del algoritmo. Asimismo, la estabilidad se relaciona con la pregunta: ¿si se perturban los datos de entrada, el algoritmo calcula una solución “cercana” a los datos no perturbados? (esta pregunta tiene que ver con el <strong>análisis de sensibilidad</strong> en un algoritmo ante perturbaciones en los datos de entrada).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">El</span> <span class="n">cómputo</span> <span class="n">científico</span> <span class="n">también</span> <span class="n">toma</span> <span class="n">en</span> <span class="n">cuenta</span> <span class="n">cantidades</span> <span class="n">discretas</span><span class="p">,</span> <span class="n">no</span> <span class="n">solo</span> <span class="n">continuas</span><span class="p">;</span> <span class="n">de</span> <span class="n">hecho</span> <span class="n">muchas</span> <span class="n">veces</span> <span class="n">se</span> <span class="n">resuelven</span> <span class="n">problemas</span> <span class="n">haciendo</span> <span class="n">discretización</span><span class="o">.</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="fuentes-de-error">
 <h2>Fuentes de error<a class="headerlink" href="#fuentes-de-error" title="Permalink to this headline">¶</a></h2>
@@ -276,33 +291,54 @@
 <li><p>Mediciones con instrumentos.</p></li>
 <li><p>Cálculos previos.</p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Estos</span> <span class="n">errores</span> <span class="n">se</span> <span class="n">pueden</span> <span class="n">acumular</span> <span class="n">y</span> <span class="n">hacer</span> <span class="n">crecer</span> <span class="n">el</span> <span class="n">error</span> <span class="n">considerablemente</span>
+</pre></div>
+</div>
 <p>Las fuentes anteriores típicamente están fuera de nuestro control. En el cómputo científico se estudian dos fuentes que influyen directamente en el algoritmo utilizado para resolver un problema y sí podemos controlarlas:</p>
 <ul class="simple">
 <li><p>Truncamiento: relacionado con el uso de procesos o cantidades finitas.</p></li>
 <li><p>Redondeo: relacionado con la representación de los números y la aritmética realizada en una máquina.</p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Por</span> <span class="n">ejemplo</span><span class="p">,</span> <span class="n">el</span> <span class="n">truncamiento</span> <span class="n">podría</span> <span class="n">hacerse</span> <span class="n">con</span> <span class="n">un</span> <span class="n">ciclo</span> <span class="s2">&quot;for&quot;</span><span class="o">.</span> <span class="n">Si</span> <span class="n">tuvieras</span> <span class="n">que</span> <span class="n">hacer</span> <span class="n">ese</span> <span class="n">ciclo</span> <span class="n">infinitas</span> <span class="n">veces</span><span class="p">,</span> <span class="n">vas</span> <span class="n">a</span> <span class="n">limitarlo</span> <span class="n">a</span> <span class="n">un</span> <span class="n">número</span> <span class="n">finito</span> <span class="n">de</span> <span class="n">veces</span><span class="o">.</span>
+</pre></div>
+</div>
 <p>Estas fuentes de error influyen en la exactitud de un cálculo y las perturbaciones que resulten de estas fuentes, serán amplificadas (o no) por la <strong>naturaleza del problema</strong> y el <strong>tipo de algoritmo utilizado</strong>. Al estudio de la exactitud y estabilidad de un algoritmo por fuentes de error se le llama <strong>análisis del error</strong>.</p>
 </div>
 <div class="section" id="analisis-del-error">
-<h2>Análisis del error<a class="headerlink" href="#analisis-del-error" title="Permalink to this headline">¶</a></h2>
+<span id="anerr"></span><h2>Análisis del error<a class="headerlink" href="#analisis-del-error" title="Permalink to this headline">¶</a></h2>
 <p>En general un problema puede verse como evaluar una función <span class="math notranslate nohighlight">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span>. Por ejemplo, sea <span class="math notranslate nohighlight">\(x\)</span> el dato de entrada, considérese el problema de evaluar <span class="math notranslate nohighlight">\(f(x)\)</span>, el dato de salida.</p>
 <p>Al trabajar con la máquina, nos encontramos que la representación de un número real en general no es exacta, por ello tenemos una aproximación <span class="math notranslate nohighlight">\(\hat{x}\)</span> a la cantidad <span class="math notranslate nohighlight">\(x\)</span> (error por redondeo) y nuestra forma de calcular <span class="math notranslate nohighlight">\(f\)</span> es por medio de un algoritmo <span class="math notranslate nohighlight">\(\hat{f}\)</span>, entonces, el error al evaluar <span class="math notranslate nohighlight">\(f\)</span> es:</p>
 <div class="math notranslate nohighlight">
-\[\text{Error total} = \hat{f}(\hat{x}) - f(x) = \underbrace{\hat{f}(\hat{x})-f(\hat{x})}_\text{Error Computacional} + \underbrace{f(\hat{x})-f(x)}_\text{Error en datos}\]</div>
+\[\text{Error total} = \hat{f}(\hat{x}) - f(x) = \underbrace{\hat{f}(\hat{x})-f(\hat{x})}_\text{Error Computacional} + \underbrace{f(\hat{x})-f(x)}_\text{Error en datos}.\]</div>
 <p>El primer término es generado por el algoritmo utilizado: <span class="math notranslate nohighlight">\(\hat{f}\)</span> (cálculos y aproximaciones realizadas por el algoritmo utilizando <span class="math notranslate nohighlight">\(\hat{x}\)</span>) y el segundo es debido a mediciones o redondeos realizados por la máquina o personas o instrumentos, observa que este término no se ve influenciado por el algoritmo utilizado y es un error que no controlamos.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">Por</span> <span class="n">ejemplo</span><span class="p">,</span> <span class="n">hacer</span> <span class="n">una</span> <span class="n">aproximación</span> <span class="n">por</span> <span class="n">serie</span> <span class="n">sería</span> <span class="n">un</span> <span class="n">error</span> <span class="n">por</span> <span class="n">truncamiento</span><span class="p">;</span> <span class="n">si</span> <span class="n">usáramos</span> <span class="n">Monte</span> <span class="n">Carlo</span> <span class="n">el</span> <span class="n">truncamiento</span> <span class="n">estaría</span> <span class="n">asociado</span> <span class="n">al</span> <span class="n">número</span> <span class="n">de</span> <span class="n">puntos</span> <span class="n">que</span> <span class="n">se</span> <span class="n">generan</span> <span class="n">en</span> <span class="n">una</span> <span class="n">región</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">El</span> <span class="n">error</span> <span class="n">por</span> <span class="n">datos</span> <span class="n">es</span> <span class="n">algo</span> <span class="n">que</span> <span class="n">no</span> <span class="n">podemos</span> <span class="n">controlar</span><span class="p">;</span> <span class="n">nos</span> <span class="n">debemos</span> <span class="n">enfocar</span> <span class="n">en</span> <span class="n">el</span> <span class="n">error</span> <span class="n">computacional</span><span class="o">.</span>
+</pre></div>
+</div>
 <p>El error computacional tiene dos componentes: uno por <strong>truncamiento</strong> y otro por <strong>redondeo</strong>:</p>
 <ul class="simple">
-<li><p>El truncamiento es la diferencia entre el resultado veradero y el resultado que se obtiene con un algoritmo usando aritmética exacta. Por ejemplo, reemplazar una serie infinita (resultado verdadero) con una serie truncada (algoritmo: truncar serie infinita) y evaluar la serie truncada con <strong>aritmética exacta</strong> (por ejemplo usar <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> en los cálculos en lugar de <span class="math notranslate nohighlight">\(0.333\)</span>).</p></li>
+<li><p>El truncamiento es la diferencia entre el resultado verdadero y el resultado que se obtiene con un algoritmo usando aritmética exacta. Por ejemplo, reemplazar una serie infinita (resultado verdadero) con una serie truncada (algoritmo: truncar serie infinita) y evaluar la serie truncada con <strong>aritmética exacta</strong> (por ejemplo usar <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span> en los cálculos en lugar de <span class="math notranslate nohighlight">\(0.333\)</span>).</p></li>
 <li><p>El error por redondeo es la diferencia entre el resultado obtenido por un algoritmo utilizando aritmética exacta y el resultado producido por el mismo algoritmo usando <strong>aritmética de máquina</strong>.</p></li>
 </ul>
-<p><strong>Obs:</strong> obsérvese que en la descomposición del error total de arriba se utiliza en el error computacional <span class="math notranslate nohighlight">\(\hat{x}\)</span>. En la nota <a class="reference external" href="https://github.com/ITAM-DS/analisis-numerico-computo-cientifico/blob/master/temas/I.computo_cientifico/1.3.Condicion_de_un_problema_y_estabilidad_de_un_algoritmo.ipynb">1.3.Condición_estabilidad_y_normas</a> se define la estabilidad de un algoritmo utilizando <span class="math notranslate nohighlight">\(x\)</span> en lugar de <span class="math notranslate nohighlight">\(\hat{x}\)</span> pues se desea medir la cercanía entre <span class="math notranslate nohighlight">\(x\)</span> y <span class="math notranslate nohighlight">\(\hat{x}\)</span> determinada por el sistema de punto flotante (errores por redondeo).</p>
-<p><strong>Comentario:</strong> aunque los errores por truncamiento y por redondeo son componentes del error total, típicamente un tipo de error domina sobre otro. Hacer la distinción entre ellos, nos ayuda a entender el comportamiento de los algoritmos y los factores que influyen en su <strong>exactitud</strong>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<p>Obsérvese que en la descomposición del error total de arriba se utiliza en el error computacional <span class="math notranslate nohighlight">\(\hat{x}\)</span>. En la nota <a class="reference internal" href="../1.4/Condicion_de_un_problema_y_estabilidad_de_un_algoritmo.html#cpea"><span class="std std-ref">Condición de un problema y estabilidad de un algoritmo</span></a> se define la estabilidad de un algoritmo utilizando <span class="math notranslate nohighlight">\(x\)</span> en lugar de <span class="math notranslate nohighlight">\(\hat{x}\)</span> pues se desea medir la cercanía entre <span class="math notranslate nohighlight">\(x\)</span> y <span class="math notranslate nohighlight">\(\hat{x}\)</span> determinada por el sistema de punto flotante (errores por redondeo).</p>
+</div>
+<div class="admonition-comentario admonition">
+<p class="admonition-title">Comentario</p>
+<p>Aunque los errores por truncamiento y por redondeo son componentes del error total, típicamente un tipo de error domina sobre otro. Hacer la distinción entre ellos, nos ayuda a entender el comportamiento de los algoritmos y los factores que influyen en su <strong>exactitud</strong>.</p>
+</div>
 </div>
 <div class="section" id="nota-sobre-exactitud-y-precision">
 <h2>Nota sobre exactitud y precisión.<a class="headerlink" href="#nota-sobre-exactitud-y-precision" title="Permalink to this headline">¶</a></h2>
 <p>Los errores en los cálculos y las medidas se pueden caracterizar respecto a su exactitud y precisión. La exactitud se refiere a que tan cercano está el valor calculado o medido del valor verdadero. La precisión se refiere a qué tan cercanos se encuentran unos de otros diversos valores calculados o medidos. Obsérvese el siguiente diagrama:</p>
 <img src="https://www.dl.dropboxusercontent.com/s/azkoe49xfg3a90d/1.1.exactitud_precision.png?dl=0" heigth="500" width="500"><p><strong>Preguntas de comprehensión</strong></p>
-<p>1)¿Cuáles son las características del análisis numérico y cómputo científico?</p>
+<ol class="simple">
+<li><p>¿Cuáles son las características del análisis numérico y cómputo científico?</p></li>
+</ol>
+<ul class="simple">
+<li></li>
+</ul>
 <p>2)¿Qué propiedades debe tener un buen algoritmo?</p>
 <p>3)¿Cuáles fuentes de error principalmente son estudiadas por el análisis numérico y cómputo científico al resolver un problema?</p>
 <p>4)Menciona las diferencias entre los términos exactitud y precisión.</p>
