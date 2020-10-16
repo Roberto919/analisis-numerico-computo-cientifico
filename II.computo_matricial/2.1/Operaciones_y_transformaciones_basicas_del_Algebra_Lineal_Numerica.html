@@ -39,6 +39,7 @@
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2.2 Eigenvalores y eigenvectores" href="../2.2/Eigenvalores_y_eigenvectores.html" />
     <link rel="prev" title="1.7 Integración Numérica" href="../../I.computo_cientifico/1.7/Integracion_numerica.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,6 +129,43 @@
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    2.1 Operaciones y transformaciones básicas del Álgebra Lineal Numérica
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2.2/Eigenvalores_y_eigenvectores.html">
+   2.2 Eigenvalores y eigenvectores
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2.3/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz.html">
+   2.3 Algoritmos y aplicaciones de eigenvalores y eigenvectores de una matriz
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../2.4/Valores_vectores_singulares_y_algoritmos_para_calcular_la_SVD.html">
+   2.4 Valores, vectores singulares y algoritmos para calcular la SVD
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  III. Optimización convexa
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.1/Definicion_de_problema_optimizacion_conjuntos_y_funciones_convexas.html">
+   3.1 Definición de problemas de optimización, conjuntos y funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.2/Algoritmos_de_descenso_y_busqueda_de_linea_funciones_convexas.html">
+   3.2 Algoritmos de descenso y búsqueda de línea para funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.3/Ecuaciones_no_lineales.html">
+   3.3 Ecuaciones no lineales
   </a>
  </li>
 </ul>
@@ -325,26 +363,19 @@
 </div>
 <hr class="docutils" />
 <p>Nota generada a partir de <a class="reference external" href="https://www.dropbox.com/s/fyqwiqasqaa3wlt/3.1.1.Multiplicacion_de_matrices_y_estructura_de_datos.pdf?dl=0">liga1</a>, <a class="reference external" href="https://www.dropbox.com/s/jwu8lu4r14pb7ut/3.2.1.Sistemas_de_ecuaciones_lineales_eliminacion_Gaussiana_y_factorizacion_LU.pdf?dl=0">liga2</a> y <a class="reference external" href="https://www.dropbox.com/s/s4ch0ww1687pl76/3.2.2.Factorizaciones_matriciales_SVD_Cholesky_QR.pdf?dl=0">liga3</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Al final de esta nota el y la lectora:</p>
+<ul class="simple">
+<li><p>Entenderá cómo utilizar transformaciones típicas en el álgebra lineal numérica en la que se basan muchos de los algoritmos del análisis numérico. En específico aprenderá cómo aplicar las transformaciones de Gauss, reflexiones de Householder y rotaciones Givens a vectores y matrices.</p></li>
+<li><p>Se familizarizará con la notación vectorial y matricial de las operaciones básicas del álgebra lineal numérica.</p></li>
+</ul>
+</div>
 <p>Las operaciones básicas del Álgebra Lineal Numérica podemos dividirlas en vectoriales y matriciales.</p>
 <div class="section" id="vectoriales">
 <h2>Vectoriales<a class="headerlink" href="#vectoriales" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Transponer:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times 1}  \rightarrow \mathbb{R} ^{1 \times n}\)</span>: <span class="math notranslate nohighlight">\(y = x^T\)</span> entonces</p></li>
+<li><p><strong>Transponer:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{n \times 1}  \rightarrow \mathbb{R} ^{1 \times n}\)</span>: <span class="math notranslate nohighlight">\(y = x^T\)</span> entonces <span class="math notranslate nohighlight">\(x = \left[ \begin{array}{c} x_1 \\ x_2 \\ \vdots \\ x_n \end{array} \right ]\)</span> y se tiene: <span class="math notranslate nohighlight">\(y = x^T = [x_1, x_2, \dots, x_n].\)</span></p></li>
 </ul>
-<div class="math notranslate nohighlight">
-\[\begin{split}x = 
-\left[
-\begin{array}{c}
-x_1 \\
-x_2 \\
-\vdots \\
-x_n
-\end{array}
-\right ]
-\end{split}\]</div>
-<p>y se tiene:</p>
-<div class="math notranslate nohighlight">
-\[ y = x^T = [x_1, x_2, \dots, x_n].\]</div>
 <ul class="simple">
 <li><p><strong>Suma:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^n  \times \mathbb{R} ^n \rightarrow \mathbb{R}^n\)</span>: <span class="math notranslate nohighlight">\(z = x + y\)</span> entonces <span class="math notranslate nohighlight">\(z_i = x_i + y_i\)</span></p></li>
 <li><p><strong>Multiplicación por un escalar:</strong> <span class="math notranslate nohighlight">\(\mathbb{R} \times \mathbb{R} ^n \rightarrow \mathbb{R}^n\)</span>: <span class="math notranslate nohighlight">\(y = \alpha x\)</span> entonces <span class="math notranslate nohighlight">\(y_i = \alpha x_i\)</span>.</p></li>
@@ -357,18 +388,24 @@ x_n
 <div class="section" id="matriciales">
 <h2>Matriciales<a class="headerlink" href="#matriciales" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><strong>Transponer:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{n \times m}\)</span>: <span class="math notranslate nohighlight">\(C = A^T\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = a_{ij}\)</span>.</p></li>
+<li><p><strong>Transponer:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{n \times m}\)</span>: <span class="math notranslate nohighlight">\(C = A^T\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = a_{ji}\)</span>.</p></li>
 <li><p><strong>Sumar:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \times \mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = A + B\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = a_{ij} + b_{ij}\)</span>.</p></li>
 <li><p><strong>Multiplicación por un escalar:</strong> <span class="math notranslate nohighlight">\(\mathbb{R} \times \mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = \alpha A\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = \alpha a_{ij}\)</span></p></li>
 <li><p><strong>Multiplicación por un vector:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}\)</span>: <span class="math notranslate nohighlight">\(y = Ax\)</span> entonces <span class="math notranslate nohighlight">\(y_i = \displaystyle \sum_{j=1}^n a_{ij}x_j\)</span>.</p></li>
-<li><p><strong>Multiplicación entre matrices:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times k} \times \mathbb{R}^{k \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = AB\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = \displaystyle \sum_{r=1}^k a_{ir}b_{rj}\)</span>.</p></li>
+<li><p><strong>Multiplicación entre matrices:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times k} \times \mathbb{R}^{k \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = AB\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = \displaystyle \sum_{r=1}^k a_{ir}b_{rj}\)</span>.</p>
+<ul>
+<li><p>Para esta necesitaríamos hacer tres ciclos “for” para codificar esta operación.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
 <li><p><strong>Multiplicación <em>point wise</em>:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \times \mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = A.*B\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = a_{ij}b_{ij}\)</span>.</p></li>
 <li><p><strong>División <em>point wise</em>:</strong> <span class="math notranslate nohighlight">\(\mathbb{R}^{m \times n} \times \mathbb{R}^{m \times n} \rightarrow \mathbb{R}^{m \times n}\)</span>: <span class="math notranslate nohighlight">\(C = A./B\)</span> entonces <span class="math notranslate nohighlight">\(c_{ij} = a_{ij}/b_{ij}\)</span> con <span class="math notranslate nohighlight">\(b_{ij} \neq 0\)</span>.</p></li>
 </ul>
 <p><strong>Como ejemplos de transformaciones básicas del Álgebra Lineal Numérica se encuentran:</strong></p>
 </div>
 <div class="section" id="transformaciones-de-gauss">
-<h2>Transformaciones de Gauss<a class="headerlink" href="#transformaciones-de-gauss" title="Permalink to this headline">¶</a></h2>
+<span id="tgauss"></span><h2>Transformaciones de Gauss<a class="headerlink" href="#transformaciones-de-gauss" title="Permalink to this headline">¶</a></h2>
 <p>En esta sección suponemos que <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> y <span class="math notranslate nohighlight">\(A\)</span> es una matriz con entradas <span class="math notranslate nohighlight">\(a_{ij} \in \mathbb{R}^{n \times n} \forall i,j=1,2,\dots,n\)</span>.</p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -389,6 +426,13 @@ x_n
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -443,12 +487,12 @@ x_n
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1_a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1_a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-2.,  0.,  0.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-2.  0.  0.]
 </pre></div>
 </div>
 </div>
@@ -467,26 +511,26 @@ x_n
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[1. , 0. , 0. ],
-       [1.5, 1. , 0. ],
-       [2. , 0. , 1. ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[1.  0.  0. ]
+ [1.5 1.  0. ]
+ [2.  0.  1. ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span><span class="nd">@a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span><span class="nd">@a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-2.,  0.,  0.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-2.  0.  0.]
 </pre></div>
 </div>
 </div>
@@ -541,12 +585,12 @@ x_n
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L2_a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L2_a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-2.,  3.,  0.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-2.  3.  0.]
 </pre></div>
 </div>
 </div>
@@ -565,26 +609,26 @@ x_n
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 1.        ,  0.        ,  0.        ],
-       [ 0.        ,  1.        ,  0.        ],
-       [ 0.        , -1.33333333,  1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 1.     0.     0.   ]
+ [ 0.     1.     0.   ]
+ [ 0.    -1.333  1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L2</span><span class="nd">@a</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L2</span><span class="nd">@a</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-2.,  3.,  0.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-2.  3.  0.]
 </pre></div>
 </div>
 </div>
@@ -620,14 +664,14 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 4.,  5., -7.],
-       [ 3.,  0.,  8.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 4.  5. -7.]
+ [ 3.  0.  8.]]
 </pre></div>
 </div>
 </div>
@@ -671,17 +715,17 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1_A_1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1_A_1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-1.,  0.,  0.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-1.  0.  0.]
 </pre></div>
 </div>
 </div>
 </div>
-<p><strong>Y se debe aplicar <span class="math notranslate nohighlight">\(\ell_1\)</span> a las columnas número 2 y 3 de <span class="math notranslate nohighlight">\(A\)</span> para completar el producto <span class="math notranslate nohighlight">\(L_1A\)</span>:</strong></p>
+<p><strong>Y se debe aplicar <span class="math notranslate nohighlight">\(L_1\)</span> a las columnas número 2 y 3 de <span class="math notranslate nohighlight">\(A\)</span> para completar el producto <span class="math notranslate nohighlight">\(L_1A\)</span>:</strong></p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Aplicando <span class="math notranslate nohighlight">\(L_1\)</span> a la segunda columna de <span class="math notranslate nohighlight">\(A\)</span>: <span class="math notranslate nohighlight">\(A[1:3,2]\)</span>.</p>
@@ -695,12 +739,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1_A_2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1_A_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([ 2., 13.,  6.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 2. 13.  6.]
 </pre></div>
 </div>
 </div>
@@ -718,12 +762,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1_A_3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1_A_3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([ 5., 13., 23.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 5. 13. 23.]
 </pre></div>
 </div>
 </div>
@@ -742,47 +786,47 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[1., 0., 0.],
-       [4., 1., 0.],
-       [3., 0., 1.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0.]
+ [4. 1. 0.]
+ [3. 0. 1.]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 0., 13., 13.],
-       [ 0.,  6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 0. 13. 13.]
+ [ 0.  6. 23.]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
-<p>Al aplicar <span class="math notranslate nohighlight">\(\ell_1\)</span> a la primer columna de <span class="math notranslate nohighlight">\(A\)</span> <strong>siempre</strong> obtenemos ceros por debajo del pivote que en este caso es <span class="math notranslate nohighlight">\(a_{11}\)</span>.</p>
+<p>Al aplicar <span class="math notranslate nohighlight">\(L_1\)</span> a la primer columna de <span class="math notranslate nohighlight">\(A\)</span> <strong>siempre</strong> obtenemos ceros por debajo del pivote que en este caso es <span class="math notranslate nohighlight">\(a_{11}\)</span>.</p>
 </div>
 <p id="eg2-1"><strong>Después de hacer la multiplicación <span class="math notranslate nohighlight">\(L_1A\)</span> en cualquiera de los dos casos (construyendo o no explícitamente <span class="math notranslate nohighlight">\(L_1\)</span>) no se modifica el primer renglón de <span class="math notranslate nohighlight">\(A\)</span>:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 4.,  5., -7.],
-       [ 3.,  0.,  8.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 4.  5. -7.]
+ [ 3.  0.  8.]]
 </pre></div>
 </div>
 </div>
@@ -793,12 +837,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-1.,  2.,  5.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-1.  2.  5.]
 </pre></div>
 </div>
 </div>
@@ -809,12 +853,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">,:]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">((</span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span><span class="p">)[</span><span class="mi">0</span><span class="p">,:])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-1.,  2.,  5.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-1.  2.  5.]
 </pre></div>
 </div>
 </div>
@@ -835,12 +879,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">e1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
@@ -851,12 +895,12 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">e1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
@@ -866,24 +910,24 @@ L_2L_1A = \left [
 \[e_1^T A[1:3,2:3] = A[0, 2:3]\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c1">#observe that we have to use 2+1=3 as the second number after &quot;:&quot; in 1:3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span> <span class="c1">#observe that we have to use 2+1=3 as the second number after &quot;:&quot; in 1:3</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([2., 5.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[2. 5.]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="c1">#also we could have use this statement</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:])</span> <span class="c1">#also we could have use this statement</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([2., 5.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[2. 5.]
 </pre></div>
 </div>
 </div>
@@ -893,12 +937,12 @@ L_2L_1A = \left [
 \[\ell_1A[0, 2]\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l1</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([ 0., -8., -6.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 0. -8. -6.]
 </pre></div>
 </div>
 </div>
@@ -907,12 +951,12 @@ L_2L_1A = \left [
 \[\ell_1A[0,3]\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l1</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([  0., -20., -15.])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[  0. -20. -15.]
 </pre></div>
 </div>
 </div>
@@ -921,29 +965,29 @@ L_2L_1A = \left [
 <p class="admonition-title">Observación</p>
 <p>En los dos cálculos anteriores, las primeras entradas son iguales a <span class="math notranslate nohighlight">\(0\)</span> por lo que es consistente con el hecho que únicamente se modifican dos entradas de la segunda y tercer columna de <span class="math notranslate nohighlight">\(A\)</span>.</p>
 </div>
-<p>De forma compacta y aprovechando funciones en <code class="docutils literal notranslate"><span class="pre">numpy</span></code> como <code class="docutils literal notranslate"><span class="pre">outer</span></code> se puede calcular lo anterior como:</p>
+<p>De forma compacta y aprovechando funciones en <em>NumPy</em> como <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.outer.html">np.outer</a> se puede calcular lo anterior como:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ -8., -20.],
-       [ -6., -15.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -8. -20.]
+ [ -6. -15.]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:])</span> <span class="c1">#also we could have use this statement</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]))</span> <span class="c1">#also we could have use this statement</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ -8., -20.],
-       [ -6., -15.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ -8. -20.]
+ [ -6. -15.]]
 </pre></div>
 </div>
 </div>
@@ -955,13 +999,13 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">l1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[13., 13.],
-       [ 6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[13. 13.]
+ [ 6. 23.]]
 </pre></div>
 </div>
 </div>
@@ -969,14 +1013,14 @@ L_2L_1A = \left [
 <p>Compárese con:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 0., 13., 13.],
-       [ 0.,  6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 0. 13. 13.]
+ [ 0.  6. 23.]]
 </pre></div>
 </div>
 </div>
@@ -1000,13 +1044,13 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_aux_2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A_aux_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0., 13., 13.],
-       [ 0.,  6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0. 13. 13.]
+ [ 0.  6. 23.]]
 </pre></div>
 </div>
 </div>
@@ -1020,14 +1064,14 @@ L_2L_1A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_aux_3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A_aux_3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 0., 13., 13.],
-       [ 0.,  6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 0. 13. 13.]
+ [ 0.  6. 23.]]
 </pre></div>
 </div>
 </div>
@@ -1035,14 +1079,14 @@ L_2L_1A = \left [
 <p>que es el resultado de:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">L1</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-1.,  2.,  5.],
-       [ 0., 13., 13.],
-       [ 0.,  6., 23.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-1.  2.  5.]
+ [ 0. 13. 13.]
+ [ 0.  6. 23.]]
 </pre></div>
 </div>
 </div>
@@ -1065,14 +1109,17 @@ A = \left [
 <img src="https://dl.dropboxusercontent.com/s/su4z0obupk95vql/transf_Gauss_outer_product.png?dl=0" heigth="550" width="550">
 <p>y obtener una matriz triangular superior en cada ejercicio.</p>
 </div>
-<div class="admonition-comentario admonition">
-<p class="admonition-title">Comentario</p>
-<p>Las transformaciones de Gauss se utilizan para la fase de eliminación del método de eliminación Gaussiana o también llamada factorización LU. Ver <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.</p>
+<div class="admonition-comentarios admonition">
+<p class="admonition-title">Comentarios</p>
+<ul class="simple">
+<li><p>Las transformaciones de Gauss se utilizan para la fase de eliminación del método de eliminación Gaussiana o también llamada factorización <span class="math notranslate nohighlight">\(LU\)</span>. Ver <a class="reference external" href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination</a>.</p></li>
+<li><p>La factorización <span class="math notranslate nohighlight">\(P, L, U\)</span> que es la <span class="math notranslate nohighlight">\(LU\)</span> con permutaciones por pivoteo parcial es un método estable numéricamente respecto al redondeo en la práctica pero inestable en la teoría.</p></li>
+</ul>
 </div>
 </div>
 </div>
 <div class="section" id="matriz-ortogonal-y-matriz-con-columnas-ortonormales">
-<h2>Matriz ortogonal y matriz con columnas ortonormales<a class="headerlink" href="#matriz-ortogonal-y-matriz-con-columnas-ortonormales" title="Permalink to this headline">¶</a></h2>
+<span id="matortmatcolortono"></span><h2>Matriz ortogonal y matriz con columnas ortonormales<a class="headerlink" href="#matriz-ortogonal-y-matriz-con-columnas-ortonormales" title="Permalink to this headline">¶</a></h2>
 <p>Un conjunto de vectores <span class="math notranslate nohighlight">\(\{x_1, \dots, x_p\}\)</span> en <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span> (<span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^m\)</span>)es ortogonal si <span class="math notranslate nohighlight">\(x_i^Tx_j=0\)</span> <span class="math notranslate nohighlight">\(\forall i\neq j\)</span>. Por ejemplo, para un conjunto de <span class="math notranslate nohighlight">\(2\)</span> vectores <span class="math notranslate nohighlight">\(x_1,x_2\)</span> en <span class="math notranslate nohighlight">\(\mathbb{R}^3\)</span> esto se visualiza:</p>
 <img src="https://dl.dropboxusercontent.com/s/cekagqnxe0grvu4/vectores_ortogonales.png?dl=0" heigth="550" width="550">
 <div class="admonition-comentarios admonition">
@@ -1081,15 +1128,18 @@ A = \left [
 <li><p>Si el conjunto <span class="math notranslate nohighlight">\(\{x_1,\dots,x_n\}\)</span> en <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span> satisface <span class="math notranslate nohighlight">\(x_i^Tx_j= \delta_{ij}= \begin{cases}
 1 &amp;\text{ si } i=j,\\
 0 &amp;\text{ si } i\neq j
-\end{cases}\)</span>, ver <a class="reference external" href="https://en.wikipedia.org/wiki/Kronecker_delta">Kronecker_delta</a> se le nombra conjunto <strong>ortonormal</strong>, esto es, constituye un conjunto ortogonal y cada elemento del conjunto tiene norma <span class="math notranslate nohighlight">\(2\)</span> o Euclidiana igual a <span class="math notranslate nohighlight">\(1\)</span>: <span class="math notranslate nohighlight">\(||x_i||_2 = 1, \forall i=1,\dots,n\)</span>.</p></li>
-<li><p>Si definimos a la matriz <span class="math notranslate nohighlight">\(X\)</span> con columnas dadas por cada uno de los vectores del conjunto <span class="math notranslate nohighlight">\(\{x_1,\dots, x_n\}\)</span>: <span class="math notranslate nohighlight">\(X=(x_1, \dots , x_n) \in \mathbb{R}^{m \times n}\)</span> entonces la propiedad de que cada par de columnas satisfaga <span class="math notranslate nohighlight">\(x_i^Tx_j=\delta_{ij}\)</span> se puede escribir en notación matricial como <span class="math notranslate nohighlight">\(X^TX = I_n\)</span> con <span class="math notranslate nohighlight">\(I_n\)</span> la matriz identidad de tamaño <span class="math notranslate nohighlight">\(n\)</span> o bien <span class="math notranslate nohighlight">\(XX^T=I_m\)</span>. A la matriz <span class="math notranslate nohighlight">\(X\)</span> se le nombra <strong>matriz con columnas ortonormales</strong>.</p></li>
+\end{cases}\)</span>, ver <a class="reference external" href="https://en.wikipedia.org/wiki/Kronecker_delta">Kronecker_delta</a> se le nombra conjunto <strong>ortonormal</strong>, esto es, constituye un conjunto ortogonal y cada elemento del conjunto tiene norma <span class="math notranslate nohighlight">\(2\)</span> o Euclidiana igual a <span class="math notranslate nohighlight">\(1\)</span>: <span class="math notranslate nohighlight">\(||x_i||_2 = 1, \forall i=1,\dots,n\)</span>.</p>
+<ul>
+<li><p>Si definimos a la matriz <span class="math notranslate nohighlight">\(X\)</span> con columnas dadas por cada uno de los vectores del conjunto <span class="math notranslate nohighlight">\(\{x_1,\dots, x_n\}\)</span>: <span class="math notranslate nohighlight">\(X=(x_1, \dots , x_n) \in \mathbb{R}^{m \times n}\)</span> entonces la propiedad de que cada par de columnas satisfaga <span class="math notranslate nohighlight">\(x_i^Tx_j=\delta_{ij}\)</span> se puede escribir en notación matricial como <span class="math notranslate nohighlight">\(X^TX = I_n\)</span> con <span class="math notranslate nohighlight">\(I_n\)</span> la matriz identidad de tamaño <span class="math notranslate nohighlight">\(n\)</span> si <span class="math notranslate nohighlight">\(n \leq m\)</span> o bien <span class="math notranslate nohighlight">\(XX^T=I_m\)</span> si <span class="math notranslate nohighlight">\(m \leq n\)</span>. A la matriz <span class="math notranslate nohighlight">\(X\)</span> se le nombra <strong>matriz con columnas ortonormales</strong>.</p></li>
 <li><p>Si cada <span class="math notranslate nohighlight">\(x_i\)</span> está en <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> (en lugar de <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span>) entonces construímos a la matriz <span class="math notranslate nohighlight">\(X\)</span> como el punto anterior con la diferencia que <span class="math notranslate nohighlight">\(X \in \mathbb{R}^{n \times n}\)</span>. En este caso <span class="math notranslate nohighlight">\(X\)</span> se le nombra <strong>matriz ortogonal</strong>.</p></li>
+</ul>
+</li>
 <li><p>Entre las propiedades más importantes de las matrices ortogonales o con columnas ortonormales es que son isometrías bajo la norma <span class="math notranslate nohighlight">\(2\)</span> o Euclidiana y multiplicar por tales matrices es estable numéricamente bajo el redondeo, ver <a class="reference internal" href="../../I.computo_cientifico/1.4/Condicion_de_un_problema_y_estabilidad_de_un_algoritmo.html#cpea"><span class="std std-ref">Condición de un problema y estabilidad de un algoritmo</span></a>.</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="transformaciones-de-reflexion">
-<h2>Transformaciones de reflexión<a class="headerlink" href="#transformaciones-de-reflexion" title="Permalink to this headline">¶</a></h2>
+<span id="tref"></span><h2>Transformaciones de reflexión<a class="headerlink" href="#transformaciones-de-reflexion" title="Permalink to this headline">¶</a></h2>
 <p>En esta sección suponemos que <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span> y <span class="math notranslate nohighlight">\(A\)</span> es una matriz con entradas <span class="math notranslate nohighlight">\(a_{ij} \in \mathbb{R}^{m \times n} \forall i=1,2,\dots,m, j=1, 2, \dots, n\)</span>.</p>
 <div class="section" id="reflectores-de-householder">
 <h3>Reflectores de Householder<a class="headerlink" href="#reflectores-de-householder" title="Permalink to this headline">¶</a></h3>
@@ -1130,12 +1180,12 @@ A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1 2 3]
 </pre></div>
 </div>
 </div>
@@ -1171,12 +1221,12 @@ A = \left [
 <p>Hacemos ceros por debajo de la primera entrada de <span class="math notranslate nohighlight">\(x\)</span> haciendo la multiplicación matriz-vector <span class="math notranslate nohighlight">\(Rx\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([3.74165739, 0.        , 0.        ])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[3.742 0.    0.   ]
 </pre></div>
 </div>
 </div>
@@ -1184,12 +1234,12 @@ A = \left [
 <p>El resultado de <span class="math notranslate nohighlight">\(Rx\)</span> es <span class="math notranslate nohighlight">\((||x||_2,0,0)^T\)</span> con <span class="math notranslate nohighlight">\(||x||_2\)</span> dada por:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3.7416573867739413
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>3.7416573867739413
 </pre></div>
 </div>
 </div>
@@ -1215,26 +1265,26 @@ A = \left [
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.26726124,  0.53452248,  0.80178373],
-       [ 0.53452248,  0.61007346, -0.5848898 ],
-       [ 0.80178373, -0.5848898 ,  0.12266529]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.267  0.535  0.802]
+ [ 0.535  0.61  -0.585]
+ [ 0.802 -0.585  0.123]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="nd">@x</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="nd">@x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([3.74165739e+00, 0.00000000e+00, 2.22044605e-16])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[3.742 0.    0.   ]
 </pre></div>
 </div>
 </div>
@@ -1273,12 +1323,12 @@ A = \left [
 <p>Hacemos ceros por debajo de la primera entrada de <span class="math notranslate nohighlight">\(x\)</span> haciendo la multiplicación matriz-vector <span class="math notranslate nohighlight">\(Rx\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-3.74165739e+00, -4.44089210e-16, -4.44089210e-16])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-3.742 -0.    -0.   ]
 </pre></div>
 </div>
 </div>
@@ -1310,7 +1360,7 @@ A = \left [
 \[v_1=x_1-||x||_2 = \frac{x_1^2-||x||_2^2}{x_1+||x||_2} = -\frac{x_2^2+x_3^2+\dots + x_m^2}{x_1+||x||_2}.\]</div>
 <ul class="simple">
 <li><p>En la implementación del cálculo del vector de Householder, es útil que <span class="math notranslate nohighlight">\(v_1=1\)</span> y así únicamente se almacenará <span class="math notranslate nohighlight">\(v[2:m]\)</span>. Al vector <span class="math notranslate nohighlight">\(v[2:m]\)</span> se le nombra <strong>parte esencial del vector de Householder</strong>.</p></li>
-<li><p>Las transformaciones de reflexión de Householder se utilizan para la factorización QR. Ver <a class="reference external" href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a>.</p></li>
+<li><p>Las transformaciones de reflexión de Householder se utilizan para la factorización QR. Ver <a class="reference external" href="https://en.wikipedia.org/wiki/QR_decomposition">QR decomposition</a>, la cual es una factorización estable numéricamente bajo el redondeo.</p></li>
 </ul>
 </div>
 <div class="tip admonition">
@@ -1333,6 +1383,7 @@ R_2A^{(1)} = R_2
 0 &amp; * &amp; * &amp; *
 \end{array}
 \right]
+=
 \left[
 \begin{array}{cccc}
 * &amp; * &amp; * &amp; *\\
@@ -1391,15 +1442,15 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 3.,  2., -1.],
-       [ 2.,  3.,  2.],
-       [-1.,  2.,  3.],
-       [ 2.,  1.,  4.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 3.  2. -1.]
+ [ 2.  3.  2.]
+ [-1.  2.  3.]
+ [ 2.  1.  4.]]
 </pre></div>
 </div>
 </div>
@@ -1428,12 +1479,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([ 7.24264069,  2.        , -1.        ,  2.        ])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 7.243  2.    -1.     2.   ]
 </pre></div>
 </div>
 </div>
@@ -1451,12 +1502,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">beta</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>0.032543690979272503
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.032543690979272503
 </pre></div>
 </div>
 </div>
@@ -1467,12 +1518,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-4.24264069e+00, -4.44089210e-16,  2.22044605e-16, -4.44089210e-16])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-4.243 -0.     0.    -0.   ]
 </pre></div>
 </div>
 </div>
@@ -1490,15 +1541,15 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-4.24264069e+00, -2.82842712e+00, -1.41421356e+00],
-       [-4.44089210e-16,  1.66666667e+00,  1.88561808e+00],
-       [ 2.22044605e-16,  2.66666667e+00,  3.05719096e+00],
-       [-4.44089210e-16, -3.33333333e-01,  3.88561808e+00]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-4.243 -2.828 -1.414]
+ [-0.     1.667  1.886]
+ [ 0.     2.667  3.057]
+ [-0.    -0.333  3.886]]
 </pre></div>
 </div>
 </div>
@@ -1513,24 +1564,24 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4.2426406871192865
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>4.2426406871192865
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4.242640687119285
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>4.242640687119285
 </pre></div>
 </div>
 </div>
@@ -1560,12 +1611,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([ 4.82894433,  2.66666667, -0.33333333])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[ 4.829  2.667 -0.333]
 </pre></div>
 </div>
 </div>
@@ -1587,12 +1638,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta</span><span class="o">*</span><span class="n">v</span><span class="o">*</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-3.16227766,  0.        ,  0.        ])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-3.162  0.     0.   ]
 </pre></div>
 </div>
 </div>
@@ -1610,14 +1661,14 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-3.16227766, -3.16227766],
-       [ 0.        ,  0.26961371],
-       [ 0.        ,  4.23406524]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-3.162 -3.162]
+ [ 0.     0.27 ]
+ [ 0.     4.234]]
 </pre></div>
 </div>
 </div>
@@ -1628,12 +1679,15 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>3.1622776601683795
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>3.1622776601683795
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1655,12 +1709,12 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([4.5122544 , 4.23406524])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[4.512 4.234]
 </pre></div>
 </div>
 </div>
@@ -1685,24 +1739,24 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([-4.24264069,  0.        ])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[-4.243  0.   ]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A2_aux</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A2_aux</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4.242640687119285
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>4.242640687119285
 </pre></div>
 </div>
 </div>
@@ -1731,13 +1785,13 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_aux_2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_aux_2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.        , -4.24264069],
-       [ 0.        ,  0.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.    -4.243]
+ [ 0.     0.   ]]
 </pre></div>
 </div>
 </div>
@@ -1751,14 +1805,14 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_aux_3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_aux_3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-3.16227766, -3.16227766],
-       [ 0.        , -4.24264069],
-       [ 0.        ,  0.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-3.162 -3.162]
+ [ 0.    -4.243]
+ [ 0.     0.   ]]
 </pre></div>
 </div>
 </div>
@@ -1779,14 +1833,14 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_aux_4</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_aux_4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.        , -3.16227766, -3.16227766],
-       [ 0.        ,  0.        , -4.24264069],
-       [ 0.        ,  0.        ,  0.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.    -3.162 -3.162]
+ [ 0.     0.    -4.243]
+ [ 0.     0.     0.   ]]
 </pre></div>
 </div>
 </div>
@@ -1801,15 +1855,15 @@ R_2A^{(1)} = R_2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[-4.24264069, -2.82842712, -1.41421356],
-       [ 0.        , -3.16227766, -3.16227766],
-       [ 0.        ,  0.        , -4.24264069],
-       [ 0.        ,  0.        ,  0.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[-4.243 -2.828 -1.414]
+ [ 0.    -3.162 -3.162]
+ [ 0.     0.    -4.243]
+ [ 0.     0.     0.   ]]
 </pre></div>
 </div>
 </div>
@@ -1817,18 +1871,24 @@ R_2A^{(1)} = R_2
 <p>Podemos verificar lo anterior comparando con la matriz <span class="math notranslate nohighlight">\(R\)</span> de la factorización <span class="math notranslate nohighlight">\(QR\)</span> de <span class="math notranslate nohighlight">\(A\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="p">,</span><span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>(array([[-7.07106781e-01,  1.18454328e-16,  4.71404521e-01],
-        [-4.71404521e-01, -5.27046277e-01,  7.85674201e-02],
-        [ 2.35702260e-01, -8.43274043e-01, -1.57134840e-01],
-        [-4.71404521e-01,  1.05409255e-01, -8.64241621e-01]]),
- array([[-4.24264069, -2.82842712, -1.41421356],
-        [ 0.        , -3.16227766, -3.16227766],
-        [ 0.        ,  0.        , -4.24264069]]))
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Q:
+[[-0.707  0.     0.471]
+ [-0.471 -0.527  0.079]
+ [ 0.236 -0.843 -0.157]
+ [-0.471  0.105 -0.864]]
+R:
+[[-4.243 -2.828 -1.414]
+ [ 0.    -3.162 -3.162]
+ [ 0.     0.    -4.243]]
 </pre></div>
 </div>
 </div>
@@ -1852,7 +1912,7 @@ R_2A^{(1)} = R_2
 </div>
 </div>
 <div class="section" id="transformaciones-de-rotacion">
-<h2>Transformaciones de rotación<a class="headerlink" href="#transformaciones-de-rotacion" title="Permalink to this headline">¶</a></h2>
+<span id="trot"></span><h2>Transformaciones de rotación<a class="headerlink" href="#transformaciones-de-rotacion" title="Permalink to this headline">¶</a></h2>
 <p>En esta sección suponemos que <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span> y <span class="math notranslate nohighlight">\(A\)</span> es una matriz con entradas <span class="math notranslate nohighlight">\(a_{ij} \in \mathbb{R}^{m \times n} \forall i=1,2,\dots,m, j=1, 2, \dots, n\)</span>.</p>
 <p>Si <span class="math notranslate nohighlight">\(u, v \in \mathbb{R}^2-\{0\}\)</span> con <span class="math notranslate nohighlight">\(\ell = ||u||_2 = ||v||_2\)</span> y se desea rotar al vector <span class="math notranslate nohighlight">\(u\)</span> en sentido contrario a las manecillas del reloj por un ángulo <span class="math notranslate nohighlight">\(\theta\)</span> para llevarlo a la dirección de <span class="math notranslate nohighlight">\(v\)</span>:</p>
 <img src="https://dl.dropboxusercontent.com/s/vq8eu0yga2x7cb2/rotation_1.png?dl=0" heigth="500" width="500">
@@ -1877,13 +1937,19 @@ u_2
 \right]
 \end{array}
 \end{split}\]</div>
-<div class="admonition-comentarios admonition">
-<p class="admonition-title">Comentarios</p>
-<ul class="simple">
-<li><p>La matriz <span class="math notranslate nohighlight">\(R_O\)</span> se llama matriz de <strong>rotación</strong> o <strong>rotaciones Givens</strong>, es una matriz ortogonal pues <span class="math notranslate nohighlight">\(R_O^TR_O=I_2\)</span>.</p></li>
-<li><p>La multiplicación <span class="math notranslate nohighlight">\(v=R_Ou\)</span> es una rotación en sentido contrario a las manecillas del reloj. La multiplicación <span class="math notranslate nohighlight">\(u=R_O^Tv\)</span> es una rotación en sentido de las manecillas del reloj y el ángulo asociado es <span class="math notranslate nohighlight">\(-\theta\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(det(R_O)=1\)</span>.</p></li>
-</ul>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p>La matriz <span class="math notranslate nohighlight">\(R_O\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}R_O=
+\left[ \begin{array}{cc}
+cos\theta &amp; -sen\theta\\
+sen\theta &amp; cos\theta
+\end{array}
+\right] 
+\end{split}\]</div>
+<p>se nombra matriz de <strong>rotación</strong> o <strong>rotaciones Givens</strong>, es una matriz ortogonal pues <span class="math notranslate nohighlight">\(R_O^TR_O=I_2\)</span>.</p>
+<p>La multiplicación <span class="math notranslate nohighlight">\(v=R_Ou\)</span> es una rotación en sentido contrario a las manecillas del reloj, de hecho cumple <span class="math notranslate nohighlight">\(det(R_O)=1\)</span>. La multiplicación <span class="math notranslate nohighlight">\(u=R_O^Tv\)</span> es una rotación en sentido de las manecillas del reloj y el ángulo asociado es <span class="math notranslate nohighlight">\(-\theta\)</span>.</p>
 </div>
 <div class="section" id="ejemplo-aplicando-rotaciones-givens-a-un-vector">
 <h3>Ejemplo aplicando rotaciones Givens a un vector<a class="headerlink" href="#ejemplo-aplicando-rotaciones-givens-a-un-vector" title="Permalink to this headline">¶</a></h3>
@@ -1914,45 +1980,54 @@ sen(\frac{\pi}{4}) &amp; cos(\frac{\pi}{4})
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RO</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">RO</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.70710678, -0.70710678],
-       [ 0.70710678,  0.70710678]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.707 -0.707]
+ [ 0.707  0.707]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RO</span><span class="nd">@v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">RO</span><span class="nd">@v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([1.11022302e-16, 1.41421356e+00])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[0.    1.414]
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Con esta operación estamos aplicando rotación al vector “v”</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>1.4142135623730951
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>1.4142135623730951
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Vemos que la norma es la misma después de la rotación.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <p>Observa que se preserva la norma <span class="math notranslate nohighlight">\(2\)</span> o Euclidiana del vector, las matrices de rotación Givens son matrices ortogonales y por tanto isometrías: <span class="math notranslate nohighlight">\(||R_0v||_2=||v||_2\)</span>.</p>
 </div>
+<ul class="simple">
+<li><p>Un objetivo que buscamos satisfacer es hacer cero alguna entrada.</p></li>
+</ul>
 <p>En el ejemplo anterior se hizo cero la entrada <span class="math notranslate nohighlight">\(v_1\)</span> de <span class="math notranslate nohighlight">\(v\)</span>. Las matrices de rotación se utilizan para hacer ceros en entradas de un vector. Por ejemplo si <span class="math notranslate nohighlight">\(v=(v_1,v_2)^T\)</span> y <strong>se desea hacer cero la entrada <span class="math notranslate nohighlight">\(v_2\)</span> de <span class="math notranslate nohighlight">\(v\)</span></strong> se puede utilizar la matriz de rotación:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}R_O = \left[ \begin{array}{cc}
@@ -2027,6 +2102,10 @@ sen\theta &amp; cos\theta
 \end{array}
 \end{split}\]</div>
 <p>que es una matriz de rotación para un ángulo que gira <strong>en sentido contrario de las manecillas del reloj</strong>.</p>
+<ul class="simple">
+<li><p>El <span class="math notranslate nohighlight">\(R_0\)</span> de este ejercicio es la fórmula general para hacer cero alguna entrada de una matriz de 2x2.</p></li>
+<li><p>Todas las matriz de rotación son ortogonales porque preservan su norma. Pero no todas las ortogonales son de rotación.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicio</p>
 <p>Usar una matriz de rotación Givens para rotar al vector <span class="math notranslate nohighlight">\((-3, 4)^T\)</span> un ángulo de <span class="math notranslate nohighlight">\(\frac{\pi}{3}\)</span> en sentido de las manecillas del reloj.</p>
@@ -2034,6 +2113,9 @@ sen\theta &amp; cos\theta
 </div>
 <div class="section" id="ejemplo-aplicando-rotaciones-givens-a-una-matriz">
 <h3>Ejemplo aplicando rotaciones Givens a una matriz<a class="headerlink" href="#ejemplo-aplicando-rotaciones-givens-a-una-matriz" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Con esto lidiamos con rotación de matrices de más de 2 dimensiones.</p></li>
+</ul>
 <p>Las rotaciones Givens permiten hacer ceros en entradas de una matriz que son <strong>seleccionadas</strong>. Por ejemplo si se desea hacer cero la entrada <span class="math notranslate nohighlight">\(x_4\)</span> de <span class="math notranslate nohighlight">\(x \in \mathbb{R}^4\)</span>, se definen <span class="math notranslate nohighlight">\(cos\theta = \frac{x_2}{\sqrt{x_2^2 + x_4^2}}, sen\theta = \frac{x_4}{\sqrt{x_2^2 + x_4^2}}\)</span> y</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2080,6 +2162,15 @@ x_3 \\
 \end{array}
 \end{split}\]</div>
 <p>Y se escribe que se hizo una rotación en el plano <span class="math notranslate nohighlight">\((2,4)\)</span>.</p>
+<ul class="simple">
+<li><p>Los ceros que habíamos asignado hacen que el vector de <span class="math notranslate nohighlight">\(x\)</span> no se afecte en algunos casos.</p></li>
+<li><p>Podemos extrapolar esa misma idea a matrices más grandes.</p>
+<ul>
+<li><p>Debes elegir unicamente la estructura correcta de tu matriz de rotación.</p></li>
+</ul>
+</li>
+<li><p>Si estuvieras trabajando con una matriz de 2x2 entonces los cosenos de los valores se efectarían.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <p>Obsérvese que sólo se modificaron dos entradas de <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(x_2, x_4\)</span> por lo que el mismo efecto se obtiene al hacer la multiplicación:</p>
@@ -2101,6 +2192,14 @@ x_4
 \end{split}\]</div>
 <p>para tales entradas.</p>
 </div>
+<ul class="simple">
+<li><p>En este ejercicio elegimos el plano 1,2.</p>
+<ul>
+<li><p>Modificamos primer columna y segundo renglón.</p></li>
+<li><p>Lo hacemos con los “senos” y “cosenos” correspondientes.</p></li>
+</ul>
+</li>
+</ul>
 <p>Considérese a la matriz <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{4 \times 4}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}A =
@@ -2136,19 +2235,22 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.,  1., -2.,  2.],
-       [ 1.,  2.,  0.,  1.],
-       [-2.,  0.,  3., -2.],
-       [ 2.,  1., -2., -1.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.  1. -2.  2.]
+ [ 1.  2.  0.  1.]
+ [-2.  0.  3. -2.]
+ [ 2.  1. -2. -1.]]
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Vamos a usar la fórmula general que ya habíamos visto arriba:</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a_11</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">idx_1</span><span class="p">,</span><span class="n">idx_column</span><span class="p">]</span>
@@ -2170,13 +2272,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R12</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.9701425 ,  0.24253563],
-       [-0.24253563,  0.9701425 ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.97   0.243]
+ [-0.243  0.97 ]]
 </pre></div>
 </div>
 </div>
@@ -2194,26 +2296,26 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.,  1., -2.,  2.],
-       [ 1.,  2.,  0.,  1.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.  1. -2.  2.]
+ [ 1.  2.  0.  1.]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R12</span><span class="nd">@A_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R12</span><span class="nd">@A_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.12310563,  1.45521375, -1.940285  ,  2.18282063],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.123  1.455 -1.94   2.183]
+ [ 0.     1.698  0.485  0.485]]
 </pre></div>
 </div>
 </div>
@@ -2227,13 +2329,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.12310563,  1.45521375, -1.940285  ,  2.18282063],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.123  1.455 -1.94   2.183]
+ [ 0.     1.698  0.485  0.485]]
 </pre></div>
 </div>
 </div>
@@ -2258,32 +2360,36 @@ x_4
 <p class="sidebar-title"></p>
 <p><span class="math notranslate nohighlight">\(A^{(1)} = R_{12}^\theta A^{(0)}\)</span>.</p>
 </div>
+<ul class="simple">
+<li><p>Aquí ya colocamos el subresultado que obtuvimos a la matriz original.</p></li>
+<li><p>Solo modificamos el primero y segundo renglón.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.12310563,  1.45521375, -1.940285  ,  2.18282063],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [-2.        ,  0.        ,  3.        , -2.        ],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.123  1.455 -1.94   2.183]
+ [ 0.     1.698  0.485  0.485]
+ [-2.     0.     3.    -2.   ]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.,  1., -2.,  2.],
-       [ 1.,  2.,  0.,  1.],
-       [-2.,  0.,  3., -2.],
-       [ 2.,  1., -2., -1.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.  1. -2.  2.]
+ [ 1.  2.  0.  1.]
+ [-2.  0.  3. -2.]
+ [ 2.  1. -2. -1.]]
 </pre></div>
 </div>
 </div>
@@ -2294,24 +2400,24 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A1</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
@@ -2347,13 +2453,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R13</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R13</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.89973541, -0.43643578],
-       [ 0.43643578,  0.89973541]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.9   -0.436]
+ [ 0.436  0.9  ]]
 </pre></div>
 </div>
 </div>
@@ -2371,26 +2477,26 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.12310563,  1.45521375, -1.940285  ,  2.18282063],
-       [-2.        ,  0.        ,  3.        , -2.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.123  1.455 -1.94   2.183]
+ [-2.     0.     3.    -2.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R13</span><span class="nd">@A1_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R13</span><span class="nd">@A1_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 0.     0.635  1.852 -0.847]]
 </pre></div>
 </div>
 </div>
@@ -2404,13 +2510,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 0.     0.635  1.852 -0.847]]
 </pre></div>
 </div>
 </div>
@@ -2436,45 +2542,45 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.12310563,  1.45521375, -1.940285  ,  2.18282063],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [-2.        ,  0.        ,  3.        , -2.        ],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.123  1.455 -1.94   2.183]
+ [ 0.     1.698  0.485  0.485]
+ [-2.     0.     3.    -2.   ]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.,  1., -2.,  2.],
-       [ 1.,  2.,  0.,  1.],
-       [-2.,  0.,  3., -2.],
-       [ 2.,  1., -2., -1.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.  1. -2.  2.]
+ [ 1.  2.  0.  1.]
+ [-2.  0.  3. -2.]
+ [ 2.  1. -2. -1.]]
 </pre></div>
 </div>
 </div>
@@ -2485,24 +2591,24 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A2</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A2</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
@@ -2538,13 +2644,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R14</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R14</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.91651514,  0.4       ],
-       [-0.4       ,  0.91651514]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.917  0.4  ]
+ [-0.4    0.917]]
 </pre></div>
 </div>
 </div>
@@ -2562,26 +2668,26 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R14</span><span class="nd">@A2_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R14</span><span class="nd">@A2_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 5.        ,  1.6       , -3.6       ,  2.2       ],
-       [ 0.        ,  0.3927922 , -0.61101009, -2.05124817]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.     1.6   -3.6    2.2  ]
+ [ 0.     0.393 -0.611 -2.051]]
 </pre></div>
 </div>
 </div>
@@ -2595,13 +2701,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 5.        ,  1.6       , -3.6       ,  2.2       ],
-       [ 0.        ,  0.3927922 , -0.61101009, -2.05124817]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.     1.6   -3.6    2.2  ]
+ [ 0.     0.393 -0.611 -2.051]]
 </pre></div>
 </div>
 </div>
@@ -2627,63 +2733,70 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 5.        ,  1.6       , -3.6       ,  2.2       ],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ],
-       [ 0.        ,  0.3927922 , -0.61101009, -2.05124817]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.     1.6   -3.6    2.2  ]
+ [ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]
+ [ 0.     0.393 -0.611 -2.051]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Vemos que el resultado de este ejercicio es el cero del tercer renglón.</p></li>
+</ul>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Se preserva la norma 2 o Euclidiana de <span class="math notranslate nohighlight">\(A[1:4,1]\)</span>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A3</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A3</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>5.0
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>Entrada <span class="math notranslate nohighlight">\(a_{32}\)</span>, plano <span class="math notranslate nohighlight">\((2,3)\)</span>:</strong></p>
+<ul class="simple">
+<li><p>En este caso vamos a hacer 0 un valor de la segunda columna.</p></li>
+<li><p>Vamos a ir afectando todo el renglón parejo.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idx_1</span> <span class="o">=</span> <span class="mi">1</span>
@@ -2714,13 +2827,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R23</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R23</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.93660976,  0.3503743 ],
-       [-0.3503743 ,  0.93660976]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.937  0.35 ]
+ [-0.35   0.937]]
 </pre></div>
 </div>
 </div>
@@ -2738,28 +2851,26 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R23</span><span class="nd">@A3_subset</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">R23</span><span class="nd">@A3_subset</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.00000000e+00,  1.81265393e+00,  1.10335457e+00,
-         1.57622081e-01],
-       [ 0.00000000e+00,  4.48877380e-17,  1.56501609e+00,
-        -9.63086825e-01]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.     1.813  1.103  0.158]
+ [ 0.     0.     1.565 -0.963]]
 </pre></div>
 </div>
 </div>
@@ -2773,15 +2884,13 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A4_aux</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A4_aux</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 0.00000000e+00,  1.81265393e+00,  1.10335457e+00,
-         1.57622081e-01],
-       [ 0.00000000e+00,  4.48877380e-17,  1.56501609e+00,
-        -9.63086825e-01]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 0.     1.813  1.103  0.158]
+ [ 0.     0.     1.565 -0.963]]
 </pre></div>
 </div>
 </div>
@@ -2812,40 +2921,40 @@ x_4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.00000000e+00  1.60000000e+00 -3.60000000e+00  2.20000000e+00]
- [ 0.00000000e+00  1.81265393e+00  1.10335457e+00  1.57622081e-01]
- [ 0.00000000e+00  4.48877380e-17  1.56501609e+00 -9.63086825e-01]
- [ 0.00000000e+00  3.92792202e-01 -6.11010093e-01 -2.05124817e+00]]
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.     1.6   -3.6    2.2  ]
+ [ 0.     1.813  1.103  0.158]
+ [ 0.     0.     1.565 -0.963]
+ [ 0.     0.393 -0.611 -2.051]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 5.        ,  1.6       , -3.6       ,  2.2       ],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ],
-       [ 0.        ,  0.3927922 , -0.61101009, -2.05124817]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 5.     1.6   -3.6    2.2  ]
+ [ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]
+ [ 0.     0.393 -0.611 -2.051]]
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[ 4.58257569,  1.30930734, -3.05505046,  2.83683257],
-       [ 0.        ,  1.69774938,  0.48507125,  0.48507125],
-       [ 0.        ,  0.63510735,  1.85239643, -0.8468098 ],
-       [ 2.        ,  1.        , -2.        , -1.        ]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 4.583  1.309 -3.055  2.837]
+ [ 0.     1.698  0.485  0.485]
+ [ 0.     0.635  1.852 -0.847]
+ [ 2.     1.    -2.    -1.   ]]
 </pre></div>
 </div>
 </div>
@@ -2856,24 +2965,24 @@ x_4
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A4</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A4</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.449489742783178
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.449489742783178
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">[:,</span> <span class="n">idx_column</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.449489742783178
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.449489742783178
 </pre></div>
 </div>
 </div>
@@ -2882,10 +2991,22 @@ x_4
 <p class="admonition-title">Ejercicio</p>
 <p>Finalizar el ejercicio para llevar a la matriz <span class="math notranslate nohighlight">\(A\)</span> a una matriz triangular superior.</p>
 </div>
+<div class="tip admonition">
+<p class="admonition-title">Ejercicios</p>
+<p>1.Resuelve los ejercicios y preguntas de la nota.</p>
+</div>
+<p><strong>Preguntas de comprehensión.</strong></p>
+<p>1)Escribe ejemplos de operaciones vectoriales y matriciales básicas del Álgebra Lineal Numérica.</p>
+<p>2)¿Para qué se utilizan las transformaciones de Gauss?</p>
+<p>3)Escribe nombres de factorizaciones en las que se utilizan las transformaciones de Gauss.</p>
+<p>4)Escribe propiedades que tiene una matriz ortogonal.</p>
+<p>5)¿Una matriz ortogonal es rectangular?</p>
+<p>6)¿Qué propiedades tienen las matrices de proyección, reflexión y rotación?</p>
+<p>7)¿Qué problema numérico se quiere resolver al definir un vector de Householder como <span class="math notranslate nohighlight">\(x+signo(x_1)||x||_2e_1\)</span>?</p>
 <p><strong>Referencias:</strong></p>
-<ul class="simple">
+<ol class="simple">
 <li><p>G. H. Golub, C. F. Van Loan, Matrix Computations, John Hopkins University Press, 2013.</p></li>
-</ul>
+</ol>
 </div>
 </div>
 </div>
@@ -2919,6 +3040,7 @@ x_4
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../../I.computo_cientifico/1.7/Integracion_numerica.html" title="previous page">1.7 Integración Numérica</a>
+    <a class='right-next' id="next-link" href="../2.2/Eigenvalores_y_eigenvectores.html" title="next page">2.2 Eigenvalores y eigenvectores</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

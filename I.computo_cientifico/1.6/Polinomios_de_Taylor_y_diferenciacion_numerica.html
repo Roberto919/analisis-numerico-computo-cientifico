@@ -131,6 +131,43 @@
    2.1 Operaciones y transformaciones básicas del Álgebra Lineal Numérica
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.2/Eigenvalores_y_eigenvectores.html">
+   2.2 Eigenvalores y eigenvectores
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.3/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz.html">
+   2.3 Algoritmos y aplicaciones de eigenvalores y eigenvectores de una matriz
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.4/Valores_vectores_singulares_y_algoritmos_para_calcular_la_SVD.html">
+   2.4 Valores, vectores singulares y algoritmos para calcular la SVD
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  III. Optimización convexa
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.1/Definicion_de_problema_optimizacion_conjuntos_y_funciones_convexas.html">
+   3.1 Definición de problemas de optimización, conjuntos y funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.2/Algoritmos_de_descenso_y_busqueda_de_linea_funciones_convexas.html">
+   3.2 Algoritmos de descenso y búsqueda de línea para funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.3/Ecuaciones_no_lineales.html">
+   3.3 Ecuaciones no lineales
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -317,6 +354,14 @@
 </div>
 <hr class="docutils" />
 <p>Nota generada a partir de la <a class="reference external" href="https://www.dropbox.com/s/jfrxanjls8kndjp/Diferenciacion_e_Integracion.pdf?dl=0">liga1</a>, <a class="reference external" href="https://www.dropbox.com/s/mmd1uzvwhdwsyiu/4.3.2.Teoria_de_convexidad_Funciones_convexas.pdf?dl=0">liga2</a> e inicio de <a class="reference external" href="https://www.dropbox.com/s/ko86cce1olbtsbk/4.3.1.Teoria_de_convexidad_Conjuntos_convexos.pdf?dl=0">liga3</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Al final de esta nota el y la lectora:</p>
+<ul class="simple">
+<li><p>Aprenderá que el método de diferenciación finita es un método inestable numéricamente respecto al redondeo.</p></li>
+<li><p>Conocerá las expresiones de los polinomios de Taylor para funciones de varias variables.</p></li>
+<li><p>Tendrá en su lista de programas del lenguaje <em>R</em> implementaciones para aproximar al gradiente y a la Hessiana de una función con los métodos de diferenciación finita.</p></li>
+</ul>
+</div>
 <div class="section" id="problema-como-aproximar-una-funcion-f-en-un-punto-x-1">
 <h2>Problema: ¿Cómo aproximar una función <span class="math notranslate nohighlight">\(f\)</span> en un punto <span class="math notranslate nohighlight">\(x_1\)</span>?<a class="headerlink" href="#problema-como-aproximar-una-funcion-f-en-un-punto-x-1" title="Permalink to this headline">¶</a></h2>
 <p>Si <span class="math notranslate nohighlight">\(f\)</span> es continuamente diferenciable en <span class="math notranslate nohighlight">\(x_0\)</span> y <span class="math notranslate nohighlight">\(f^{(1)}, f^{(2)}\)</span> existen y están acotadas en <span class="math notranslate nohighlight">\(x_0\)</span> entonces:</p>
@@ -333,7 +378,7 @@
 \[f(x_1) \approx f(x_0)\]</div>
 <p>lo cual sólo requiere del conocimiento de <span class="math notranslate nohighlight">\(f(x_0)\)</span> y se nombra aproximación de <strong>orden</strong> <span class="math notranslate nohighlight">\(0\)</span>, sin embargo esta aproximación tiene un error de <strong>orden</strong> <span class="math notranslate nohighlight">\(1\)</span> pues este es proporcional a <span class="math notranslate nohighlight">\(h\)</span> , esto es, al reducir a la mitad <span class="math notranslate nohighlight">\(h\)</span> se reduce a la mitad el error.</p>
 <ul class="simple">
-<li><p>Los errores anteriores los nombramos errores por <strong>truncamiento</strong>, ver <span class="xref std std-ref">Fuentes del error</span> y <a class="reference internal" href="../1.1/Analisis_numerico_y_computo_cientifico.html#anerr"><span class="std std-ref">Análisis del error</span></a> para un recordatorio de tal error. Utilizamos la notación “O grande” <span class="math notranslate nohighlight">\(\mathcal{O}(\cdot)\)</span> para escribir lo anterior:</p></li>
+<li><p>Los errores anteriores los nombramos errores por <strong>truncamiento</strong>, ver <span class="xref std std-ref">Fuentes del error</span> y <span class="xref std std-ref">Análisis del error</span> para un recordatorio de tal error. Utilizamos la notación “O grande” <span class="math notranslate nohighlight">\(\mathcal{O}(\cdot)\)</span> para escribir lo anterior:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[f(x)-f(x_0)=\mathcal{O}(h)\]</div>
@@ -366,6 +411,10 @@
 \[R_n(x) = \frac{f^{(n+1)}(\xi_x)(x-x_0)^{(n+1)}}{(n+1)!}\]</div>
 <p>con <span class="math notranslate nohighlight">\(\xi_x\)</span> entre <span class="math notranslate nohighlight">\(x_0, x\)</span> y <span class="math notranslate nohighlight">\(x_0\)</span> se llama centro. Ver <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html#fcd"><span class="std std-ref">Definición de función, continuidad y derivada</span></a> para definición del conjunto <span class="math notranslate nohighlight">\(\mathcal{C}^n([a,b])\)</span>.</p>
 </div>
+<ul class="simple">
+<li><p>El residual nos puede ayudar a acotar el error asociado a la aproximación del polinomio del Taylor.</p></li>
+<li><p>Con el residual podemos saber cuál es el error máximo que podríamos tener aproximando una función con polinomios de Taylor en un rango específico.</p></li>
+</ul>
 <div class="admonition-comentarios admonition">
 <p class="admonition-title">Comentarios</p>
 <ul class="simple">
@@ -464,19 +513,19 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gg</span><span class="o">+</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gg</span><span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;f(x)&#39;</span><span class="p">))</span> <span class="o">+</span> 
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_Taylor_0</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;constante&#39;</span><span class="p">))</span><span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_Taylor_1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;lineal&#39;</span><span class="p">))</span> <span class="o">+</span> 
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_Taylor_2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grado 2&#39;</span><span class="p">))</span> <span class="o">+</span> 
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_Taylor_3</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grado 3&#39;</span><span class="p">))</span> <span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">y_Taylor_4</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grado 4&#39;</span><span class="p">))</span> <span class="o">+</span> 
-<span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_26_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_26_0.png" />
+<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_28_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_28_0.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -511,15 +560,15 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 <span class="n">p4_approx</span> <span class="o">&lt;-</span> <span class="n">Taylor_approx</span><span class="p">(</span><span class="n">x_test_point</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error relativo polinomio constante&#39;</span><span class="p">)</span>
-<span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">x0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">x0</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error relativo polinomio lineal&#39;</span><span class="p">)</span>
-<span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p1_approx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p1_approx</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error relativo polinomio grado 2&#39;</span><span class="p">)</span>
-<span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p2_approx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p2_approx</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error relativo polinomio grado 3&#39;</span><span class="p">)</span>
-<span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p3_approx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p3_approx</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error relativo polinomio grado 4&#39;</span><span class="p">)</span>
-<span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p4_approx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">compute_error_point_wise</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">p4_approx</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -527,19 +576,34 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio constante&quot;
 </pre></div>
 </div>
-<div class="output text_html">0.266666666666667</div><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio lineal&quot;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 0.2666667
 </pre></div>
 </div>
-<div class="output text_html">0.071111111111111</div><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 2&quot;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio lineal&quot;
 </pre></div>
 </div>
-<div class="output text_html">0.018962962962963</div><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 3&quot;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 0.07111111
 </pre></div>
 </div>
-<div class="output text_html">0.00505679012345678</div><div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 4&quot;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 2&quot;
 </pre></div>
 </div>
-<div class="output text_html">0.00134847736625514</div></div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 0.01896296
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 3&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 0.00505679
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] &quot;error relativo polinomio grado 4&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 0.001348477
+</pre></div>
+</div>
+</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicio</p>
@@ -593,6 +657,9 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 </div>
 <div class="section" id="diferenciacion-numerica-por-diferencias-finitas">
 <h2>Diferenciación numérica por diferencias finitas<a class="headerlink" href="#diferenciacion-numerica-por-diferencias-finitas" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Los polinomios de Taylor nos permiten ter fórmulas que podemos derivar</p></li>
+</ul>
 <div class="admonition-comentario admonition">
 <p class="admonition-title">Comentario</p>
 <p>En esta sección se revisan métodos numéricos para aproximar las derivadas. Otros métodos para el cálculo de las derivadas se realizan con el cómputo simbólico o algebraico, ver <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html#fcd"><span class="std std-ref"> Definición de función, continuidad y derivada</span></a> para ejemplos.</p>
@@ -708,30 +775,45 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gf</span><span class="o">+</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gf</span><span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="n">y</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">res_relative_error</span><span class="p">)))</span><span class="o">+</span>
-<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación a la primera derivada por diferencias finitas&#39;</span><span class="p">)</span>
+<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación a la primera derivada por diferencias finitas&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_72_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_72_0.png" />
+<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_75_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_75_0.png" />
 </div>
 </div>
+<ul class="simple">
+<li><p>Las componentes que infuencían la forma del error:</p>
+<ul>
+<li><p>Componente asociada al teorema de Taylor (derecha)</p></li>
+<li><p>Componente de error por redondeo (izquierda)</p>
+<ul>
+<li><p>La “h” es cada vez más pequeña y se acerca cada vez más a “x”</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicio</p>
 <p>Realizar una gráfica de log(error relativo) vs log(h) (h en el eje horizontal) con <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> para aproximar la segunda derivada de <span class="math notranslate nohighlight">\(f(x)=e^{-x}\)</span> en <span class="math notranslate nohighlight">\(x=1\)</span> con <span class="math notranslate nohighlight">\(h \in \{10^{-16}, 10^{-14}, \dots , 10^{-1}\}\)</span> y diferencias hacia delante. Valor a aproximar: <span class="math notranslate nohighlight">\(f^{(2)}(1) = e^{-1}\)</span>. Usar:</p>
+</div>
 <div class="math notranslate nohighlight">
 \[\frac{d^2f(x)}{dx} = \frac{f(x+2h)-2f(x+h)+f(x)}{h^2} + \mathcal{O}(h)\]</div>
 <p>Encontrar valor(es) de <span class="math notranslate nohighlight">\(h\)</span> que minimiza(n) al error absoluto y relativo.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
 </div>
 <div class="admonition-comentario admonition">
 <p class="admonition-title">Comentario</p>
 <p>Aproximaciones a la segunda derivada de una función <span class="math notranslate nohighlight">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span> se pueden obtener con las fórmulas:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\frac{d^2f(x)}{dx} = \frac{f(x+2h)-2f(x+h)+f(x)}{h^2} + \mathcal{O}(h)\)</span> por diferencias hacia delante.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{d^2f(x)}{dx} \approx \frac{f(x)-2f(x-h)+f(x-2h)}{h^2} + \mathcal{O}(h)\)</span> por diferencias hacia atrás.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{d^2f(x)}{dx} \approx \frac{f(x+h)-2f(x)+f(x-h)}{h^2} + \mathcal{O}(h^2)\)</span> por diferencias centradas.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{d^2f(x)}{dx} = \frac{f(x)-2f(x-h)+f(x-2h)}{h^2} + \mathcal{O}(h)\)</span> por diferencias hacia atrás.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\frac{d^2f(x)}{dx} = \frac{f(x+h)-2f(x)+f(x-h)}{h^2} + \mathcal{O}(h^2)\)</span> por diferencias centradas.</p></li>
 </ul>
 <p>Estas fórmulas se obtienen con el teorema de Taylor bajo las suposiciones correctas.</p>
 </div>
@@ -758,6 +840,18 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 <div class="math notranslate nohighlight">
 \[\text{ErrRel}\left (\frac{\hat{f}(x+h)-\hat{f}(x)}{h} \right) = \frac{\text{ErrAbs}\left ( \frac{\hat{f}(x+h)-\hat{f}(x)}{h} \right )}{|f^{(1)}(x)|} \leq \frac{\mathcal{O}(h) + \frac{C\epsilon_{maq}}{h}}{|f^{(1)}(x)|} = K_1h + K_2\frac{1}{h}\]</div>
 <p>con <span class="math notranslate nohighlight">\(K_1, K_2 &gt;0\)</span> constantes.</p>
+<ul class="simple">
+<li><p>Cuando “h” es muy grande el valor que domina es “K_1”</p>
+<ul>
+<li><p>La “K_1” se está refiriendo al error por truncamiento</p></li>
+</ul>
+</li>
+<li><p>Cuando “h” es muy chica el valor que domina es “K_2”</p>
+<ul>
+<li><p>La “K_2” se refiere al error por redondeo</p></li>
+</ul>
+</li>
+</ul>
 <p>Entonces la función <span class="math notranslate nohighlight">\(g(h) = \mathcal{O}(h) + \mathcal{O}\left (\frac{1}{h} \right)\)</span> acota al error absoluto y al error relativo y se tiene:</p>
 <ul class="simple">
 <li><p>Si <span class="math notranslate nohighlight">\(h \rightarrow 0\)</span> la componente <span class="math notranslate nohighlight">\(\mathcal{O} \left ( \frac{1}{h} \right )\)</span> domina a la componente <span class="math notranslate nohighlight">\(\mathcal{O}(h)\)</span>, la cual tiende a <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
@@ -790,22 +884,28 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">max</span><span class="p">(</span><span class="n">res_relative_error</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">res_relative_error</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">1</div></div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 1
+</pre></div>
+</div>
+</div>
 </div>
 <p>y esto ocurre para un valor de <span class="math notranslate nohighlight">\(h\)</span> igual a:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">[</span><span class="n">which</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">res_relative_error</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="n">which</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">res_relative_error</span><span class="p">)])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html">1e-16</div></div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[1] 1e-16
+</pre></div>
+</div>
+</div>
 </div>
 <div class="tip admonition">
 <p class="admonition-title">Pregunta</p>
@@ -821,7 +921,7 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 </div>
 <div class="section" id="diferenciacion-numerica-para-una-funcion-f-mathbb-r-n-rightarrow-mathbb-r">
 <h2>Diferenciación numérica para una función <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}\)</span><a class="headerlink" href="#diferenciacion-numerica-para-una-funcion-f-mathbb-r-n-rightarrow-mathbb-r" title="Permalink to this headline">¶</a></h2>
-<p>Supongamos <span class="math notranslate nohighlight">\(f\)</span> es dos veces diferenciable en <span class="math notranslate nohighlight">\(\text{dom}f\)</span>. Si <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}\)</span> entonces su derivada se llama <strong>gradiente</strong>, el cual es una función <span class="math notranslate nohighlight">\(\nabla f: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> y su segunda derivada se llama <strong>Hessiana</strong>, la cual es una función <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^{n\times n}\)</span> (ver <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html#fcd"><span class="std std-ref">Definición de función, continuidad y derivada</span></a> para definición de derivadas en funciones <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span>). Ambas funciones al evaluarse resultan en un vector en <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> y en una matriz en <span class="math notranslate nohighlight">\(\mathbb{R}^{n\times n}\)</span> respectivamente.</p>
+<p>Supongamos <span class="math notranslate nohighlight">\(f\)</span> es dos veces diferenciable en <span class="math notranslate nohighlight">\(\text{intdom}f\)</span>. Si <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}\)</span> entonces <span class="math notranslate nohighlight">\(\nabla f: \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> y <span class="math notranslate nohighlight">\(\nabla ^2f: \mathbb{R}^n \rightarrow \mathbb{R}^{n\times n}\)</span> (ver <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html#fcd"><span class="std std-ref">Definición de función, continuidad y derivada</span></a> para definición de derivadas en funciones <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}^m\)</span>). Ambas funciones al evaluarse resultan en un vector en <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> y en una matriz en <span class="math notranslate nohighlight">\(\mathbb{R}^{n\times n}\)</span> respectivamente.</p>
 <p>Podemos utilizar las fórmulas de aproximación en diferenciación numérica con diferencias finitas para el caso <span class="math notranslate nohighlight">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span> revisadas anteriormente para aproximar al gradiente y a la Hessiana.</p>
 <p>Para el caso del gradiente se tiene por <strong>diferenciación hacia delante</strong>:</p>
 <div class="math notranslate nohighlight">
@@ -901,7 +1001,7 @@ P_2(x) &amp;=&amp; f(x_0) + f^{(1)}(x_0)(x-x_0) + \frac{f^{(2)}(x_0)(x-x_0)^2}{2
 <p><strong>Punto en el que se evaluará</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_0</span><span class="o">&lt;-</span><span class="n">c</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_0</span><span class="o">&lt;-</span><span class="n">c</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1108,14 +1208,14 @@ compute_error&lt;-function(obj,approx){
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gg</span><span class="o">+</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gg</span><span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="n">y</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">rel_err_gf</span><span class="p">)))</span><span class="o">+</span>
-<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación al gradiente por diferencias finitas&#39;</span><span class="p">)</span>
+<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación al gradiente por diferencias finitas&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_126_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_126_0.png" />
+<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_133_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_133_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1132,14 +1232,14 @@ compute_error&lt;-function(obj,approx){
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gg</span><span class="o">+</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gg</span><span class="o">+</span>
 <span class="n">geom_line</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">),</span><span class="n">y</span><span class="o">=</span><span class="n">log</span><span class="p">(</span><span class="n">rel_err_gf2</span><span class="p">)))</span><span class="o">+</span>
-<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación a la Hessiana por diferencias finitas&#39;</span><span class="p">)</span>
+<span class="n">ggtitle</span><span class="p">(</span><span class="s1">&#39;Aproximación a la Hessiana por diferencias finitas&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_128_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_128_0.png" />
+<img alt="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_135_0.png" src="../../_images/Polinomios_de_Taylor_y_diferenciacion_numerica_135_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1173,6 +1273,8 @@ compute_error&lt;-function(obj,approx){
 <li><p>Nota <a class="reference internal" href="../1.5/Definicion_de_funcion_continuidad_derivada.html#fcd"><span class="std std-ref">Definición de función, continuidad y derivada</span></a>.</p></li>
 <li><p>Nota <a class="reference internal" href="../1.4/Condicion_de_un_problema_y_estabilidad_de_un_algoritmo.html#cpea"><span class="std std-ref">Condición de un problema y estabilidad de un algoritmo</span></a>.</p></li>
 </ol>
+<hr class="docutils" />
+<hr class="docutils" />
 </div>
 </div>
 </div>

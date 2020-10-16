@@ -131,6 +131,43 @@
    2.1 Operaciones y transformaciones básicas del Álgebra Lineal Numérica
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.2/Eigenvalores_y_eigenvectores.html">
+   2.2 Eigenvalores y eigenvectores
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.3/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz.html">
+   2.3 Algoritmos y aplicaciones de eigenvalores y eigenvectores de una matriz
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.4/Valores_vectores_singulares_y_algoritmos_para_calcular_la_SVD.html">
+   2.4 Valores, vectores singulares y algoritmos para calcular la SVD
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  III. Optimización convexa
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.1/Definicion_de_problema_optimizacion_conjuntos_y_funciones_convexas.html">
+   3.1 Definición de problemas de optimización, conjuntos y funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.2/Algoritmos_de_descenso_y_busqueda_de_linea_funciones_convexas.html">
+   3.2 Algoritmos de descenso y búsqueda de línea para funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.3/Ecuaciones_no_lineales.html">
+   3.3 Ecuaciones no lineales
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -342,6 +379,13 @@
 </div>
 <hr class="docutils" />
 <p>Nota generada a partir de <a class="reference external" href="https://www.dropbox.com/s/5bc6tn39o0qqg35/1.3.Condicion_estabilidad_y_normas.pdf?dl=0">liga</a></p>
+<div class="tip admonition">
+<p class="admonition-title">Al final de esta nota el y la lectora:</p>
+<ul class="simple">
+<li><p>Aprenderá las definiciones de algunas normas vectoriales y matriciales más utilizadas en las Matemáticas para la medición de errores, residuales, en general cercanía a cantidades de interés.</p></li>
+<li><p>Comprenderá la interpretación que tiene una norma matricial.</p></li>
+</ul>
+</div>
 <p>Una norma define una medida de distancia en un conjunto y da nociones de tamaño, vecindad, convergencia y continuidad.</p>
 <div class="section" id="normas-vectoriales">
 <h2>Normas vectoriales<a class="headerlink" href="#normas-vectoriales" title="Permalink to this headline">¶</a></h2>
@@ -374,7 +418,7 @@
 <li><p><span class="math notranslate nohighlight">\(\exists 0 \in V\)</span> tal que <span class="math notranslate nohighlight">\(x + 0 = 0 + x = x\)</span> <span class="math notranslate nohighlight">\(\forall x \in V\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\forall x \in V\)</span> <span class="math notranslate nohighlight">\(\exists -x \in V\)</span> tal que <span class="math notranslate nohighlight">\(x + (-x) = 0\)</span>.</p></li>
 <li><p>a(bx) = (ab)x.</p></li>
-<li><p><span class="math notranslate nohighlight">\(1x = x\)</span> con $ 1 \in \mathbb{R}$.</p></li>
+<li><p><span class="math notranslate nohighlight">\(1x = x\)</span> con <span class="math notranslate nohighlight">\(1 \in \mathbb{R}\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(a(x + y) = ax + ay\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\((a+b)x = ax + bx\)</span>.</p></li>
 </ul>
@@ -434,7 +478,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Normas_vectoriales_y_matriciales_16_0.png" src="../../_images/Normas_vectoriales_y_matriciales_16_0.png" />
+<img alt="../../_images/Normas_vectoriales_y_matriciales_17_0.png" src="../../_images/Normas_vectoriales_y_matriciales_17_0.png" />
 </div>
 </div>
 </div>
@@ -463,7 +507,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Normas_vectoriales_y_matriciales_18_0.png" src="../../_images/Normas_vectoriales_y_matriciales_18_0.png" />
+<img alt="../../_images/Normas_vectoriales_y_matriciales_19_0.png" src="../../_images/Normas_vectoriales_y_matriciales_19_0.png" />
 </div>
 </div>
 </div>
@@ -484,7 +528,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Normas_vectoriales_y_matriciales_20_0.png" src="../../_images/Normas_vectoriales_y_matriciales_20_0.png" />
+<img alt="../../_images/Normas_vectoriales_y_matriciales_21_0.png" src="../../_images/Normas_vectoriales_y_matriciales_21_0.png" />
 </div>
 </div>
 <div class="tip admonition">
@@ -539,18 +583,18 @@ a_m^T
 \[y=Ax=\displaystyle \sum_{j=1}^n a_jx_j\]</div>
 <p>con <span class="math notranslate nohighlight">\(a_j \in \mathbb{R}^m, x \in \mathbb{R}^n\)</span>. Obsérvese que <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n, Ax \in \mathbb{R}^m\)</span>.</p>
 </div>
-<p>Un ejemplo de norma-<span class="math notranslate nohighlight">\(2\)</span> ponderada es: <span class="math notranslate nohighlight">\(\{x \in \mathbb{R}^2 \text{ tales que } ||x||_D \leq 1, ||x||_D = ||Dx||_2, \text{con matriz diagonal } D\}\)</span>:</p>
+<p>Un ejemplo de norma-<span class="math notranslate nohighlight">\(2\)</span> ponderada es: <span class="math notranslate nohighlight">\(\{x \in \mathbb{R}^2 \text{ tales que } ||x||_D \leq 1, ||x||_D = ||Dx||_2, \text{con matriz diagonal } D \text{ y entradas positivas}\}\)</span>:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d1</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
-<span class="n">d2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span>
-<span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">d1</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">d2</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#definición de norma2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d1_inv</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">5</span>
+<span class="n">d2_inv</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span>
+<span class="n">f</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">d1_inv</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">d2_inv</span><span class="o">*</span><span class="n">x</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1">#definición de norma2</span>
 <span class="n">density</span><span class="o">=</span><span class="mf">1e-5</span>
 <span class="n">density_p</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">2.5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">d1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">d1</span><span class="p">,</span><span class="n">density</span><span class="p">)</span>
-<span class="n">y1</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">d2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">d1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">y2</span><span class="o">=-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">d2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">d1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">x_p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">d1</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">d1</span><span class="p">,(</span><span class="n">density_p</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">d1_inv</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">d1_inv</span><span class="p">,</span><span class="n">density</span><span class="p">)</span>
+<span class="n">y1</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">d2_inv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">d1_inv</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y2</span><span class="o">=-</span><span class="mf">1.0</span><span class="o">/</span><span class="n">d2_inv</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="n">d1_inv</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">x_p</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">d1_inv</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">d1_inv</span><span class="p">,(</span><span class="n">density_p</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">ind</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x_p</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span>
 <span class="n">x_p_subset</span><span class="o">=</span><span class="n">x_p</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y1</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
@@ -562,17 +606,14 @@ a_m^T
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Normas_vectoriales_y_matriciales_28_0.png" src="../../_images/Normas_vectoriales_y_matriciales_28_0.png" />
+<img alt="../../_images/Normas_vectoriales_y_matriciales_29_0.png" src="../../_images/Normas_vectoriales_y_matriciales_29_0.png" />
 </div>
 </div>
-<p>en este caso <span class="math notranslate nohighlight">\(D=\left[\begin{array}{cc}
-\frac{1}{5} &amp;0\\
-0 &amp;\frac{1}{3}
-\end{array}\right ]\)</span></p>
+<p>en este caso <span class="math notranslate nohighlight">\(D=\left[\begin{array}{cc} \frac{1}{25} &amp;0\\ 0 &amp;\frac{1}{9} \end{array}\right ] =  \left[\begin{array}{cc} \frac{1}{d_1} &amp;0\\ 0 &amp;\frac{1}{d_2} \end{array}\right ]\)</span></p>
 </div>
 </div>
 <div class="section" id="normas-matriciales">
-<h2>Normas matriciales<a class="headerlink" href="#normas-matriciales" title="Permalink to this headline">¶</a></h2>
+<span id="nmat"></span><h2>Normas matriciales<a class="headerlink" href="#normas-matriciales" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="inducidas">
 <h3>Inducidas<a class="headerlink" href="#inducidas" title="Permalink to this headline">¶</a></h3>
 <p>De las normas matriciales más importantes se encuentran las <strong>inducidas</strong> por normas vectoriales. Estas normas matriciales se definen en términos de los vectores en <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> a los que se les aplica la multiplicación <span class="math notranslate nohighlight">\(Ax\)</span>:</p>
@@ -655,8 +696,12 @@ a_m^T
          <span class="n">x2_y2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x2_y2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
          <span class="n">x1_y3</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x1_y3</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
          <span class="n">x2_y4</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">x2_y4</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">e1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">)),</span><span class="n">x1</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">e1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">e1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="n">e2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">e2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
+         <span class="n">e1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">e1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Vectores con norma 1 menor o igual a 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
@@ -664,8 +709,8 @@ a_m^T
          <span class="n">A_to_vector_2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A_to_vector_2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
          <span class="n">A_to_vector_3</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A_to_vector_3</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
          <span class="n">A_to_vector_4</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A_to_vector_4</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">A_to_vector_e1</span> <span class="o">=</span> <span class="n">apply_A</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">A_to_vector_e1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A_to_vector_e1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">A_to_vector_e2</span> <span class="o">=</span> <span class="n">apply_A</span><span class="p">(</span><span class="n">e2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">A_to_vector_e2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">A_to_vector_e2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Efecto de la matriz A sobre los vectores con norma 1 menor o igual a 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -673,17 +718,17 @@ a_m^T
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Normas_vectoriales_y_matriciales_43_0.png" src="../../_images/Normas_vectoriales_y_matriciales_43_0.png" />
+<img alt="../../_images/Normas_vectoriales_y_matriciales_45_0.png" src="../../_images/Normas_vectoriales_y_matriciales_45_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>4.0
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>4.0
 </pre></div>
 </div>
 </div>
@@ -722,12 +767,12 @@ a_m^T
 <p>por ejemplo para la matriz anterior se tiene:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.9208096264818897
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.9208096264818897
 </pre></div>
 </div>
 </div>
@@ -735,12 +780,12 @@ a_m^T
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>2.9208096264818897
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.9208096264818897
 </pre></div>
 </div>
 </div>
@@ -781,8 +826,9 @@ a_m^T
 <p class="admonition-title">Observación</p>
 <p>Si <span class="math notranslate nohighlight">\(C\)</span> es finito, <span class="math notranslate nohighlight">\(\sup C\)</span> es el máximo de los elementos de <span class="math notranslate nohighlight">\(C\)</span> y típicamente se denota como <span class="math notranslate nohighlight">\(\max C\)</span>.</p>
 </div>
-<p>Análogamente, <span class="math notranslate nohighlight">\(a \in \mathbb{R}\)</span> es una <strong>cota inferior</strong> en <span class="math notranslate nohighlight">\(C \subseteq \mathbb{R}\)</span> si
-<span class="math notranslate nohighlight">\($a \leq x, \forall x \in C.\)</span>$</p>
+<p>Análogamente, <span class="math notranslate nohighlight">\(a \in \mathbb{R}\)</span> es una <strong>cota inferior</strong> en <span class="math notranslate nohighlight">\(C \subseteq \mathbb{R}\)</span> si</p>
+<div class="math notranslate nohighlight">
+\[a \leq x, \forall x \in C.\]</div>
 <p>El <strong>ínfimo o máxima cota inferior</strong> de <span class="math notranslate nohighlight">\(C\)</span> es <span class="math notranslate nohighlight">\(\inf C = -\sup (-C)\)</span>. Por convención <span class="math notranslate nohighlight">\(\inf \emptyset = \infty\)</span> y si <span class="math notranslate nohighlight">\(C\)</span> no es acotado por debajo entonces <span class="math notranslate nohighlight">\(\inf C = -\infty\)</span>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>

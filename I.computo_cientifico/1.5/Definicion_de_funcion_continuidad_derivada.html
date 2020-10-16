@@ -131,6 +131,43 @@
    2.1 Operaciones y transformaciones básicas del Álgebra Lineal Numérica
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.2/Eigenvalores_y_eigenvectores.html">
+   2.2 Eigenvalores y eigenvectores
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.3/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz.html">
+   2.3 Algoritmos y aplicaciones de eigenvalores y eigenvectores de una matriz
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../II.computo_matricial/2.4/Valores_vectores_singulares_y_algoritmos_para_calcular_la_SVD.html">
+   2.4 Valores, vectores singulares y algoritmos para calcular la SVD
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  III. Optimización convexa
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.1/Definicion_de_problema_optimizacion_conjuntos_y_funciones_convexas.html">
+   3.1 Definición de problemas de optimización, conjuntos y funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.2/Algoritmos_de_descenso_y_busqueda_de_linea_funciones_convexas.html">
+   3.2 Algoritmos de descenso y búsqueda de línea para funciones convexas
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../III.optimizacion_convexa/3.3/Ecuaciones_no_lineales.html">
+   3.3 Ecuaciones no lineales
+  </a>
+ </li>
 </ul>
 
 </nav>
@@ -229,6 +266,11 @@
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#notacion">
      Notación
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conjunto-abierto-cerrado-cerradura-e-interior">
+     Conjunto abierto, cerrado, cerradura e interior
     </a>
    </li>
   </ul>
@@ -362,8 +404,16 @@
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comentario-y-ejemplo-final">
-   Comentario y ejemplo final
+  <a class="reference internal nav-link" href="#tablita-util-para-formulas-de-diferenciacion-con-el-operador-nabla">
+   Tablita útil para fórmulas de diferenciación con el operador
+   <span class="math notranslate nohighlight">
+    \(\nabla\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comentario-respecto-al-computo-simbolico-o-algebraico-y-numerico">
+   Comentario respecto al cómputo simbólico o algebraico y númerico
   </a>
  </li>
 </ul>
@@ -390,6 +440,15 @@
 </div>
 <hr class="docutils" />
 <p>Nota generada a partir de la <a class="reference external" href="https://www.dropbox.com/s/jfrxanjls8kndjp/Diferenciacion_e_Integracion.pdf?dl=0">liga1</a>, <a class="reference external" href="https://www.dropbox.com/s/mmd1uzvwhdwsyiu/4.3.2.Teoria_de_convexidad_Funciones_convexas.pdf?dl=0">liga2</a> e inicio de <a class="reference external" href="https://www.dropbox.com/s/ko86cce1olbtsbk/4.3.1.Teoria_de_convexidad_Conjuntos_convexos.pdf?dl=0">liga3</a>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Al final de esta nota el y la lectora:</p>
+<ul class="simple">
+<li><p>Aprenderá las definiciones de función y derivada de una función en algunos casos de interés para el curso. En específico el caso de derivada direccional es muy importante.</p></li>
+<li><p>Aprenderá que el gradiente y Hessiana de una función son un vector y una matriz de primeras (información de primer orden) y segundas derivadas (información de segundo orden) respectivamente.</p></li>
+<li><p>Aprenderá algunas fórmulas utilizadas con el operador nabla de diferenciación.</p></li>
+<li><p>Aprenderá la diferencia entre el cálculo algebraico o simbólico y el numérico vía el paquete <em>SymPy</em>.</p></li>
+</ul>
+</div>
 <div class="section" id="funcion">
 <h2>Función<a class="headerlink" href="#funcion" title="Permalink to this headline">¶</a></h2>
 <div class="admonition-definicion admonition">
@@ -404,6 +463,9 @@
 <p><span class="math notranslate nohighlight">\(\text{dom}f\)</span> (el dominio de <span class="math notranslate nohighlight">\(f\)</span>) puede ser un subconjunto propio de <span class="math notranslate nohighlight">\(A\)</span>, esto es, algunos elementos de <span class="math notranslate nohighlight">\(A\)</span> y otros no, son mapeados a elementos de <span class="math notranslate nohighlight">\(B\)</span>.</p>
 </div>
 <p>En lo que sigue se considera al espacio <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> y se asume que conjuntos y subconjuntos están en este espacio.</p>
+</div>
+<div class="section" id="conjunto-abierto-cerrado-cerradura-e-interior">
+<span id="cacci"></span><h3>Conjunto abierto, cerrado, cerradura e interior<a class="headerlink" href="#conjunto-abierto-cerrado-cerradura-e-interior" title="Permalink to this headline">¶</a></h3>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Un punto <span class="math notranslate nohighlight">\(x\)</span> se nombra <strong>punto límite</strong> de un conjunto <span class="math notranslate nohighlight">\(X\)</span>, si existe una sucesión <span class="math notranslate nohighlight">\(\{x_k\} \subset X\)</span> que converge a <span class="math notranslate nohighlight">\(x\)</span>. El conjunto de puntos límites se nombra <strong>cerradura</strong> o <em>closure</em> de <span class="math notranslate nohighlight">\(X\)</span> y se denota como <span class="math notranslate nohighlight">\(\text{cl}X\)</span>.</p>
@@ -490,13 +552,14 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">quotient</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">quotient</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \sin{\left(x \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-sin(x)
+</pre></div>
+</div>
 </div>
 </div>
 <p>Lo anterior corresponde a la <strong>derivada de <span class="math notranslate nohighlight">\(\cos(x)\)</span></strong>:</p>
@@ -509,47 +572,56 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \sin{\left(x \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-sin(x)
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Si queremos evaluar la derivada podemos usar:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle -1\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-1
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Hay que notar que estamos usando la constante pi del paquete <em>sympy</em></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>d         
+──(cos(x))
+dx        
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit_numerically</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{d}{d x} \cos{\left(x \right)}\]</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">Derivative</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">doit_numerically</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-1.00000000000000
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle -1.0\]</div>
 </div>
 </div>
 </div>
@@ -578,7 +650,7 @@
 \[\frac{\partial f_i(x)}{\partial x_j} = \displaystyle \lim_{h \rightarrow 0} \frac{f_i(x+he_j)-f_i(x)}{h}\]</div>
 <p>donde: <span class="math notranslate nohighlight">\(f_i : \mathbb{R}^n \rightarrow \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(i=1,\dots,m,j=1,\dots,n\)</span> y <span class="math notranslate nohighlight">\(e_j\)</span> <span class="math notranslate nohighlight">\(j\)</span>-ésimo vector canónico que tiene un número <span class="math notranslate nohighlight">\(1\)</span> en la posición <span class="math notranslate nohighlight">\(j\)</span> y <span class="math notranslate nohighlight">\(0\)</span> en las entradas restantes.</p>
 <ul class="simple">
-<li><p>Si <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}, Df(x) \in \mathbb{R}^{1\times n}\)</span>, su transpuesta se llama <strong>gradiente</strong>, el cual es un vector columna, se denota <span class="math notranslate nohighlight">\(\nabla f(x)\)</span> y sus componentes son derivadas parciales:</p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(f: \mathbb{R}^n \rightarrow \mathbb{R}, Df(x) \in \mathbb{R}^{1\times n}\)</span>, su transpuesta se llama <strong>gradiente</strong>, se denota <span class="math notranslate nohighlight">\(\nabla f(x)\)</span>, es una función <span class="math notranslate nohighlight">\(\nabla f : \mathbb{R}^n \rightarrow \mathbb{R}^n\)</span>, recibe un vector y devuelve un vector columna y sus componentes son derivadas parciales:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\nabla f(x) = Df(x)^T = 
@@ -598,6 +670,9 @@
 <li><p>En este contexto, la aproximación de primer orden a <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\(x\)</span> es: <span class="math notranslate nohighlight">\(f(x) + \nabla f(x)^T(z-x)\)</span> para <span class="math notranslate nohighlight">\(z\)</span> cercana a <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>Cuando tienes una función que va de R^n a R^m, la derivada es una matriz de mxn</p></li>
+</ul>
 </div>
 <div class="section" id="id3">
 <h3>Notación<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
@@ -633,13 +708,15 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1} x_{2} + x_{2}^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          2
+x₁⋅x₂ + x₂ 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -651,13 +728,15 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1}^{2} + 2 x_{1} x_{2} + x_{2}^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>  2               2
+x₁  + 2⋅x₁⋅x₂ + x₂ 
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Derivadas parciales:</strong></p>
@@ -675,13 +754,14 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df1_x1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">df1_x1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>x₂
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -697,13 +777,14 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df1_x2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">df1_x2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1} + 2 x_{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>x₁ + 2⋅x₂
+</pre></div>
+</div>
 </div>
 </div>
 <p>Para <span class="math notranslate nohighlight">\(f_2(x) = x_1^2 + 2x_1 x_2 + x_2^2\)</span>:</p>
@@ -720,13 +801,14 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df2_x1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">df2_x1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2 x_{1} + 2 x_{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2⋅x₁ + 2⋅x₂
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -742,13 +824,14 @@ x_1^2 + 2x_1x_2 + x_2^2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">df2_x2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">df2_x2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2 x_{1} + 2 x_{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2⋅x₁ + 2⋅x₂
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Entonces la derivada es:</strong></p>
@@ -771,13 +854,18 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}x_{1} x_{2} + x_{2}^{2}\\x_{1}^{2} + 2 x_{1} x_{2} + x_{2}^{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡              2    ⎤
+⎢    x₁⋅x₂ + x₂     ⎥
+⎢                   ⎥
+⎢  2               2⎥
+⎣x₁  + 2⋅x₁⋅x₂ + x₂ ⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -786,13 +874,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">jacobian</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">jacobian</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}x_{2} &amp; x_{1} + 2 x_{2}\\2 x_{1} + 2 x_{2} &amp; 2 x_{1} + 2 x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡    x₂        x₁ + 2⋅x₂ ⎤
+⎢                        ⎥
+⎣2⋅x₁ + 2⋅x₂  2⋅x₁ + 2⋅x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Para evaluar por ejemplo en <span class="math notranslate nohighlight">\((x_1, x_2)^T = (0, 1)^T\)</span>:</strong></p>
@@ -805,13 +896,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">x1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">subs</span><span class="p">([(</span><span class="n">x1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}1 &amp; 2\\2 &amp; 2\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡1  2⎤
+⎢    ⎥
+⎣2  2⎦
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -828,8 +922,8 @@ x_2 &amp; x_1+2x_2\\
 <span id="id5"></span><h3>Ejemplo<a class="headerlink" href="#ej1" title="Permalink to this headline">¶</a></h3>
 <p>Sean <span class="math notranslate nohighlight">\(f:\mathbb{R}^n \rightarrow \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(g:\mathbb{R} \rightarrow \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(h:\mathbb{R}^n \rightarrow \mathbb{R}\)</span> con <span class="math notranslate nohighlight">\(h(z) = g(f(z))\)</span> entonces:</p>
 <div class="math notranslate nohighlight">
-\[Dh(x) = Dg(f(x))Df(x) = \frac{dg(f(x))}{dx}(\nabla f(x))^T \in \mathbb{R}^{1\times n}\]</div>
-<p>y la transpuesta de <span class="math notranslate nohighlight">\(Dh(x)\)</span> es: <span class="math notranslate nohighlight">\(\nabla h(x) = (Dh(x))^T = \frac{dg(f(x))}{dx} \nabla f(x) \in \mathbb{R}^{n\times 1}\)</span>.</p>
+\[Dh(x) = Dg(f(x))Df(x) = \frac{dg(f(x))}{dx}\nabla f(x)^T \in \mathbb{R}^{1\times n}\]</div>
+<p>y la transpuesta de <span class="math notranslate nohighlight">\(Dh(x)\)</span> es: <span class="math notranslate nohighlight">\(\nabla h(x) = Dh(x)^T = \frac{dg(f(x))}{dx} \nabla f(x) \in \mathbb{R}^{n\times 1}\)</span>.</p>
 </div>
 <div class="section" id="id6">
 <h3>Ejemplo<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
@@ -850,13 +944,14 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \cos{\left(x \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>cos(x)
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -868,13 +963,14 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \sin{\left(x \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>sin(x)
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -886,24 +982,26 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \sin{\left(\cos{\left(x \right)} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>sin(cos(x))
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \sin{\left(x \right)} \cos{\left(\cos{\left(x \right)} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-sin(x)⋅cos(cos(x))
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Otras formas para calcular la derivada de la composición <span class="math notranslate nohighlight">\(h\)</span>:</strong></p>
@@ -923,13 +1021,14 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \sin{\left(x \right)} \cos{\left(\cos{\left(x \right)} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-sin(x)⋅cos(cos(x))
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -941,13 +1040,17 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \sin{\left(x \right)} \cos{\left(\cos{\left(x \right)} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>-sin(x)⋅cos(cos(x))
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -970,13 +1073,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1} + \frac{1}{x_{2}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>     1 
+x₁ + ──
+     x₂
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -988,12 +1094,12 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>exp
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>exp
 </pre></div>
 </div>
 </div>
@@ -1007,43 +1113,58 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{x_{1} + \frac{1}{x_{2}}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>      1 
+ x₁ + ──
+      x₂
+ℯ       
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
-<p><strong>Derivada parcial de <span class="math notranslate nohighlight">\(f\)</span> respecto a <span class="math notranslate nohighlight">\(x_1\)</span>.</strong></p>
+<p><strong>Derivada parcial de <span class="math notranslate nohighlight">\(h\)</span> respecto a <span class="math notranslate nohighlight">\(x_1\)</span>.</strong></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{x_{1} + \frac{1}{x_{2}}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>      1 
+ x₁ + ──
+      x₂
+ℯ       
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
-<p><strong>Derivada parcial de <span class="math notranslate nohighlight">\(f\)</span> respecto a <span class="math notranslate nohighlight">\(x_2\)</span>.</strong></p>
+<p><strong>Derivada parcial de <span class="math notranslate nohighlight">\(h\)</span> respecto a <span class="math notranslate nohighlight">\(x_2\)</span>.</strong></p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x2</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle - \frac{e^{x_{1} + \frac{1}{x_{2}}}}{x_{2}^{2}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>       1  
+  x₁ + ── 
+       x₂ 
+-ℯ        
+──────────
+     2    
+   x₂     
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Otra forma para calcular el gradiente de <span class="math notranslate nohighlight">\(h\)</span> (derivada de <span class="math notranslate nohighlight">\(h\)</span>) es utilizando <a class="reference external" href="https://stackoverflow.com/questions/39558515/how-to-get-the-gradient-and-hessian-sympy">how-to-get-the-gradient-and-hessian-sympy</a>:</strong></p>
@@ -1056,13 +1177,23 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left[\begin{matrix}e^{x_{1} + \frac{1}{x_{2}}} &amp; - \frac{e^{x_{1} + \frac{1}{x_{2}}}}{x_{2}^{2}}\end{matrix}\right]\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡                 1  ⎤
+⎢      1     x₁ + ── ⎥
+⎢ x₁ + ──         x₂ ⎥
+⎢      x₂  -ℯ        ⎥
+⎢ℯ         ──────────⎥
+⎢               2    ⎥
+⎣             x₂     ⎦
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1080,7 +1211,7 @@ x_2 &amp; x_1+2x_2\\
 <p class="admonition-title">Observación</p>
 <p>Si <span class="math notranslate nohighlight">\(p=1\)</span>, <span class="math notranslate nohighlight">\(g: \mathbb{R}^m \rightarrow \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(h: \mathbb{R}^n \rightarrow \mathbb{R}\)</span> se tiene:</p>
 <div class="math notranslate nohighlight">
-\[\nabla h(x) = (Dh(x))^T = A^T(Dg(Ax+b))^T=A^T\nabla g(Ax+b) \in \mathbb{R}^{n\times 1}.\]</div>
+\[\nabla h(x) = Dh(x)^T = A^TDg(Ax+b)^T=A^T\nabla g(Ax+b) \in \mathbb{R}^{n\times 1}.\]</div>
 </div>
 </div>
 <div class="section" id="ejrestriccionalinea">
@@ -1108,13 +1239,15 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1}^{2} + x_{2}^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>  2     2
+x₁  + x₂ 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1141,13 +1274,15 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left(t v_{1} + x_{1}\right)^{2} + \left(t v_{2} + x_{2}\right)^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>           2              2
+(t⋅v₁ + x₁)  + (t⋅v₂ + x₂) 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1156,13 +1291,14 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2 v_{1} \left(t v_{1} + x_{1}\right) + 2 v_{2} \left(t v_{2} + x_{2}\right)\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2⋅v₁⋅(t⋅v₁ + x₁) + 2⋅v₂⋅(t⋅v₂ + x₂)
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Segunda opción para calcular la derivada utilizando vectores:</strong></p>
@@ -1175,13 +1311,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}x_{1}\\x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡x₁⎤
+⎢  ⎥
+⎣x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1200,13 +1339,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_arg_f_function</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">new_arg_f_function</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}t v_{1} + x_{1}\\t v_{2} + x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡t⋅v₁ + x₁⎤
+⎢         ⎥
+⎣t⋅v₂ + x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1226,13 +1368,15 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left(t v_{1} + x_{1}\right)^{2} + \left(t v_{2} + x_{2}\right)^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>           2              2
+(t⋅v₁ + x₁)  + (t⋅v₂ + x₂) 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1241,25 +1385,29 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2 v_{1} \left(t v_{1} + x_{1}\right) + 2 v_{2} \left(t v_{2} + x_{2}\right)\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2⋅v₁⋅(t⋅v₁ + x₁) + 2⋅v₂⋅(t⋅v₂ + x₂)
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Tercera opción definiendo a la función <span class="math notranslate nohighlight">\(f\)</span> a partir de <span class="math notranslate nohighlight">\(x\)</span> symbol Matrix:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}x_{1}\\x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡x₁⎤
+⎢  ⎥
+⎣x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1271,24 +1419,29 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle x_{1}^{2} + x_{2}^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>  2     2
+x₁  + x₂ 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_arg_f_function</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">new_arg_f_function</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}t v_{1} + x_{1}\\t v_{2} + x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡t⋅v₁ + x₁⎤
+⎢         ⎥
+⎣t⋅v₂ + x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1301,13 +1454,15 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left(t v_{1} + x_{1}\right)^{2} + \left(t v_{2} + x_{2}\right)^{2}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>           2              2
+(t⋅v₁ + x₁)  + (t⋅v₂ + x₂) 
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1316,37 +1471,44 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle 2 v_{1} \left(t v_{1} + x_{1}\right) + 2 v_{2} \left(t v_{2} + x_{2}\right)\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2⋅v₁⋅(t⋅v₁ + x₁) + 2⋅v₂⋅(t⋅v₂ + x₂)
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>En lo siguiente se utiliza <a class="reference external" href="https://docs.sympy.org/latest/modules/tensor/array.html#derivatives-by-array">derive-by_array</a>, <a class="reference external" href="https://stackoverflow.com/questions/39558515/how-to-get-the-gradient-and-hessian-sympy">how-to-get-the-gradient-and-hessian-sympy</a> para mostrar cómo se puede hacer un producto punto con SymPy</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}2 x_{1}\\2 x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡2⋅x₁⎤
+⎢    ⎥
+⎣2⋅x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">new_arg_f_function</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
-                            <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">new_arg_f_function</span><span class="p">[</span><span class="mi">1</span><span class="p">]})</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">new_arg_f_function</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+                                         <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">new_arg_f_function</span><span class="p">[</span><span class="mi">1</span><span class="p">]}))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}2 t v_{1} + 2 x_{1}\\2 t v_{2} + 2 x_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡2⋅t⋅v₁ + 2⋅x₁⎤
+⎢             ⎥
+⎣2⋅t⋅v₂ + 2⋅x₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1359,13 +1521,16 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{split}\displaystyle \left[\begin{matrix}v_{1}\\v_{2}\end{matrix}\right]\end{split}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡v₁⎤
+⎢  ⎥
+⎣v₂⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1374,13 +1539,14 @@ x_2 &amp; x_1+2x_2\\
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">gradient_f_new_arg</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">gradient_f_new_arg</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle v_{1} \left(2 t v_{1} + 2 x_{1}\right) + v_{2} \left(2 t v_{2} + 2 x_{2}\right)\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>v₁⋅(2⋅t⋅v₁ + 2⋅x₁) + v₂⋅(2⋅t⋅v₂ + 2⋅x₂)
+</pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1447,13 +1613,21 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \log{\left(\sum_{i=1}^{m} e^{{y}_{i}} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>   ⎛  m        ⎞
+   ⎜ ___       ⎟
+   ⎜ ╲         ⎟
+   ⎜  ╲    y[i]⎟
+log⎜  ╱   ℯ    ⎟
+   ⎜ ╱         ⎟
+   ⎜ ‾‾‾       ⎟
+   ⎝i = 1      ⎠
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>Para un caso de <span class="math notranslate nohighlight">\(m=3\)</span> en la función <span class="math notranslate nohighlight">\(g\)</span> se tiene:</strong></p>
@@ -1473,13 +1647,15 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">g_m_3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">g_m_3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \log{\left(e^{y_{1}} + e^{y_{2}} + e^{y_{3}} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>   ⎛ y₁    y₂    y₃⎞
+log⎝ℯ   + ℯ   + ℯ  ⎠
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1499,13 +1675,18 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dg_m_3</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">dg_m_3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left[\begin{matrix}\frac{e^{y_{1}}}{e^{y_{1}} + e^{y_{2}} + e^{y_{3}}} &amp; \frac{e^{y_{2}}}{e^{y_{1}} + e^{y_{2}} + e^{y_{3}}} &amp; \frac{e^{y_{3}}}{e^{y_{1}} + e^{y_{2}} + e^{y_{3}}}\end{matrix}\right]\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡       y₁               y₂               y₃      ⎤
+⎢      ℯ                ℯ                ℯ        ⎥
+⎢───────────────  ───────────────  ───────────────⎥
+⎢ y₁    y₂    y₃   y₁    y₂    y₃   y₁    y₂    y₃⎥
+⎣ℯ   + ℯ   + ℯ    ℯ   + ℯ   + ℯ    ℯ   + ℯ   + ℯ  ⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1514,15 +1695,37 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="mi">3</span><span class="p">]]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left[\begin{matrix}\frac{\sum_{i=1}^{m} e^{{y}_{i}} \delta_{1 i}}{\sum_{i=1}^{m} e^{{y}_{i}}} &amp; \frac{\sum_{i=1}^{m} e^{{y}_{i}} \delta_{2 i}}{\sum_{i=1}^{m} e^{{y}_{i}}} &amp; \frac{\sum_{i=1}^{m} e^{{y}_{i}} \delta_{3 i}}{\sum_{i=1}^{m} e^{{y}_{i}}}\end{matrix}\right]\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡  m                 m                 m             ⎤
+⎢ ____              ____              ____           ⎥
+⎢ ╲                 ╲                 ╲              ⎥
+⎢  ╲                 ╲                 ╲             ⎥
+⎢   ╲   y[i]          ╲   y[i]          ╲   y[i]     ⎥
+⎢   ╱  ℯ    ⋅δ        ╱  ℯ    ⋅δ        ╱  ℯ    ⋅δ   ⎥
+⎢  ╱          1,i    ╱          2,i    ╱          3,i⎥
+⎢ ╱                 ╱                 ╱              ⎥
+⎢ ‾‾‾‾              ‾‾‾‾              ‾‾‾‾           ⎥
+⎢i = 1             i = 1             i = 1           ⎥
+⎢────────────────  ────────────────  ────────────────⎥
+⎢    m                 m                 m           ⎥
+⎢   ___               ___               ___          ⎥
+⎢   ╲                 ╲                 ╲            ⎥
+⎢    ╲    y[i]         ╲    y[i]         ╲    y[i]   ⎥
+⎢    ╱   ℯ             ╱   ℯ             ╱   ℯ       ⎥
+⎢   ╱                 ╱                 ╱            ⎥
+⎢   ‾‾‾               ‾‾‾               ‾‾‾          ⎥
+⎣  i = 1             i = 1             i = 1         ⎦
+</pre></div>
 </div>
 </div>
+</div>
+<ul class="simple">
+<li><p>Esta expresión generaliza la del renglón de arriba</p></li>
+</ul>
 <p><strong>Para la composición <span class="math notranslate nohighlight">\(h(x) = g(f(x))\)</span> se utilizan las siguientes celdas:</strong></p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -1553,13 +1756,22 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#we want something like:</span>
-<span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          n               
+         ___              
+         ╲                
+          ╲               
+ b[i] +   ╱   A[i, j]⋅x[j]
+         ╱                
+         ‾‾‾              
+        j = 1             
+ℯ                         
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1572,13 +1784,14 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arg_sum</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">arg_sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle {A}_{i,j} {x}_{j}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>A[i, j]⋅x[j]
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1590,24 +1803,44 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">arg_exp</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">arg_exp</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle {b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>         n               
+        ___              
+        ╲                
+         ╲               
+b[i] +   ╱   A[i, j]⋅x[j]
+        ╱                
+        ‾‾‾              
+       j = 1             
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">arg_exp</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">arg_exp</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>          n               
+         ___              
+         ╲                
+          ╲               
+ b[i] +   ╱   A[i, j]⋅x[j]
+         ╱                
+         ‾‾‾              
+        j = 1             
+ℯ                         
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1619,13 +1852,29 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">arg_2_sum</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sympy</span><span class="o">.</span><span class="n">Sum</span><span class="p">(</span><span class="n">arg_2_sum</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>   m                              
+_______                           
+╲                                 
+ ╲                                
+  ╲               n               
+   ╲             ___              
+    ╲            ╲                
+     ╲            ╲               
+     ╱   b[i] +   ╱   A[i, j]⋅x[j]
+    ╱            ╱                
+   ╱             ‾‾‾              
+  ╱             j = 1             
+ ╱      ℯ                         
+╱                                 
+‾‾‾‾‾‾‾                           
+ i = 1                            
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1638,13 +1887,29 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \log{\left(\sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}} \right)}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>   ⎛   m                              ⎞
+   ⎜_______                           ⎟
+   ⎜╲                                 ⎟
+   ⎜ ╲                                ⎟
+   ⎜  ╲               n               ⎟
+   ⎜   ╲             ___              ⎟
+   ⎜    ╲            ╲                ⎟
+   ⎜     ╲            ╲               ⎟
+log⎜     ╱   b[i] +   ╱   A[i, j]⋅x[j]⎟
+   ⎜    ╱            ╱                ⎟
+   ⎜   ╱             ‾‾‾              ⎟
+   ⎜  ╱             j = 1             ⎟
+   ⎜ ╱      ℯ                         ⎟
+   ⎜╱                                 ⎟
+   ⎜‾‾‾‾‾‾‾                           ⎟
+   ⎝ i = 1                            ⎠
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1653,13 +1918,48 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \frac{\sum_{i=1}^{m} \left(e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\right) \sum_{j=1}^{n} \delta_{1 j} {A}_{i,j}}{\sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}}\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>   m                                                  
+________                                              
+╲                                                     
+ ╲                 n                                  
+  ╲               ___                                 
+   ╲              ╲                                   
+    ╲              ╲                                  
+     ╲    b[i] +   ╱   A[i, j]⋅x[j]   n               
+      ╲           ╱                  ___              
+      ╱           ‾‾‾                ╲                
+     ╱           j = 1                ╲   δ   ⋅A[i, j]
+    ╱    ℯ                         ⋅  ╱    1,j        
+   ╱                                 ╱                
+  ╱                                  ‾‾‾              
+ ╱                                  j = 1             
+╱                                                     
+‾‾‾‾‾‾‾‾                                              
+ i = 1                                                
+──────────────────────────────────────────────────────
+             m                                        
+          _______                                     
+          ╲                                           
+           ╲                                          
+            ╲               n                         
+             ╲             ___                        
+              ╲            ╲                          
+               ╲            ╲                         
+               ╱   b[i] +   ╱   A[i, j]⋅x[j]          
+              ╱            ╱                          
+             ╱             ‾‾‾                        
+            ╱             j = 1                       
+           ╱      ℯ                                   
+          ╱                                           
+          ‾‾‾‾‾‾‾                                     
+           i = 1                                      
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -1668,13 +1968,48 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sympy</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">derive_by_array</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]]))</span> <span class="c1">#we can use also: derive_by_array(h, [x[1], x[2], x[3]]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\displaystyle \left[\begin{matrix}\frac{\sum_{i=1}^{m} \left(e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\right) \sum_{j=1}^{n} \delta_{1 j} {A}_{i,j}}{\sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}} &amp; \frac{\sum_{i=1}^{m} \left(e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\right) \sum_{j=1}^{n} \delta_{2 j} {A}_{i,j}}{\sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}} &amp; \frac{\sum_{i=1}^{m} \left(e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}\right) \sum_{j=1}^{n} \delta_{3 j} {A}_{i,j}}{\sum_{i=1}^{m} e^{{b}_{i} + \sum_{j=1}^{n} {A}_{i,j} {x}_{j}}}\end{matrix}\right]\]</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>⎡   m                                                  ⎤
+⎢________                                              ⎥
+⎢╲                                                     ⎥
+⎢ ╲                 n                                  ⎥
+⎢  ╲               ___                                 ⎥
+⎢   ╲              ╲                                   ⎥
+⎢    ╲              ╲                                  ⎥
+⎢     ╲    b[i] +   ╱   A[i, j]⋅x[j]   n               ⎥
+⎢      ╲           ╱                  ___              ⎥
+⎢      ╱           ‾‾‾                ╲                ⎥
+⎢     ╱           j = 1                ╲   δ   ⋅A[i, j]⎥
+⎢    ╱    ℯ                         ⋅  ╱    1,j        ⎥
+⎢   ╱                                 ╱                ⎥
+⎢  ╱                                  ‾‾‾              ⎥
+⎢ ╱                                  j = 1             ⎥
+⎢╱                                                     ⎥
+⎢‾‾‾‾‾‾‾‾                                              ⎥
+⎢ i = 1                                                ⎥
+⎢──────────────────────────────────────────────────────⎥
+⎢             m                                        ⎥
+⎢          _______                                     ⎥
+⎢          ╲                                           ⎥
+⎢           ╲                                          ⎥
+⎢            ╲               n                         ⎥
+⎢             ╲             ___                        ⎥
+⎢              ╲            ╲                          ⎥
+⎢               ╲            ╲                         ⎥
+⎢               ╱   b[i] +   ╱   A[i, j]⋅x[j]          ⎥
+⎢              ╱            ╱                          ⎥
+⎢             ╱             ‾‾‾                        ⎥
+⎢            ╱             j = 1                       ⎥
+⎢           ╱      ℯ                                   ⎥
+⎢          ╱                                           ⎥
+⎢          ‾‾‾‾‾‾‾                                     ⎥
+⎣           i = 1                                      ⎦
+</pre></div>
+</div>
 </div>
 </div>
 <div class="tip admonition">
@@ -1708,23 +2043,28 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 <li><p>La aproximación de segundo orden a <span class="math notranslate nohighlight">\(f\)</span> en <span class="math notranslate nohighlight">\(x\)</span> (o también para puntos cercanos a <span class="math notranslate nohighlight">\(x\)</span>) es la función cuadrática en la variable <span class="math notranslate nohighlight">\(z\)</span>:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[f(x) + (\nabla f(x))^T(z-x)+\frac{1}{2}(z-x)^T\nabla^2f(x)(z-x)\]</div>
+\[f(x) + \nabla f(x)^T(z-x)+\frac{1}{2}(z-x)^T\nabla^2f(x)(z-x)\]</div>
 <ul class="simple">
 <li><p>Se cumple:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
-\[\displaystyle \lim_{z \rightarrow x, z \neq x} \frac{|f(z)-[f(x)+(\nabla f(x))^T(z-x)+\frac{1}{2}(z-x)^T\nabla^2f(x)(z-x)]|}{||z-x||_2} = 0, z \in \text{dom}f\]</div>
+\[\displaystyle \lim_{z \rightarrow x, z \neq x} \frac{|f(z)-[f(x)+\nabla f(x)^T(z-x)+\frac{1}{2}(z-x)^T\nabla^2f(x)(z-x)]|}{||z-x||_2} = 0, z \in \text{dom}f\]</div>
 <ul class="simple">
 <li><p>Se tiene lo siguiente:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(\nabla f\)</span> es una función nombrada <em>gradient mapping</em> (o simplemente gradiente).</p></li>
-<li><p><span class="math notranslate nohighlight">\(\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> tiene regla de correspondencia <span class="math notranslate nohighlight">\(\nabla f(x)\)</span> (evaluar en <span class="math notranslate nohighlight">\(x\)</span> la matriz <span class="math notranslate nohighlight">\((Df(\cdot))^T\)</span>).</p></li>
-<li><p>Si <span class="math notranslate nohighlight">\(f\)</span> es dos veces diferenciable entonces: <span class="math notranslate nohighlight">\(D\nabla f(x) = \nabla^2f(x)\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla f:\mathbb{R}^n \rightarrow \mathbb{R}^n\)</span> tiene regla de correspondencia <span class="math notranslate nohighlight">\(\nabla f(x)\)</span> (evaluar en <span class="math notranslate nohighlight">\(x\)</span> la matriz <span class="math notranslate nohighlight">\(Df(\cdot)^T\)</span>).</p></li>
+<li><p>Se dice que <span class="math notranslate nohighlight">\(f\)</span> es dos veces diferenciable en <span class="math notranslate nohighlight">\(\text{dom}f\)</span> si <span class="math notranslate nohighlight">\(\text{dom}f\)</span> es abierto y <span class="math notranslate nohighlight">\(f\)</span> es dos veces diferenciable en cada punto de <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\nabla f(x) = \nabla^2f(x)\)</span> para <span class="math notranslate nohighlight">\(x \in \text{intdom}f\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\nabla ^2 f(x) : \mathbb{R}^n \rightarrow \mathbb{R}^{n \times n}\)</span>.</p></li>
 <li><p><strong>Importante:</strong> si <span class="math notranslate nohighlight">\(f \in \mathcal{C}^2(\text{dom}f)\)</span> entonces la Hessiana es una matriz simétrica.</p></li>
 </ul>
 </li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>Las matrices simétricas tienen propiedades muy útiles para el análisis numérico</p></li>
+</ul>
 </div>
 <div class="section" id="regla-de-la-cadena-para-la-segunda-derivada">
 <h2>Regla de la cadena para la segunda derivada<a class="headerlink" href="#regla-de-la-cadena-para-la-segunda-derivada" title="Permalink to this headline">¶</a></h2>
@@ -1744,15 +2084,15 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <p>y</p>
 <div class="math notranslate nohighlight">
-\[\nabla h(x)=(Dh(x))^T = (Dg(f(x))Df(x))^T=\frac{dg(x)}{dx}\nabla f(x)\]</div>
+\[\nabla h(x)=Dh(x)^T = (Dg(f(x))Df(x))^T=\frac{dg(f(x))}{dx}\nabla f(x)\]</div>
 <p>por lo que:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{eqnarray}
 \nabla^2 h(x) &amp;=&amp; D\nabla h(x) \nonumber \\
 &amp;=&amp; D \left(\frac{dg(f(x))}{dx}\nabla f(x)\right) \nonumber \\
-&amp;=&amp; \frac{dg(f(x))}{dx}\nabla^2 f(x)+\left(\frac{d^2g(f(x))}{dx}\nabla f(x) (\nabla f(x))^T \right)^T \nonumber \\
-&amp;=&amp; \frac{dg(f(x))}{dx}\nabla^2 f(x)+\frac{d^2g(f(x))}{dx} \nabla f(x) (\nabla f(x))^T \nonumber
+&amp;=&amp; \frac{dg(f(x))}{dx}\nabla^2 f(x)+\left(\frac{d^2g(f(x))}{dx}\nabla f(x) \nabla f(x)^T \right)^T \nonumber \\
+&amp;=&amp; \frac{dg(f(x))}{dx}\nabla^2 f(x)+\frac{d^2g(f(x))}{dx} \nabla f(x) \nabla f(x)^T \nonumber
 \end{eqnarray}
 \end{split}\]</div>
 </div>
@@ -1819,8 +2159,36 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 </div>
 </div>
-<div class="section" id="comentario-y-ejemplo-final">
-<h2>Comentario y ejemplo final<a class="headerlink" href="#comentario-y-ejemplo-final" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tablita-util-para-formulas-de-diferenciacion-con-el-operador-nabla">
+<h2>Tablita útil para fórmulas de diferenciación con el operador <span class="math notranslate nohighlight">\(\nabla\)</span><a class="headerlink" href="#tablita-util-para-formulas-de-diferenciacion-con-el-operador-nabla" title="Permalink to this headline">¶</a></h2>
+<p>Sean <span class="math notranslate nohighlight">\(f,g:\mathbb{R}^n \rightarrow \mathbb{R}\)</span> con <span class="math notranslate nohighlight">\(f,g \in \mathcal{C}^2\)</span> respectivamente en sus dominios y <span class="math notranslate nohighlight">\(\alpha_1, \alpha_2 \in \mathbb{R}\)</span>, <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span>, <span class="math notranslate nohighlight">\(b \in \mathbb{R}^n\)</span> son fijas. Diferenciando con respecto a la variable <span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> se tiene:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p></p></th>
+<th class="text-align:center head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>linealidad</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\nabla(\alpha_1 f(x) + \alpha_2 g(x)) = \alpha_1 \nabla f(x) + \alpha_2 \nabla g(x)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>producto</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\nabla(f(x)g(x)) = \nabla f(x) g(x) + f(x) \nabla g(x)\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>producto punto</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\nabla(b^Tx) = b\)</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>cuadrático</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\nabla(x^TAx) = 2(A+A^T)x\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>segunda derivada</p></td>
+<td class="text-align:center"><p><span class="math notranslate nohighlight">\(\nabla^2(Ax)=A\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="comentario-respecto-al-computo-simbolico-o-algebraico-y-numerico">
+<h2>Comentario respecto al cómputo simbólico o algebraico y númerico<a class="headerlink" href="#comentario-respecto-al-computo-simbolico-o-algebraico-y-numerico" title="Permalink to this headline">¶</a></h2>
 <p>Si bien el cómputo simbólico o algebraico nos ayuda a calcular las expresiones para las derivadas evitando los problemas de errores por redondeo que se revisarán en <a class="reference internal" href="../1.6/Polinomios_de_Taylor_y_diferenciacion_numerica.html#ptdn"><span class="std std-ref">Polinomios de Taylor y diferenciación numérica</span></a>, la complejidad de las expresiones que internamente se manejan es ineficiente vs el cómputo numérico, ver <a class="reference external" href="https://en.wikipedia.org/wiki/Computer_algebra#Computer_science_aspects">Computer science aspects of computer algebra</a> y <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_Multiple_Precision_Arithmetic_Library">GNU_Multiple_Precision_Arithmetic_Library</a>.</p>
 <p>Como ejemplo de la precisión arbitraria que se puede manejar con el cómputo simbólico o algebraico vs el <a class="reference internal" href="../1.2/Sistema_de_punto_flotante.html#spf"><span class="std std-ref">Sistema en punto flotante</span></a> considérese el cálculo siguiente:</p>
 <div class="cell docutils container">
@@ -1832,12 +2200,12 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;</span><span class="si">{:0.16e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eps</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:0.16e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;2.2204460492503131e-16&#39;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.2204460492503131e-16
 </pre></div>
 </div>
 </div>
@@ -1851,12 +2219,12 @@ Dh(x)=\left(\displaystyle \sum_{i=1}^m\exp(a_i^Tx+b_i) \right)^{-1}\left[ \begin
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;</span><span class="si">{:0.16e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eps_sympy</span><span class="p">))</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:0.16e}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eps_sympy</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&#39;0.0000000000000000e+00&#39;
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>0.0000000000000000e+00
 </pre></div>
 </div>
 </div>
