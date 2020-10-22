@@ -464,6 +464,9 @@
 <div class="math notranslate nohighlight">
 \[A_{k+1} = (J_0 J_1 \cdots J_k)^T A(J_0 J_1 \cdots J_k)\]</div>
 <p><strong>converge</strong> a una matriz diagonal en la que se encuentran los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ul class="simple">
+<li><p>Estas son las mismas que las rotaciones de Givens.</p></li>
+</ul>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Los pasos de un algoritmo representan una guía para la implementación, no implica que se tengan que implementar uno a continuación del otro como se describe. Si una implementación respeta la lógica y al mismo algoritmo, entonces pueden seguirse los pasos de una forma distinta.</p>
@@ -483,6 +486,12 @@
 </div></blockquote>
 <p><strong>hasta</strong> convergencia: satisfacer criterio de paro en el que se utiliza <span class="math notranslate nohighlight">\(tol\)</span> y <span class="math notranslate nohighlight">\(maxsweeps\)</span>.</p>
 </div></blockquote>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(tol\)</span> se da normalmente como 10^-8.</p></li>
+<li><p>Con la transformación del paso 3 preservamos la simetría.</p></li>
+<li><p>El paso tres te ayuda a calcular los eigenvalores.</p></li>
+<li><p>Con el paso 4 calculamos los eigenvectores.</p></li>
+</ul>
 <p>La matriz <span class="math notranslate nohighlight">\(J_k\)</span> se utiliza para eliminar un par de entradas (simétricas) en la matriz <span class="math notranslate nohighlight">\(A_k\)</span>, esto  preserva la simetría de la matriz original. En las columnas de la matriz <span class="math notranslate nohighlight">\(Q_{k}\)</span> se encuentran aproximaciones a los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span> y en la diagonal de <span class="math notranslate nohighlight">\(A_{k}\)</span> se tienen aproximaciones a los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="admonition-comentarios admonition">
 <p class="admonition-title">Comentarios</p>
@@ -490,6 +499,9 @@
 <p>1.Elegir <span class="math notranslate nohighlight">\((idx1,idx2)\)</span> tales que <span class="math notranslate nohighlight">\(|a_{idx1,idx2}| = \displaystyle \max_{i \neq j}|a_{ij}|\)</span>.</p>
 <p>2.<strong>Ordenamiento cíclico por renglones:</strong> elegir <span class="math notranslate nohighlight">\((idx1, idx2)\)</span> en el conjunto <span class="math notranslate nohighlight">\((1,2),(1,3),\dots,(1,n),(2,3),(2,4)\dots,(n-1,n)\)</span>.</p>
 </div>
+<ul class="simple">
+<li><p>Vemos que la metodología 1 nos pide encontrar el valor más grande dentro de la matriz.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <p>Obsérvese que <span class="math notranslate nohighlight">\(A_{k+1}\)</span> y <span class="math notranslate nohighlight">\(A_{k}\)</span> son matrices ortogonalmente similares, ver <a class="reference internal" href="../2.2/Eigenvalores_y_eigenvectores.html#similitud"><span class="std std-ref">similitud</span></a>.</p>
@@ -550,6 +562,9 @@ t_1^* &amp;=&amp; -\tau + \sqrt{\tau^2+1}&amp;=&amp;\frac{1}{\tau+\sqrt{\tau^2+1
 t_2^* &amp;=&amp; -\tau - \sqrt{\tau^2+1}&amp;=&amp;\frac{1}{\tau-\sqrt{\tau^2+1}} \nonumber
 \end{eqnarray}
 \end{split}\]</div>
+<ul class="simple">
+<li><p>Dado que obtenemos una ecuación cuadrática, podemos obtener las raíces.</p></li>
+</ul>
 <p>Se <strong>sugiere</strong> utilizar la raíz de menor magnitud para disminuir errores por redondeo por lo que:</p>
 <div class="math notranslate nohighlight">
 \[t^* = \frac{\text{signo}(\tau)}{|\tau| + \sqrt{1+\tau^2}}\]</div>
@@ -752,6 +767,9 @@ A =
 </div>
 <p>con <code class="docutils literal notranslate"><span class="pre">||A_k||_F</span></code> norma de Frobenius de <span class="math notranslate nohighlight">\(A_k\)</span> y <code class="docutils literal notranslate"><span class="pre">sweeps</span></code> contador de los <em>sweeps</em>.</p>
 </div>
+<ul class="simple">
+<li><p>La <span class="math notranslate nohighlight">\(n\)</span> en la heurística <span class="math notranslate nohighlight">\((log(n))\)</span> es la dimensión de la matriz.</p></li>
+</ul>
 </div>
 <div class="section" id="id1">
 <h3>Ejemplo<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -769,6 +787,14 @@ A =
 \right ].
 \end{split}\]</div>
 <p>Utilizando la metodología de ordenamiento cíclico por renglones realizar dos <em>sweeps</em> del método de rotaciones de Jacobi para matrices simétricas.</p>
+<ul class="simple">
+<li><p>Este método que vamos a aplicar está demostrado que siempre va a converger.</p></li>
+<li><p>Un sweep es el número de entradas por arriba de la diagnoal que queremos hacer cero.</p>
+<ul>
+<li><p>Un sweep consiste en hacer los números arriba de la diagonal cero.</p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_Jacobi_rotation</span><span class="p">(</span><span class="n">Ak</span><span class="p">,</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">):</span>
@@ -825,7 +851,7 @@ A =
 </div>
 </div>
 <p>El <strong>primer <em>sweep</em></strong> considera las entradas: <span class="math notranslate nohighlight">\((1,2), (1,3), (1,4), (2,3), (2,4), (3,4)\)</span>.</p>
-<p>A continuación se toman en el orden <span class="math notranslate nohighlight">\((1,4), (1,3), (1,2), (2,4), (2,3)\)</span> y finalmente <span class="math notranslate nohighlight">\((3,4)\)</span> para mostrar que el orden de selección de las entradas no importa.</p>
+<p>A continuación se toman en el orden <span class="math notranslate nohighlight">\((1,4), (1,3), (1,2), (2,4), (2,3)\)</span> y finalmente <span class="math notranslate nohighlight">\((3,4)\)</span> para mostrar que el orden de selección de las entradas en una forma decreciente no importa.</p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Se sugiere haber revisado los ejemplos de <a class="reference internal" href="../2.1/Operaciones_y_transformaciones_basicas_del_Algebra_Lineal_Numerica.html#trot"><span class="std std-ref">transformaciones de rotación</span></a>.</p>
@@ -1022,6 +1048,10 @@ A =
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Antes de llegar al <em>sweep</em> vemos como quedó la matriz.</p></li>
+<li><p>Vemos que algunas cosas sí se hicieron cero pero no todas.</p></li>
+</ul>
 <p><strong>Segundo <em>sweep</em></strong></p>
 <p><strong>Entrada <span class="math notranslate nohighlight">\(a_{41}\)</span> rotación en el plano <span class="math notranslate nohighlight">\((1,4)\)</span>:</strong></p>
 <div class="cell docutils container">
@@ -1258,7 +1288,7 @@ A =
 <p class="admonition-title">Comentarios</p>
 <p>Algunas características del método de rotaciones de Jacobi para matrices simétricas:</p>
 <ul class="simple">
-<li><p>Tiene una convergencia cuadrática, esto es, la matriz <span class="math notranslate nohighlight">\(A_k\)</span> al ir aproximándose hacia una diagonal, el número de dígitos de precisión en cada iteración se duplica. Sin embargo el algoritmo QR (versión no simple) es más eficiente en cuanto al número de iteraciones.</p></li>
+<li><p>Tiene una convergencia cuadrática, esto es, la matriz <span class="math notranslate nohighlight">\(A_k\)</span> al ir aproximándose hacia una diagonal, el número de dígitos de precisión en cada iteración se duplica. Sin embargo el algoritmo QR (versión no simple) es más eficiente en cuanto al número de iteraciones. No alcanza a la precisión del algoritmo de Jacobi.</p></li>
 <li><p>La precisión que tiene en el cálculo de eigenvalores es alta (error relativo pequeño).</p></li>
 <li><p>Es un algoritmo que puede realizarse con cómputo en paralelo si se utilizan ordenamientos específicos como el cíclico por renglones. También este algoritmo puede realizarse por bloques.</p></li>
 </ul>
@@ -1549,6 +1579,9 @@ A =
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[8. 3.]
 </pre></div>
 </div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="admonition-comentarios admonition" id="comentariosalgqr">
@@ -1588,10 +1621,16 @@ A =
 </div>
 <div class="section" id="metodo-de-la-potencia-para-matrices-simetricas-a-in-mathbb-r-n-times-n">
 <span id="mpotmatsim"></span><h2>Método de la potencia para matrices simétricas <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span><a class="headerlink" href="#metodo-de-la-potencia-para-matrices-simetricas-a-in-mathbb-r-n-times-n" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Este método es relevante porque hay aplicaciones que solo necesitan un eigen-valor.</p></li>
+</ul>
 <p>Si la matriz <span class="math notranslate nohighlight">\(A\)</span> tiene un <strong>único</strong> eigenvalor <span class="math notranslate nohighlight">\(\lambda_1\)</span> que tiene máximo módulo y <span class="math notranslate nohighlight">\(z^{(0)}\)</span> es un vector distinto de cero entonces el esquema iterativo:</p>
 <div class="math notranslate nohighlight">
 \[z^{(k)} = A z^{(k-1)}\]</div>
 <p><strong>casi siempre</strong> converge a un múltiplo del eigenvector de <span class="math notranslate nohighlight">\(A\)</span> asociado a <span class="math notranslate nohighlight">\(\lambda_1\)</span>, ver <a class="reference internal" href="#comentariosmetpotencia"><span class="std std-ref">comentarios del método de la potencia</span></a> para suposiciones que garantizan la convergencia.</p>
+<ul class="simple">
+<li><p>Máximo módulo se refiere al valor más grande de los eigen valores.</p></li>
+</ul>
 <div class="section" id="id3">
 <h3>Ejemplo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -1756,17 +1795,10 @@ z^{(k)} &amp;=&amp; A z^{(k-1)} = A^2 z^{(k-2)} = \cdots = A^k z^{(0)} \nonumber
 <li><p>El método anterior converge de forma lineal al eigenvalor de máximo módulo <span class="math notranslate nohighlight">\(\lambda_1\)</span> y a un eigenvector asociado a tal eigenvalor, <span class="math notranslate nohighlight">\(q_1\)</span>, si se satisfacen las siguientes condiciones:</p>
 <ul>
 <li><p><span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> es simétrica.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda_1\)</span> cumple:</p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_1\)</span> cumple: <span class="math notranslate nohighlight">\(|\lambda_1| &gt; |\lambda_2| \geq \cdots \geq |\lambda_n|\)</span> esto es, <span class="math notranslate nohighlight">\(\lambda_1\)</span> es el único eigenvalor de máximo módulo.</p></li>
+<li><p>El coseno del ángulo entre <span class="math notranslate nohighlight">\(q^{(0)}\)</span> y <span class="math notranslate nohighlight">\(q_1\)</span> es diferente de cero (no ortogonales), ver <a class="reference internal" href="../../I.computo_cientifico/1.3/Normas_vectoriales_y_matriciales.html#nvm"><span class="std std-ref">normas vectoriales y matriciales</span></a>. Esto no es un requerimiento fuerte pues al usar un sistema de punto flotante y tener errores por redondeo garantiza que en la mayoría de los casos <strong>prácticos</strong> tal coseno es diferente de cero.</p></li>
 </ul>
 </li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-|\lambda_1| &gt; |\lambda_2| \geq \cdots \geq |\lambda_n|
-\]</div>
-<p>esto es, <span class="math notranslate nohighlight">\(\lambda_1\)</span> es el único eigenvalor de máximo módulo.</p>
-<ul class="simple">
-<li><p>El coseno del ángulo entre <span class="math notranslate nohighlight">\(q^{(0)}\)</span> y <span class="math notranslate nohighlight">\(q_1\)</span> es diferente de cero (no ortogonales), ver <a class="reference internal" href="../../I.computo_cientifico/1.3/Normas_vectoriales_y_matriciales.html#nvm"><span class="std std-ref">normas vectoriales y matriciales</span></a>. Esto no es un requerimiento fuerte pues al usar un sistema de punto flotante y tener errores por redondeo garantiza que en la mayoría de los casos <strong>prácticos</strong> tal coseno es diferente de cero.</p></li>
 <li><p>El criterio de paro es de la forma:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="o">||</span><span class="n">Aq_k</span> <span class="o">-</span> <span class="n">lambda_kq_k</span><span class="o">||</span><span class="n">_2</span> <span class="o">&gt;</span> <span class="n">tol</span> <span class="o">&amp;&amp;</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">max_iters</span>
@@ -1809,7 +1841,7 @@ z^{(k)} &amp;=&amp; A z^{(k-1)} = A^2 z^{(k-2)} = \cdots = A^k z^{(0)} \nonumber
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_188_0.png" src="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_188_0.png" />
+<img alt="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_197_0.png" src="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_197_0.png" />
 </div>
 </div>
 <div class="margin sidebar">
@@ -1871,7 +1903,7 @@ eigenvectores:
 </ul>
 </li>
 <li><p>La ventaja que tiene el método de la potencia es que sólo requiere una operación del tipo matriz-vector lo cual para matrices grandes y ralas (también nombradas <em>sparse</em>: que tienen muchas entradas iguales a cero) es ventajoso.</p></li>
-<li><p>Sólo obtiene al eigenvalor con máximo módulo y un eigenvector asociado, por lo que si se desean otras parejas de eigenvalores-eigenvectores se debe recurrir a métodos adicionales por ejemplo <em>deflation</em>.</p></li>
+<li><p>Sólo obtiene al eigenvalor con máximo módulo <span class="math notranslate nohighlight">\(\lambda_1\)</span> y un eigenvector asociado, por lo que si se desean otras parejas de eigenvalores-eigenvectores se debe recurrir a métodos adicionales por ejemplo <em>deflation</em>.</p></li>
 <li><p>La convergencia de este método depende mucho de la cercanía entre <span class="math notranslate nohighlight">\(|\lambda_1|\)</span> y <span class="math notranslate nohighlight">\(|\lambda_2|\)</span>: si son muy cercanos la convergencia es lenta. Esto es posible mejorar al utilizar <em>shifts</em>.</p></li>
 </ul>
 </div>
@@ -1994,17 +2026,16 @@ r(x) = \frac{x^TAx}{x^Tx}
 <p>Para generar este grafo utilicé <a class="reference external" href="https://networkx.github.io/">networkx</a>.</p>
 </div>
 <img src="https://dl.dropboxusercontent.com/s/sezz4empv27dtd4/inlinks_outlinks_pagerank.png?dl=0" heigth="400" width="400">
-<div class="admonition-comentario admonition">
-<p class="admonition-title">Comentario</p>
-<p>La forma que se utiliza aquí para calcular el <em>pagerank</em> de una página es una versión simplificada. Además de la suma ponderada se considera un parámetro para ajustar los <em>pageranks</em> nombrado <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank#Damping_factor"><em>damping factor</em></a> y representa la distribución de las páginas a las que se pueden llegar desde una página (<em>outlinks</em>).</p>
-</div>
 <p>El <em>pagerank</em> de una página <span class="math notranslate nohighlight">\(i\)</span> es una suma ponderada de aquellas páginas que hacen referencia a <span class="math notranslate nohighlight">\(i\)</span>. La ponderación se realiza por el número de <em>outlinks</em> que tienen tales páginas, esto es:</p>
 <div class="math notranslate nohighlight">
 \[r_i = \displaystyle \sum_{j \in I_i} \frac{r_j}{N_j}\]</div>
 <p>donde: <span class="math notranslate nohighlight">\(r_i\)</span> es el <em>pagerank</em> de la página <span class="math notranslate nohighlight">\(i\)</span> y <span class="math notranslate nohighlight">\(N_i = |O_i|\)</span> es el el número de <em>outlinks</em> de la página <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<div class="admonition-comentario admonition">
-<p class="admonition-title">Comentario</p>
-<p>La ponderación anterior se realiza para hacer más “difícil” elevar el <em>pagerank</em> de una página <span class="math notranslate nohighlight">\(i\)</span> pues podrían crearse muchas páginas “artificiales” que apunten a <span class="math notranslate nohighlight">\(i\)</span> de forma sencilla. Además, la suma se realiza considerando los <em>pageranks</em> de las páginas <span class="math notranslate nohighlight">\(j\)</span> por lo que páginas con <em>pagerank</em> bajo no tendrán una contribución alta en la suma.</p>
+<div class="admonition-comentarios admonition">
+<p class="admonition-title">Comentarios</p>
+<ul class="simple">
+<li><p>La forma que se utiliza aquí para calcular el <em>pagerank</em> de una página es una versión simplificada. Además de la suma ponderada se considera un parámetro para ajustar los <em>pageranks</em> nombrado <a class="reference external" href="https://en.wikipedia.org/wiki/PageRank#Damping_factor"><em>damping factor</em></a> y representa la distribución de las páginas a las que se pueden llegar desde una página (<em>outlinks</em>).</p></li>
+<li><p>La ponderación anterior se realiza para hacer más “difícil” elevar el <em>pagerank</em> de una página <span class="math notranslate nohighlight">\(i\)</span> pues podrían crearse muchas páginas “artificiales” que apunten a <span class="math notranslate nohighlight">\(i\)</span> de forma sencilla. Además, la suma se realiza considerando los <em>pageranks</em> de las páginas <span class="math notranslate nohighlight">\(j\)</span> por lo que páginas con <em>pagerank</em> bajo no tendrán una contribución alta en la suma.</p></li>
+</ul>
 </div>
 <p>Para comprender cómo la definición anterior del <em>pagerank</em> de <span class="math notranslate nohighlight">\(i\)</span> se relaciona con el problema de cálculo de eigenvalores y eigenvectores de una matriz, se define la matriz <span class="math notranslate nohighlight">\(Q\)</span> de tamaño <span class="math notranslate nohighlight">\(n\)</span> con entradas dadas por:</p>
 <div class="math notranslate nohighlight">
@@ -2030,6 +2061,11 @@ r(x) = \frac{x^TAx}{x^Tx}
 \end{array}
 \right ]
 \end{split}\]</div>
+<ul class="simple">
+<li><p>La matriz representa relación de inlinks y outlinks.</p></li>
+<li><p>Cada renglón es una página.</p></li>
+<li><p>Si ver por columnas se refiere a las páginas hacia las que apuntas.</p></li>
+</ul>
 <p>La matriz anterior podemos leerla como sigue:</p>
 <ul class="simple">
 <li><p>(perspectiva de los renglones) La página <span class="math notranslate nohighlight">\(3\)</span> es referenciada o tiene <em>inlinks</em> de las páginas <span class="math notranslate nohighlight">\(\{2,5,6\}\)</span>.</p></li>

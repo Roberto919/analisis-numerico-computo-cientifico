@@ -645,9 +645,10 @@ eigenvectores:
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Aquí podemos ver que, a pesar de que las entradas peuden ser reales, los eigenvalores pueden ser complejos.</p></li>
-</ul>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<p>En el ejemplo anterior cada eigenvalor tiene una multiplicidad simple y la multiplicidad geométrica de cada eigenvalor es <span class="math notranslate nohighlight">\(1\)</span>.</p>
+</div>
 </div>
 <div class="section" id="id3">
 <h3>Ejemplo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
@@ -716,10 +717,6 @@ eigenvectores:
 <p class="admonition-title">Definición</p>
 <p>La <strong>multiplicidad algebraica</strong> de un eigenvalor es su multiplicidad considerado como raíz/cero del polinomio característico <span class="math notranslate nohighlight">\(p(z)\)</span>. Si no se repite entonces tal eigenvalor se le nombra de multiplicidad <strong>simple</strong>.</p>
 <p>La <strong>multiplicidad geométrica</strong> de un eigenvalor es el número máximo de eigenvectores linealmente independientes asociados a éste.</p>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">Observación</p>
-<p>En el ejemplo anterior cada eigenvalor tiene una multiplicidad simple y la multiplicidad geométrica de cada eigenvalor es <span class="math notranslate nohighlight">\(1\)</span>.</p>
 </div>
 </div>
 <div class="section" id="id4">
@@ -1030,14 +1027,17 @@ eigenvectores:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="nd">@np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="nd">@np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Lambda</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>array([[  1.,  -4.,  -4.],
-       [  8., -11.,  -8.],
-       [ -8.,   8.,   5.]])
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[  1.  -4.  -4.]
+ [  8. -11.  -8.]
+ [ -8.   8.   5.]]
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1198,6 +1198,9 @@ eigenvectores:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[2.151 0.061 2.09 ]
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 </pre></div>
 </div>
 </div>
@@ -1523,6 +1526,9 @@ eigenvectores:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>descomposición espectral:
+</pre></div>
+</div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
 QLambdaQ^T:
 [[5. 4. 2.]
  [4. 5. 2.]
@@ -1917,6 +1923,9 @@ X_2 = \left [
  [ 0.     0.     0.651 -0.805]]
 </pre></div>
 </div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="margin sidebar">
@@ -2062,6 +2071,7 @@ X_2 = \left [
 </div>
 <ul class="simple">
 <li><p>Hay algoritmos que transformarán las matrices en lo más sencillo posible. Por ejemplo, una matriz casi diagnoal.</p></li>
+<li><p>Vemos que en este caso, el método con las <span class="math notranslate nohighlight">\(X_3\)</span> es el mejor porque nos da el resultado más simple.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
@@ -2097,7 +2107,7 @@ X_2 = \left [
 <p>Considérese la siguiente ecuación cuadrática:</p>
 <div class="math notranslate nohighlight">
 \[\frac{\tilde{x}^2}{16} + \frac{\tilde{y}^2}{9} = 1.\]</div>
-<p>Con Geometría Analítica sabemos que tal ecuación representa una elipse inclinada. Además si</p>
+<p>Con Geometría Analítica sabemos que tal ecuación representa una elipse. Además si</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">D</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([[</span><span class="n">sympy</span><span class="o">.</span><span class="n">Rational</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span> <span class="mi">0</span><span class="p">],</span>
@@ -2158,6 +2168,10 @@ x_tilde    y_tilde
 </div>
 </div>
 </div>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p>Al producto <span class="math notranslate nohighlight">\(x^TAx\)</span> con <span class="math notranslate nohighlight">\(A\)</span> simétrica se le nombra forma cuadrática y es un número en <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+</div>
 <p>Rotemos al <a class="reference external" href="https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes">eje mayor de la elipse</a> un ángulo de <span class="math notranslate nohighlight">\(\theta = \frac{\pi}{3}\)</span> con una <a class="reference internal" href="../2.1/Operaciones_y_transformaciones_basicas_del_Algebra_Lineal_Numerica.html#trot"><span class="std std-ref">transformación de rotación</span></a> que genera la ecuación matricial:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{array}{l}
@@ -2212,10 +2226,6 @@ y =\frac{\tilde{x}\sqrt{3}}{2} + \frac{\tilde{y}}{2} \nonumber
 \end{eqnarray}
 \end{split}\]</div>
 <p>Despejando <span class="math notranslate nohighlight">\(\tilde{x},\tilde{y}\)</span> y sustituyendo en <span class="math notranslate nohighlight">\(\frac{\tilde{x}^2}{16} + \frac{\tilde{y}^2}{9} = 1\)</span> resulta en la ecuación:</p>
-<div class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>Esta es una ecuación de una elipse inclinada.</p>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span>
@@ -2236,6 +2246,9 @@ y =\frac{\tilde{x}\sqrt{3}}{2} + \frac{\tilde{y}}{2} \nonumber
 </div>
 </div>
 </div>
+<ul class="simple">
+<li><p>Vemos en este caso que estamos obteniendo la representación de una elipse pero en una forma un poco más compleja.</p></li>
+</ul>
 <p>O equivalentemente el producto</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\left [ \begin{array}{c}
@@ -2250,6 +2263,10 @@ y
 \end{array}
 \right ]
 \end{split}\]</div>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Esta es una ecuación de una elipse inclinada.</p>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_y</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Matrix</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span>
@@ -2266,6 +2283,9 @@ y
 </div>
 </div>
 <p>con <span class="math notranslate nohighlight">\(A\)</span> matriz dada por <span class="math notranslate nohighlight">\(A=QDQ^T\)</span>:</p>
+<ul class="simple">
+<li><p>Vemos en este caso que la <span class="math notranslate nohighlight">\(A\)</span> y la <span class="math notranslate nohighlight">\(D\)</span> serán similares (mismos eigenvalores)</p></li>
+</ul>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Observa que <span class="math notranslate nohighlight">\(A\)</span> es <strong>simétrica</strong>.</p>
@@ -2436,13 +2456,13 @@ y
 <span class="n">apply_Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vec</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Q</span><span class="nd">@np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">vec</span><span class="p">))</span>
 <span class="n">Q_to_vector_1</span> <span class="o">=</span> <span class="n">apply_Q</span><span class="p">(</span><span class="n">x_y1_hat</span><span class="p">)</span>
 <span class="n">Q_to_vector_2</span> <span class="o">=</span> <span class="n">apply_Q</span><span class="p">(</span><span class="n">x_y2_hat</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 <span class="c1">#first plot</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Q_to_vector_1</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">Q_to_vector_1</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">,</span>
          <span class="n">Q_to_vector_2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">Q_to_vector_2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;g&#39;</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;57x^2-14(3^(1/2))xy+43y^2=1&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$57x^2-14</span><span class="se">\\</span><span class="s2">sqrt</span><span class="si">{3}</span><span class="s2">xy+43y^2=1$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Ejes coordenados típicos&quot;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -2463,17 +2483,17 @@ y
          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Eigenvector Q[:,1],  define al semieje menor principal de la elipse&quot;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">-</span><span class="n">Evector_2</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">Evector_2</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span>
          <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;_nolegend_&quot;</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;x_tilde^2(1/16) + y_tilde^2(1/9)=1&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">frac{</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{x}</span><span class="s2">^2}</span><span class="si">{16}</span><span class="s2"> + </span><span class="se">\\</span><span class="s2">frac{</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{y}</span><span class="s2">^2}</span><span class="si">{9}</span><span class="s2">=1$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Ejes coordenados rotados&quot;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Puntos en el plano que cumplen x_y_tilde^TDx_y_tilde = 1 o  x_y^TAx_y =1&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;Puntos en el plano que cumplen $z^TAz=1$ y $</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{z}</span><span class="s2">^TD</span><span class="se">\\</span><span class="s2">tilde</span><span class="si">{z}</span><span class="s2">=1$&quot;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Eigenvalores_y_eigenvectores_262_0.png" src="../../_images/Eigenvalores_y_eigenvectores_262_0.png" />
+<img alt="../../_images/Eigenvalores_y_eigenvectores_264_0.png" src="../../_images/Eigenvalores_y_eigenvectores_264_0.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2483,7 +2503,7 @@ y
 <p class="sidebar-title"></p>
 <p>Recuerda que <span class="math notranslate nohighlight">\(A = Q D Q^T\)</span>, <span class="math notranslate nohighlight">\(A\)</span> es similar a <span class="math notranslate nohighlight">\(D\)</span> matriz diagonal y <span class="math notranslate nohighlight">\(Q\)</span> es ortogonal.</p>
 </div>
-<p>En la gráfica anterior se representa la rotación de los ejes coordenados definidos por los vectores canónicos <span class="math notranslate nohighlight">\(e_1, e_2\)</span> y los rotados definidos por los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span>. Los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span> están en las columnas de <span class="math notranslate nohighlight">\(Q\)</span>. La primera columna de <span class="math notranslate nohighlight">\(Q\)</span> define al eje mayor principal de la elipse y la segunda columna al eje menor principal. La longitud de los semiejes están dados respectivamente por la raíz cuadrada de los recíprocos de los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span> que en este caso son: <span class="math notranslate nohighlight">\(\frac{1}{9}, \frac{1}{16}\)</span>, esto es: <span class="math notranslate nohighlight">\(4\)</span> y <span class="math notranslate nohighlight">\(16\)</span>. Ver por ejemplo: <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_axis_theorem">Principal_axis_theorem</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">Diagonalizable_matrix</a>.</p>
+<p>En la gráfica anterior se representa la rotación de los ejes coordenados definidos por los vectores canónicos <span class="math notranslate nohighlight">\(e_1, e_2\)</span> y los rotados definidos por los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span>. Los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span> están en las columnas de <span class="math notranslate nohighlight">\(Q\)</span>. La primera columna de <span class="math notranslate nohighlight">\(Q\)</span> define al eje mayor principal de la elipse y la segunda columna al eje menor principal. La longitud de los semiejes están dados respectivamente por la raíz cuadrada de los recíprocos de los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span> que en este caso son: <span class="math notranslate nohighlight">\(\frac{1}{9}, \frac{1}{16}\)</span>, esto es: <span class="math notranslate nohighlight">\(3\)</span> y <span class="math notranslate nohighlight">\(4\)</span>. Ver por ejemplo: <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_axis_theorem">Principal_axis_theorem</a>, <a class="reference external" href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">Diagonalizable_matrix</a>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicio</p>
 <p>Rotar los ejes coordenados <span class="math notranslate nohighlight">\(45^o\)</span> la ecuación de la elipse:</p>
@@ -2525,6 +2545,10 @@ y
 <p>Ver <a class="reference internal" href="#ejmn"><span class="std std-ref">Ejemplos de matrices normales</span></a>.</p>
 <div class="section" id="una-opcion-inestable-numericamente-respecto-al-redondeo-encontrar-raices-del-polinomio-caracteristico">
 <span id="ejmn"></span><h3>Una opción (inestable numéricamente respecto al redondeo): encontrar raíces del polinomio característico…<a class="headerlink" href="#una-opcion-inestable-numericamente-respecto-al-redondeo-encontrar-raices-del-polinomio-caracteristico" title="Permalink to this headline">¶</a></h3>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Como ejemplo que no es posible expresar las raíces o ceros por una fórmula cerrada que involucren a los coeficientes, operaciones aritméticas y raíces <span class="math notranslate nohighlight">\(\sqrt[n]{\cdot}\)</span> para polinomios de grado mayor a <span class="math notranslate nohighlight">\(4\)</span>, considérese las raíces de <span class="math notranslate nohighlight">\(x^5 - x^2 + 1 = 0\)</span>.</p>
+</div>
 <p>Por definición, los eigenvalores de <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> son las raíces o ceros del polinomio característico <span class="math notranslate nohighlight">\(p(z)\)</span> por lo que un método es calcularlas vía tal polinomio. Sin embargo, <strong>no es un buen método</strong> calcular tales raíces o ceros pues para una <span class="math notranslate nohighlight">\(n &gt; 4\)</span> <a class="reference external" href="https://en.wikipedia.org/wiki/Abel%E2%80%93Ruffini_theorem">Abel</a> probó de forma teórica que las raíces en general no son posibles expresarlas por una fórmula cerrada que involucren los coeficientes, operaciones aritméticas y raíces <span class="math notranslate nohighlight">\(\sqrt[n]{\cdot}\)</span> . Por lo anterior para calcular eigenvalores de matrices con dimensión <span class="math notranslate nohighlight">\(n&gt;4\)</span> requiere de un <strong>método iterativo</strong>.</p>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>

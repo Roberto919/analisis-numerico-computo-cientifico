@@ -261,43 +261,68 @@
   <a class="reference internal nav-link" href="#sistemas-de-ecuaciones-lineales">
    Sistemas de ecuaciones lineales
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretacion-geometrica">
-   Interpretación geométrica
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#algoritmos">
-   Algoritmos
-  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sistemas-triangulares">
-     Sistemas triangulares
+    <a class="reference internal nav-link" href="#interpretacion-geometrica">
+     Interpretación geométrica
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sistemas-no-triangulares">
-     Sistemas no triangulares
+    <a class="reference internal nav-link" href="#algoritmos">
+     Algoritmos
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algoritmos-para-sistemas-triangulares">
+     Algoritmos para sistemas triangulares
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algoritmos-para-sistemas-no-triangulares">
+     Algoritmos para sistemas no triangulares
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sistemas-de-ecuaciones-lineales-square-underdetermined-overdetermined">
+     Sistemas de ecuaciones lineales
+     <em>
+      square
+     </em>
+     ,
+     <em>
+      underdetermined
+     </em>
+     ,
+     <em>
+      overdetermined
+     </em>
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sistemas-de-ecuaciones-lineales-square-underdetermined-overdetermined">
-   Sistemas de ecuaciones lineales
-   <em>
-    square
-   </em>
-   ,
-   <em>
-    underdetermined
-   </em>
-   ,
-   <em>
-    overdetermined
-   </em>
+  <a class="reference internal nav-link" href="#id1">
+   Ecuaciones no lineales
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-de-biseccion-para-problemas-de-una-dimension">
+   Método de bisección para problemas de una dimensión
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#metodo-de-newton-o-newton-raphson-para-problemas-de-una-dimension">
+   Método de Newton o Newton-Raphson para problemas de una dimensión
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minimizar-una-funcion-de-una-dimension">
+   Minimizar una función de una dimensión
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#minimizar-una-funcion-de-mas-dimensiones">
+   Minimizar una función de más dimensiones
   </a>
  </li>
 </ul>
@@ -323,7 +348,7 @@
 <p>Documentación de la imagen de docker <code class="docutils literal notranslate"><span class="pre">palmoreck/jupyterlab_optimizacion:2.1.4</span></code> en <a class="reference external" href="https://github.com/palmoreck/dockerfiles/tree/master/jupyterlab/optimizacion">liga</a>.</p>
 </div>
 <hr class="docutils" />
-<p>Nota generada a partir de <a class="reference external" href="https://www.dropbox.com/home/MNO/Notas_github/III?preview=3.5.Aplicaciones_del_algebra_lineal_numerica.pdf">liga</a>.</p>
+<p>Nota generada a partir de <a class="reference external" href="https://www.dropbox.com/s/dfwk0y04ksgfilv/3.5.Aplicaciones_del_algebra_lineal_numerica.pdf?dl=0">liga1</a>, <a class="reference external" href="https://www.dropbox.com/s/6zree47e1u3p5wx/Ecuaciones_no_lineales.pdf?dl=0">liga2</a>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Al final de esta nota el y la lectora:</p>
 <ul class="simple">
@@ -332,8 +357,10 @@
 </div>
 <div class="section" id="sistemas-de-ecuaciones-lineales">
 <h2>Sistemas de ecuaciones lineales<a class="headerlink" href="#sistemas-de-ecuaciones-lineales" title="Permalink to this headline">¶</a></h2>
-<p>Las ecuaciones lineales tienen importantes aplicaciones en todas las áreas de la ciencia. La teoría del álgebra lineal nos permite tener resultados universales de las mismas y son una herramienta importante para aproximaciones a ecuaciones no lineales. Por ejemplo, al considerar pequeñas perturbaciones en un punto, un sistema no lineal puede típicamente aproximarse por un sistema lineal en una vecindad local del punto. Sin embargo, la linearización sólo describe propiedades locales y para un análisis global de problemas no lineales otras técnicas se requieren. Tales métodos típicamente utilizan esquemas iterativos para gradualmente aproximar la solución.</p>
-<p>En general son de la forma:</p>
+<p>Las ecuaciones lineales tienen importantes aplicaciones en todas las áreas de la ciencia. La teoría del álgebra lineal nos permite tener resultados universales de las mismas y son una herramienta importante para aproximaciones a ecuaciones no lineales. Por ejemplo, al considerar pequeñas perturbaciones en un punto, un sistema no lineal puede típicamente aproximarse por un sistema lineal en una vecindad local del punto. Sin embargo, la linearización sólo describe propiedades locales y para un análisis global de problemas no lineales otras técnicas se requieren. Tales métodos comúnmente utilizan esquemas iterativos para gradualmente aproximar la solución.</p>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p>En general un sistema de ecuaciones lineal es de la forma:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{array}{ccc} 
@@ -344,34 +371,48 @@ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n &amp;=&amp; b_m
 \end{array}
 \end{split}\]</div>
 <p>donde: las <span class="math notranslate nohighlight">\(x_i\)</span>’s son las incógnitas y las <span class="math notranslate nohighlight">\(a_i\)</span>’s y <span class="math notranslate nohighlight">\(b_i\)</span>’s son constantes conocidas.</p>
-<p>Las entradas <span class="math notranslate nohighlight">\(a_{ij}\)</span>’s son llamadas <strong>coeficientes del sistema</strong> y forman a la <strong>matriz del sistema</strong> <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span>. El conjunto de <span class="math notranslate nohighlight">\(b_i\)</span>’s se le llama <strong>lado derecho del sistema</strong> y forma al <strong>vector de lado derecho</strong> <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{m}\)</span>. Si todas las <span class="math notranslate nohighlight">\(b_i\)</span>’s son iguales a <span class="math notranslate nohighlight">\(0\)</span> el sistema se le nombra <strong>homogéneo</strong>.</p>
-<p><strong>3 posibilidades para solución del sistema anterior:</strong></p>
+<p>Las entradas <span class="math notranslate nohighlight">\(a_{ij}\)</span>’s son nombradas <strong>coeficientes del sistema</strong> y forman a la <strong>matriz del sistema</strong> <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span>. El conjunto de <span class="math notranslate nohighlight">\(b_i\)</span>’s se le nombra <strong>lado derecho del sistema</strong> y forma al <strong>vector de lado derecho</strong> <span class="math notranslate nohighlight">\(b \in \mathbb{R}^{m}\)</span>. Así, el sistema se escribe como <span class="math notranslate nohighlight">\(Ax = b\)</span>.</p>
+<p>Si todas las <span class="math notranslate nohighlight">\(b_i\)</span>’s son iguales a <span class="math notranslate nohighlight">\(0\)</span> el sistema se le nombra <strong>homogéneo</strong> si no se cumple esto se le nombra <strong>no homogéneo</strong>.</p>
+</div>
+<p>La teoría del álgebra lineal nos ayuda a determinar que existen solamente <strong>3 posibilidades para solución del sistema anterior:</strong></p>
 <ul class="simple">
-<li><p><strong>Una única solución:</strong> sólo existe uno y sólo un conjunto de valores de <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente y el sistema se nombra <strong>consistente</strong> o <strong>no singular</strong>.</p></li>
-<li><p><strong>Ninguna solución:</strong> no existe ningún conjunto de valores de <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente (el conjunto solución es vacío) y el sistema se nombra <strong>inconsistente</strong> o singular.</p></li>
-<li><p><strong>Infinitas soluciones:</strong> hay una infinidad de conjuntos (distintos) de valores de las <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente. Si un sistema tiene más de una solución entonces tiene una infinidad de soluciones y el sistema se nombra <strong>consistente</strong> o <strong>no singular</strong>.</p></li>
+<li><p><strong>Una única solución:</strong> sólo existe uno y sólo un conjunto de valores de <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente.</p></li>
+<li><p><strong>Ninguna solución:</strong> no existe ningún conjunto de valores de <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente (el conjunto solución es vacío).</p></li>
+<li><p><strong>Infinitas soluciones:</strong> hay una infinidad de valores distintos de las <span class="math notranslate nohighlight">\(x_i\)</span>’s que satisfacen todas las ecuaciones simultáneamente.</p></li>
 </ul>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p>En el caso de una o infinitas soluciones el sistema de ecuaciones lineales se nombra consistente o no singular, si no existe solución se nombra inconsistente o singular.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<p>Es sencillo probar que si un sistema tiene más de una solución entonces tiene una infinidad de soluciones. Esto contrasta con sistemas de ecuaciones no lineales donde pueden existir para tales sistemas un número finito de soluciones mayor a uno.</p>
 </div>
 <div class="section" id="interpretacion-geometrica">
-<h2>Interpretación geométrica<a class="headerlink" href="#interpretacion-geometrica" title="Permalink to this headline">¶</a></h2>
+<h3>Interpretación geométrica<a class="headerlink" href="#interpretacion-geometrica" title="Permalink to this headline">¶</a></h3>
 <p>Resolver un sistema de ecuaciones lineales equivale a encontrar la intersección entre rectas, planos o hiperplanos (2,3 o n dimensiones respectivamente). Por ejemplo para un caso de dos dimensiones se tiene:</p>
 <img src="https://dl.dropboxusercontent.com/s/p92z7zlquo1adbm/algebra_lineal_1.jpg?dl=0" heigth="700" width="700">
 <p>El inciso a) representa un sistema de ecuaciones lineales sin solución, el inciso b) infinitas soluciones (en el dibujo ligeramente se desplazó hacia abajo una de las rectas para mostrar ambas) y el inciso c) una única solución.</p>
 </div>
 <div class="section" id="algoritmos">
-<h2>Algoritmos<a class="headerlink" href="#algoritmos" title="Permalink to this headline">¶</a></h2>
+<h3>Algoritmos<a class="headerlink" href="#algoritmos" title="Permalink to this headline">¶</a></h3>
 <p>Existen una gran cantidad de algoritmos para resolver los sistemas de ecuaciones. Típicamente se elige el algoritmo de acuerdo a las características de los coeficientes de la matriz del sistema y sus dimensiones.</p>
-<div class="section" id="sistemas-triangulares">
-<h3>Sistemas triangulares<a class="headerlink" href="#sistemas-triangulares" title="Permalink to this headline">¶</a></h3>
-<p>Son sistemas cuya matriz es triangular inferior o superior. Un sistema triangular inferior se resuelve con el <strong>método de sustitución hacia delante</strong>. Si es triangular superior se resuelve con el <strong>método de sustitución hacia atrás</strong>.</p>
 </div>
-<div class="section" id="sistemas-no-triangulares">
-<h3>Sistemas no triangulares<a class="headerlink" href="#sistemas-no-triangulares" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="algoritmos-para-sistemas-triangulares">
+<h3>Algoritmos para sistemas triangulares<a class="headerlink" href="#algoritmos-para-sistemas-triangulares" title="Permalink to this headline">¶</a></h3>
+<p>Son sistemas cuya matriz del sistema es triangular inferior o superior. Un sistema triangular inferior se resuelve con el <strong>método de sustitución hacia delante</strong>. Si es triangular superior se resuelve con el <strong>método de sustitución hacia atrás</strong>.</p>
+</div>
+<div class="section" id="algoritmos-para-sistemas-no-triangulares">
+<h3>Algoritmos para sistemas no triangulares<a class="headerlink" href="#algoritmos-para-sistemas-no-triangulares" title="Permalink to this headline">¶</a></h3>
 <p>Para sistemas de ecuaciones lineales más generales (no tienen estructura identificable) se tienen los <strong>métodos iterativos</strong> y <strong>directos o basados en factorizaciones matriciales</strong>.</p>
 <p>Entre los directos o basados en factorizaciones matriciales se encuentran:</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Ver <a class="reference internal" href="../3.1/Definicion_de_problema_optimizacion_conjuntos_y_funciones_convexas.html#matrizsdpositiva"><span class="std std-ref">definición</span></a> de una matriz simétrica definida positiva.</p>
+</div>
 <ul class="simple">
 <li><p>Eliminación Gaussiana o factorización LU.</p></li>
-<li><p>Factorización de Cholesky (la matriz del sistema debe ser definida positiva).</p></li>
+<li><p>Factorización de Cholesky (la matriz del sistema debe ser un elemento en <span class="math notranslate nohighlight">\(\mathbb{S}^n_{++}\)</span> simétrica positiva definida)</p></li>
 <li><p>Factorización QR.</p></li>
 <li><p>Descomposición en valores singulares (DVS o SVD por sus siglas en inglés).</p></li>
 </ul>
@@ -379,33 +420,88 @@ a_{m1}x_1 + a_{m2}x_2 + \cdots + a_{mn}x_n &amp;=&amp; b_m
 <ul class="simple">
 <li><p>Jacobi.</p></li>
 <li><p>Gauss-Seidel.</p></li>
-<li><p>Gradiente conjugado.</p></li>
+<li><p>Gradiente conjugado (la versión que se aplica a matrices del sistema simétricas requiere que tales matrices estén en <span class="math notranslate nohighlight">\(\mathbb{S}^n_{++}\)</span>).</p></li>
 </ul>
 <p>Ambos métodos: iterativos y directos o basados en factorizaciones matriciales encuentran sistemas de ecuaciones equivalentes a partir de operaciones básicas del álgebra lineal.</p>
-<div class="admonition-comentario admonition">
-<p class="admonition-title">Comentario</p>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
 <p>Dos sistemas de ecuaciones lineales son equivalentes si tienen el mismo conjunto solución.</p>
 </div>
 </div>
-</div>
 <div class="section" id="sistemas-de-ecuaciones-lineales-square-underdetermined-overdetermined">
-<h2>Sistemas de ecuaciones lineales <em>square</em>, <em>underdetermined</em>, <em>overdetermined</em><a class="headerlink" href="#sistemas-de-ecuaciones-lineales-square-underdetermined-overdetermined" title="Permalink to this headline">¶</a></h2>
-<p>Entre las características que definen el problema a resolver y el tipo de algoritmo a usar se encuentran las dimensiones de una matriz. Si la matriz del sistema tiene más renglones que columnas, <span class="math notranslate nohighlight">\(m &gt; n\)</span>, se tiene un sistema <em><strong>overdetermined</strong></em>, si tiene más columnas que renglones, <span class="math notranslate nohighlight">\(m &lt; n\)</span>, se nombra <em><strong>underdetermined</strong></em> y si tiene el mismo número de renglones y columnas, <span class="math notranslate nohighlight">\(m=n\)</span>, se nombra <em><strong>square</strong></em>.</p>
-<p>En sistemas <em>overdetermined</em> con matriz del sistema de <em>rank</em> completo se busca resolver un <strong>problema de mínimos cuadrados</strong> de la forma:</p>
+<h3>Sistemas de ecuaciones lineales <em>square</em>, <em>underdetermined</em>, <em>overdetermined</em><a class="headerlink" href="#sistemas-de-ecuaciones-lineales-square-underdetermined-overdetermined" title="Permalink to this headline">¶</a></h3>
+<p>Entre las características que definen el problema a resolver y el tipo de algoritmo a usar se encuentran las dimensiones de una matriz.</p>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p>Si la matriz del sistema tiene más renglones que columnas, <span class="math notranslate nohighlight">\(m &gt; n\)</span>, se tiene un sistema <em><strong>overdetermined</strong></em>, si tiene más columnas que renglones, <span class="math notranslate nohighlight">\(m &lt; n\)</span>, se nombra <em><strong>underdetermined</strong></em> y si tiene el mismo número de renglones y columnas, <span class="math notranslate nohighlight">\(m=n\)</span>, se nombra <em><strong>square</strong></em>.</p>
+</div>
+<p>Los sistemas de ecuaciones lineales <em>overdetermined</em> en general no tienen solución si <span class="math notranslate nohighlight">\(b \notin \text{Im}(A)\)</span> con <span class="math notranslate nohighlight">\(\text{Im}(A)\)</span> espacio columna de <span class="math notranslate nohighlight">\(A\)</span>. Por esto se busca resolver un <strong>problema de mínimos cuadrados</strong> de la forma:</p>
 <div class="math notranslate nohighlight">
 \[\displaystyle \min_{x \in \mathbb{R}^n} ||Ax-b||_2\]</div>
-<p>En sistemas <em>underdetermined</em> con matriz del sistema de <em>rank</em> completo se busca resolver el problema de optimización:</p>
+<p>con única solución si <span class="math notranslate nohighlight">\(A\)</span> es de <em>rank</em> completo.</p>
+<p>Los sistemas de ecuaciones lineales <em>underdetermined</em> pueden tener infinitas soluciones o ninguna solución. En el caso que <span class="math notranslate nohighlight">\(A\)</span> sea de <em>rank</em> completo el sistema es consistente y se busca resolver el <strong>problema de optimización de mínima norma</strong> :</p>
 <div class="math notranslate nohighlight">
 \[\displaystyle \min_{x \in \mathcal{K}} ||x||_2\]</div>
-<p>donde: <span class="math notranslate nohighlight">\(\mathcal{K} = \{x \in \mathbb{R}^n | Ax = b\}\)</span> y este es un <strong>problema de mínima norma</strong>.</p>
-<div class="admonition-comentario admonition">
-<p class="admonition-title">Comentario</p>
-<p>El problema de optimización para el caso de sistemas <em>underdetermined</em> y matriz del sistema de <em>rank</em> completo también puede escribirse como:</p>
+<p>donde: <span class="math notranslate nohighlight">\(\mathcal{K} = \{x \in \mathbb{R}^n | Ax = b\}\)</span> que es interesante para <span class="math notranslate nohighlight">\(b \neq 0\)</span> y tiene única solución.</p>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Recuérdese que el producto <span class="math notranslate nohighlight">\(x^T Ax\)</span> con <span class="math notranslate nohighlight">\(A\)</span> simétrica se le nombra forma cuadrática y es un número en <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
+</div>
+<div class="admonition-comentarios admonition">
+<p class="admonition-title">Comentarios</p>
+<ul class="simple">
+<li><p>El problema de mínimos cuadrados es un problema convexo no importando si <span class="math notranslate nohighlight">\(A\)</span> es o no de <em>rank</em> completo pues la forma cuadrática involucra a la expresión <span class="math notranslate nohighlight">\(x^TA^TAx\)</span> y <span class="math notranslate nohighlight">\(A^TA \in \mathbb{S}^n_+\)</span>.</p></li>
+<li><p>El problema de optimización a resolver para el caso de sistemas de ecuaciones lineales <em>underdetermined</em> y matriz del sistema de <em>rank</em> completo también puede escribirse como:</p></li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\min_{x \in \mathbb{R}^n} ||x||_2\]</div>
 <div class="math notranslate nohighlight">
 \[\text{sujeto a:} Ax = b\]</div>
+<p>el cual es un problema de optimización convexa con restricciones (no importando si <span class="math notranslate nohighlight">\(A\)</span> es o no de <em>rank</em> completo).</p>
 </div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Ecuaciones no lineales<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>El problema que queremos resolver es el siguiente: dada <span class="math notranslate nohighlight">\(f: \mathbb{R} \rightarrow \mathbb{R}\)</span> encontrar <span class="math notranslate nohighlight">\(x^*\)</span> que resuelva la ecuación no lineal <span class="math notranslate nohighlight">\(f(x) = 0\)</span>. Nos interesa al menos una solución de la ecuación anterior.</p>
+<div class="admonition-definicion admonition">
+<p class="admonition-title">Definición</p>
+<p><span class="math notranslate nohighlight">\(x^*\)</span> se nombra raíz o cero de <span class="math notranslate nohighlight">\(f\)</span>.</p>
+</div>
+<p>Algunos son ejemplos son:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(e^x+1=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(e^{-x}-x =0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x^2 -4\sin(x)=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x^3+6x^2+11x-6=0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sin(x) = 0\)</span>.</p></li>
+</ul>
+<div class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>Como ejemplo que no es posible expresar las raíces o ceros por una fórmula cerrada que involucren a los coeficientes, operaciones aritméticas y raíces <span class="math notranslate nohighlight">\(\sqrt[n]{\cdot}\)</span>, considérese la ecuación no lineal <span class="math notranslate nohighlight">\(x^5 - x^2 + 1 = 0\)</span>.</p>
+</div>
+<div class="admonition-comentarios admonition">
+<p class="admonition-title">Comentarios</p>
+<ul class="simple">
+<li><p>En el caso de una ecuación o un sistema de ecuaciones no lineales no tenemos resultados que determinen la existencia o unicidad de soluciones a diferencia de un sistema lineal. Sin embargo, en muchas situaciones en la práctica se resuelven ecuaciones no lineales que sí tienen solución y se desea aproximar una solución o varias soluciones en una región de interés.</p></li>
+<li><p>La mayoría de los métodos para calcular raíces o ceros de <span class="math notranslate nohighlight">\(f\)</span> vía la ecuación no lineal <span class="math notranslate nohighlight">\(f(x) = 0\)</span> nos devuelven aproximaciones y no fórmulas cerradas. Son métodos <strong>iterativos</strong> que en el caso de <span class="math notranslate nohighlight">\(1\)</span> dimensión los podemos dividir en <span class="math notranslate nohighlight">\(2\)</span> tipos: <strong>cerrados</strong> y <strong>abiertos</strong>. Los cerrados inician sus iteraciones en un intervalo que encierra a la raíz y conforme avanzan las iteraciones hacen subdivisiones del intervalo inicial por lo que su longitud se reduce y <strong>siempre</strong> convergen. Los abiertos no requieren encerrar a la raíz, en general tienen mejor desempeño que los cerrados en cuanto al número de iteraciones pero <strong>no siempre convergen</strong>.</p></li>
+<li><p>Es conveniente comentar que si bien quisiéramos tener algoritmos que calculasen todas las raíces o ceros de <span class="math notranslate nohighlight">\(f\)</span> esto no es posible, es un hecho que los métodos nos darán una solución aproximada o un mensaje del tipo “no se encontró solución”.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="metodo-de-biseccion-para-problemas-de-una-dimension">
+<h2>Método de bisección para problemas de una dimensión<a class="headerlink" href="#metodo-de-biseccion-para-problemas-de-una-dimension" title="Permalink to this headline">¶</a></h2>
+<p>Método cerrado</p>
+</div>
+<div class="section" id="metodo-de-newton-o-newton-raphson-para-problemas-de-una-dimension">
+<h2>Método de Newton o Newton-Raphson para problemas de una dimensión<a class="headerlink" href="#metodo-de-newton-o-newton-raphson-para-problemas-de-una-dimension" title="Permalink to this headline">¶</a></h2>
+<p>Método abierto</p>
+</div>
+<div class="section" id="minimizar-una-funcion-de-una-dimension">
+<h2>Minimizar una función de una dimensión<a class="headerlink" href="#minimizar-una-funcion-de-una-dimension" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="minimizar-una-funcion-de-mas-dimensiones">
+<h2>Minimizar una función de más dimensiones<a class="headerlink" href="#minimizar-una-funcion-de-mas-dimensiones" title="Permalink to this headline">¶</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicios</p>
 <p>1.Resuelve los ejercicios y preguntas de la nota.</p>
