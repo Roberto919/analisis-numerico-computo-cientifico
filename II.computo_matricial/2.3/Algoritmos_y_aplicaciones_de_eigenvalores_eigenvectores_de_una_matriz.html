@@ -464,9 +464,6 @@
 <div class="math notranslate nohighlight">
 \[A_{k+1} = (J_0 J_1 \cdots J_k)^T A(J_0 J_1 \cdots J_k)\]</div>
 <p><strong>converge</strong> a una matriz diagonal en la que se encuentran los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span>.</p>
-<ul class="simple">
-<li><p>Estas son las mismas que las rotaciones de Givens.</p></li>
-</ul>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Los pasos de un algoritmo representan una guía para la implementación, no implica que se tengan que implementar uno a continuación del otro como se describe. Si una implementación respeta la lógica y al mismo algoritmo, entonces pueden seguirse los pasos de una forma distinta.</p>
@@ -486,12 +483,6 @@
 </div></blockquote>
 <p><strong>hasta</strong> convergencia: satisfacer criterio de paro en el que se utiliza <span class="math notranslate nohighlight">\(tol\)</span> y <span class="math notranslate nohighlight">\(maxsweeps\)</span>.</p>
 </div></blockquote>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(tol\)</span> se da normalmente como 10^-8.</p></li>
-<li><p>Con la transformación del paso 3 preservamos la simetría.</p></li>
-<li><p>El paso tres te ayuda a calcular los eigenvalores.</p></li>
-<li><p>Con el paso 4 calculamos los eigenvectores.</p></li>
-</ul>
 <p>La matriz <span class="math notranslate nohighlight">\(J_k\)</span> se utiliza para eliminar un par de entradas (simétricas) en la matriz <span class="math notranslate nohighlight">\(A_k\)</span>, esto  preserva la simetría de la matriz original. En las columnas de la matriz <span class="math notranslate nohighlight">\(Q_{k}\)</span> se encuentran aproximaciones a los eigenvectores de <span class="math notranslate nohighlight">\(A\)</span> y en la diagonal de <span class="math notranslate nohighlight">\(A_{k}\)</span> se tienen aproximaciones a los eigenvalores de <span class="math notranslate nohighlight">\(A\)</span>.</p>
 <div class="admonition-comentarios admonition">
 <p class="admonition-title">Comentarios</p>
@@ -499,9 +490,6 @@
 <p>1.Elegir <span class="math notranslate nohighlight">\((idx1,idx2)\)</span> tales que <span class="math notranslate nohighlight">\(|a_{idx1,idx2}| = \displaystyle \max_{i \neq j}|a_{ij}|\)</span>.</p>
 <p>2.<strong>Ordenamiento cíclico por renglones:</strong> elegir <span class="math notranslate nohighlight">\((idx1, idx2)\)</span> en el conjunto <span class="math notranslate nohighlight">\((1,2),(1,3),\dots,(1,n),(2,3),(2,4)\dots,(n-1,n)\)</span>.</p>
 </div>
-<ul class="simple">
-<li><p>Vemos que la metodología 1 nos pide encontrar el valor más grande dentro de la matriz.</p></li>
-</ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <p>Obsérvese que <span class="math notranslate nohighlight">\(A_{k+1}\)</span> y <span class="math notranslate nohighlight">\(A_{k}\)</span> son matrices ortogonalmente similares, ver <a class="reference internal" href="../2.2/Eigenvalores_y_eigenvectores.html#similitud"><span class="std std-ref">similitud</span></a>.</p>
@@ -562,9 +550,6 @@ t_1^* &amp;=&amp; -\tau + \sqrt{\tau^2+1}&amp;=&amp;\frac{1}{\tau+\sqrt{\tau^2+1
 t_2^* &amp;=&amp; -\tau - \sqrt{\tau^2+1}&amp;=&amp;\frac{1}{\tau-\sqrt{\tau^2+1}} \nonumber
 \end{eqnarray}
 \end{split}\]</div>
-<ul class="simple">
-<li><p>Dado que obtenemos una ecuación cuadrática, podemos obtener las raíces.</p></li>
-</ul>
 <p>Se <strong>sugiere</strong> utilizar la raíz de menor magnitud para disminuir errores por redondeo por lo que:</p>
 <div class="math notranslate nohighlight">
 \[t^* = \frac{\text{signo}(\tau)}{|\tau| + \sqrt{1+\tau^2}}\]</div>
@@ -767,9 +752,6 @@ A =
 </div>
 <p>con <code class="docutils literal notranslate"><span class="pre">||A_k||_F</span></code> norma de Frobenius de <span class="math notranslate nohighlight">\(A_k\)</span> y <code class="docutils literal notranslate"><span class="pre">sweeps</span></code> contador de los <em>sweeps</em>.</p>
 </div>
-<ul class="simple">
-<li><p>La <span class="math notranslate nohighlight">\(n\)</span> en la heurística <span class="math notranslate nohighlight">\((log(n))\)</span> es la dimensión de la matriz.</p></li>
-</ul>
 </div>
 <div class="section" id="id1">
 <h3>Ejemplo<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
@@ -787,14 +769,6 @@ A =
 \right ].
 \end{split}\]</div>
 <p>Utilizando la metodología de ordenamiento cíclico por renglones realizar dos <em>sweeps</em> del método de rotaciones de Jacobi para matrices simétricas.</p>
-<ul class="simple">
-<li><p>Este método que vamos a aplicar está demostrado que siempre va a converger.</p></li>
-<li><p>Un sweep es el número de entradas por arriba de la diagnoal que queremos hacer cero.</p>
-<ul>
-<li><p>Un sweep consiste en hacer los números arriba de la diagonal cero.</p></li>
-</ul>
-</li>
-</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_Jacobi_rotation</span><span class="p">(</span><span class="n">Ak</span><span class="p">,</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">):</span>
@@ -1048,10 +1022,6 @@ A =
 </div>
 </div>
 </div>
-<ul class="simple">
-<li><p>Antes de llegar al <em>sweep</em> vemos como quedó la matriz.</p></li>
-<li><p>Vemos que algunas cosas sí se hicieron cero pero no todas.</p></li>
-</ul>
 <p><strong>Segundo <em>sweep</em></strong></p>
 <p><strong>Entrada <span class="math notranslate nohighlight">\(a_{41}\)</span> rotación en el plano <span class="math notranslate nohighlight">\((1,4)\)</span>:</strong></p>
 <div class="cell docutils container">
@@ -1247,6 +1217,9 @@ A =
  [ 4.  5.  7. -8.]]
 </pre></div>
 </div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1288,7 +1261,7 @@ A =
 <p class="admonition-title">Comentarios</p>
 <p>Algunas características del método de rotaciones de Jacobi para matrices simétricas:</p>
 <ul class="simple">
-<li><p>Tiene una convergencia cuadrática, esto es, la matriz <span class="math notranslate nohighlight">\(A_k\)</span> al ir aproximándose hacia una diagonal, el número de dígitos de precisión en cada iteración se duplica. Sin embargo el algoritmo QR (versión no simple) es más eficiente en cuanto al número de iteraciones. No alcanza a la precisión del algoritmo de Jacobi.</p></li>
+<li><p>Tiene una convergencia cuadrática, esto es, la matriz <span class="math notranslate nohighlight">\(A_k\)</span> al ir aproximándose hacia una diagonal, el número de dígitos de precisión en cada iteración se duplica. Sin embargo el algoritmo QR (versión no simple) es más eficiente en cuanto al número de iteraciones.</p></li>
 <li><p>La precisión que tiene en el cálculo de eigenvalores es alta (error relativo pequeño).</p></li>
 <li><p>Es un algoritmo que puede realizarse con cómputo en paralelo si se utilizan ordenamientos específicos como el cíclico por renglones. También este algoritmo puede realizarse por bloques.</p></li>
 </ul>
@@ -1579,9 +1552,6 @@ A =
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[8. 3.]
 </pre></div>
 </div>
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
-</div>
 </div>
 </div>
 <div class="admonition-comentarios admonition" id="comentariosalgqr">
@@ -1621,16 +1591,10 @@ A =
 </div>
 <div class="section" id="metodo-de-la-potencia-para-matrices-simetricas-a-in-mathbb-r-n-times-n">
 <span id="mpotmatsim"></span><h2>Método de la potencia para matrices simétricas <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span><a class="headerlink" href="#metodo-de-la-potencia-para-matrices-simetricas-a-in-mathbb-r-n-times-n" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Este método es relevante porque hay aplicaciones que solo necesitan un eigen-valor.</p></li>
-</ul>
 <p>Si la matriz <span class="math notranslate nohighlight">\(A\)</span> tiene un <strong>único</strong> eigenvalor <span class="math notranslate nohighlight">\(\lambda_1\)</span> que tiene máximo módulo y <span class="math notranslate nohighlight">\(z^{(0)}\)</span> es un vector distinto de cero entonces el esquema iterativo:</p>
 <div class="math notranslate nohighlight">
 \[z^{(k)} = A z^{(k-1)}\]</div>
 <p><strong>casi siempre</strong> converge a un múltiplo del eigenvector de <span class="math notranslate nohighlight">\(A\)</span> asociado a <span class="math notranslate nohighlight">\(\lambda_1\)</span>, ver <a class="reference internal" href="#comentariosmetpotencia"><span class="std std-ref">comentarios del método de la potencia</span></a> para suposiciones que garantizan la convergencia.</p>
-<ul class="simple">
-<li><p>Máximo módulo se refiere al valor más grande de los eigen valores.</p></li>
-</ul>
 <div class="section" id="id3">
 <h3>Ejemplo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
@@ -1728,6 +1692,9 @@ A =
 <div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[3.5 4.5]
 </pre></div>
 </div>
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
 </div>
 </div>
 <p><strong>…</strong></p>
@@ -1785,6 +1752,14 @@ z^{(k)} &amp;=&amp; A z^{(k-1)} = A^2 z^{(k-2)} = \cdots = A^k z^{(0)} \nonumber
 </div></blockquote>
 <p><strong>hasta</strong> convergencia: satisfacer criterio de paro en el que se utiliza <span class="math notranslate nohighlight">\(tol\)</span>.</p>
 </div></blockquote>
+<ul class="simple">
+<li><p>Paso 1: aquí están los productos matríz vector requeridos para el método de la potencia.</p></li>
+<li><p>Paso 2: normalización.</p></li>
+<li><p>Paso 3:</p></li>
+</ul>
+<ul class="simple">
+<li><p>La <span class="math notranslate nohighlight">\(q\)</span> es un vector que se va a ir acercando al eigenvector.</p></li>
+</ul>
 <div class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>En el caso no simétrico se requiere que la matriz sea diagonalizable para la convergencia del método, ver <a class="reference internal" href="../2.2/Eigenvalores_y_eigenvectores.html#diagonalizable"><span class="std std-ref">matriz diagonalizable</span></a>.</p>
@@ -1841,7 +1816,7 @@ z^{(k)} &amp;=&amp; A z^{(k-1)} = A^2 z^{(k-2)} = \cdots = A^k z^{(0)} \nonumber
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_197_0.png" src="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_197_0.png" />
+<img alt="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_190_0.png" src="../../_images/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz_190_0.png" />
 </div>
 </div>
 <div class="margin sidebar">
@@ -1907,6 +1882,9 @@ eigenvectores:
 <li><p>La convergencia de este método depende mucho de la cercanía entre <span class="math notranslate nohighlight">\(|\lambda_1|\)</span> y <span class="math notranslate nohighlight">\(|\lambda_2|\)</span>: si son muy cercanos la convergencia es lenta. Esto es posible mejorar al utilizar <em>shifts</em>.</p></li>
 </ul>
 </div>
+<ul class="simple">
+<li><p>El shift mencionado nos puede ayudar para evitar la cercanía entre los dos eigenvalores.</p></li>
+</ul>
 <div class="tip admonition">
 <p class="admonition-title">Ejercicio</p>
 <p>Realiza tres iteraciones del método de la potencia para calcular <span class="math notranslate nohighlight">\(\lambda_{\text{max}}(A)\)</span> de la matriz:</p>
@@ -1946,6 +1924,9 @@ eigenvectores:
 </div>
 <div class="section" id="algoritmo-iteracion-inversa-o-metodo-de-la-potencia-inversa-para-matrices-simetricas">
 <h3>Algoritmo: iteración inversa o método de la potencia inversa para matrices simétricas<a class="headerlink" href="#algoritmo-iteracion-inversa-o-metodo-de-la-potencia-inversa-para-matrices-simetricas" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>El problema con este método es que necesitamos conocer una aproximación al eigenvalor <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Dados</strong> <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> simétrica, <span class="math notranslate nohighlight">\(q^{(0)} \in \mathbb{R}^n\)</span> de norma Euclidiana unitaria, <span class="math notranslate nohighlight">\(\mu \in \mathbb{R}\)</span> aproximación a un eigenvalor <span class="math notranslate nohighlight">\(\lambda\)</span> de <span class="math notranslate nohighlight">\(A\)</span> y <span class="math notranslate nohighlight">\(tol &gt; 0\)</span>.</p>
 <ol class="simple">
@@ -1960,6 +1941,12 @@ eigenvectores:
 </div></blockquote>
 <p><strong>hasta</strong> convergencia: satisfacer criterio de paro en el que se utiliza <span class="math notranslate nohighlight">\(tol\)</span>.</p>
 </div></blockquote>
+<ul class="simple">
+<li><p>Aquí no hay paso 3 porque la convergencia del algoritmo validará que aproximamos bien el eigenvalor <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Notemos que el método de Gauss-Jordan no se utiliza en la práctica.</p></li>
+</ul>
 <div class="admonition-comentarios admonition">
 <p class="admonition-title">Comentarios</p>
 <ul class="simple">
@@ -1984,6 +1971,9 @@ r(x) = \frac{x^TAx}{x^Tx}
 <p>Este cociente se utiliza para acelerar la convergencia en el método de la potencia o el de iteración inversa. En el caso de la iteración inversa se tiene el siguiente algoritmo.</p>
 <div class="section" id="algoritmo-iteracion-por-el-cociente-de-rayleigh-para-matrices-simetricas">
 <h3>Algoritmo: iteración por el cociente de Rayleigh para matrices simétricas<a class="headerlink" href="#algoritmo-iteracion-por-el-cociente-de-rayleigh-para-matrices-simetricas" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Aquí la gran diferencia es que la <span class="math notranslate nohighlight">\(\mu\)</span> va cambiando.</p></li>
+</ul>
 <blockquote>
 <div><p><strong>Dados</strong> <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{n \times n}\)</span> simétrica, <span class="math notranslate nohighlight">\(x^{(0)} \in \mathbb{R}^n - \{0\}\)</span> y <span class="math notranslate nohighlight">\(tol &gt; 0\)</span>.</p>
 <p><strong>Repetir</strong> el siguiente bloque para <span class="math notranslate nohighlight">\(k=0,1,2,\dots\)</span></p>
@@ -2061,11 +2051,6 @@ r(x) = \frac{x^TAx}{x^Tx}
 \end{array}
 \right ]
 \end{split}\]</div>
-<ul class="simple">
-<li><p>La matriz representa relación de inlinks y outlinks.</p></li>
-<li><p>Cada renglón es una página.</p></li>
-<li><p>Si ver por columnas se refiere a las páginas hacia las que apuntas.</p></li>
-</ul>
 <p>La matriz anterior podemos leerla como sigue:</p>
 <ul class="simple">
 <li><p>(perspectiva de los renglones) La página <span class="math notranslate nohighlight">\(3\)</span> es referenciada o tiene <em>inlinks</em> de las páginas <span class="math notranslate nohighlight">\(\{2,5,6\}\)</span>.</p></li>
@@ -2073,7 +2058,7 @@ r(x) = \frac{x^TAx}{x^Tx}
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
-<p>Obsérvese que la suma por columna es igual a <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>Obsérvese que la suma por columna es igual a <span class="math notranslate nohighlight">\(1\)</span> 0 <span class="math notranslate nohighlight">\(0\)</span>.</p>
 </div>
 <p>En el <strong>ejemplo</strong> anterior asúmase que <strong>inicialmente</strong> <span class="math notranslate nohighlight">\(r_2 = r_5 = r_6 = \frac{1}{6}\)</span>, entonces el <em>pagerank</em> de la página <span class="math notranslate nohighlight">\(3\)</span> es: <span class="math notranslate nohighlight">\(r_3 = \frac{1}{6}\frac{1}{N_3} + \frac{1}{6}\frac{1}{N_5} + \frac{1}{6}\frac{1}{N_6} = \frac{1}{6}1 + \frac{1}{6}\frac{1}{3} + \frac{1}{6}\frac{1}{2} = 0.30\bar{5}\)</span></p>
 <p>Continuando con la descripción del problema en el cálculo del <em>pagerank</em>, si se define el vector <span class="math notranslate nohighlight">\(r\)</span> con los <em>pageranks</em> de cada página se tiene:</p>

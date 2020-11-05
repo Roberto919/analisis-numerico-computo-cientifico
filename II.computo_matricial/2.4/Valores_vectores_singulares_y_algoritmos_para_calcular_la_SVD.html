@@ -344,20 +344,18 @@
 <p class="admonition-title">Definición</p>
 <p>El número <span class="math notranslate nohighlight">\(\sigma\)</span> se denomina valor <em>singular</em> de <span class="math notranslate nohighlight">\(A\)</span> si <span class="math notranslate nohighlight">\(\sigma = \sqrt{\lambda_{A^TA}} = \sqrt{\lambda_{AA^T}}\)</span> donde: <span class="math notranslate nohighlight">\(\lambda_{A^TA}\)</span> y <span class="math notranslate nohighlight">\(\lambda_{AA^T}\)</span> es eigenvalor de <span class="math notranslate nohighlight">\(A^TA\)</span> y <span class="math notranslate nohighlight">\(AA^T\)</span> respectivamente.</p>
 </div>
-<div class="tip admonition">
-<p class="admonition-title">Observación</p>
 <p>La definición se realiza sobre <span class="math notranslate nohighlight">\(A^TA\)</span> o <span class="math notranslate nohighlight">\(AA^T\)</span> pues éstas matrices tienen el mismo espectro y además sus eigenvalores son reales y no negativos por lo que <span class="math notranslate nohighlight">\(\sigma \in \mathbb{R}\)</span> y de hecho <span class="math notranslate nohighlight">\(\sigma \geq 0\)</span> (la raíz cuadrada se calcula para un eigenvalor no negativo).</p>
-</div>
 </div>
 <div class="section" id="vector-singular-izquierdo-vector-singular-derecho">
 <h2>Vector singular izquierdo, vector singular derecho<a class="headerlink" href="#vector-singular-izquierdo-vector-singular-derecho" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-definicion admonition">
-<p class="admonition-title">Definición</p>
 <p>Asociado con cada valor singular <span class="math notranslate nohighlight">\(\sigma\)</span> existen vectores singulares <span class="math notranslate nohighlight">\(u,v\)</span> que cumplen con la igualdad:</p>
 <div class="math notranslate nohighlight">
 \[Av = \sigma u .\]</div>
 <p>Al vector <span class="math notranslate nohighlight">\(u\)</span> se le nombra <strong>vector singular izquierdo</strong> y al vector <span class="math notranslate nohighlight">\(v\)</span> se le nombra <strong>vector singular derecho</strong>.</p>
-</div>
+<ul class="simple">
+<li><p>Vemos que esta es una igualdad muy parecida a la de eigenvalores.</p></li>
+<li><p>Siempre se puede garantizar esto si hay un valor singular.</p></li>
+</ul>
 </div>
 <div class="section" id="descomposicion-en-valores-singulares-svd">
 <h2>Descomposición en valores singulares (SVD)<a class="headerlink" href="#descomposicion-en-valores-singulares-svd" title="Permalink to this headline">¶</a></h2>
@@ -424,12 +422,7 @@ v_{12} &amp; v_{22}\\
 \end{array}
 \right ]
 \end{split}\]</div>
-<div class="admonition-definicion admonition">
-<p class="admonition-title">Definición</p>
 <p>Las columnas de <span class="math notranslate nohighlight">\(U\)</span> nombramos <strong>vectores singulares izquierdos de <span class="math notranslate nohighlight">\(A\)</span></strong> y las columnas de <span class="math notranslate nohighlight">\(V\)</span> nombramos <strong>vectores singulares derechos de <span class="math notranslate nohighlight">\(A\)</span></strong> en <span class="math notranslate nohighlight">\(A = U \Sigma V^T\)</span>.</p>
-</div>
-<div class="admonition-comentarios admonition">
-<p class="admonition-title">Comentarios</p>
 <ul class="simple">
 <li><p>La notación <span class="math notranslate nohighlight">\(\sigma_1\)</span> hace referencia al valor singular más grande de A, <span class="math notranslate nohighlight">\(\sigma_2\)</span> al segundo valor singular más grande de A y así sucesivamente.</p></li>
 <li><p>Para cualquier <span class="math notranslate nohighlight">\(A \in \mathbb{R}^{m \times n}\)</span> se tiene <span class="math notranslate nohighlight">\(A = U \Sigma V^T\)</span>. Si <span class="math notranslate nohighlight">\(b = Ax = (U \Sigma V^T) x\)</span> entonces:</p></li>
@@ -444,9 +437,11 @@ v_{12} &amp; v_{22}\\
 <p>donde: <span class="math notranslate nohighlight">\(r = rank(A)\)</span>.</p>
 <p>Ver <a class="reference external" href="https://en.wikipedia.org/wiki/Singular_value_decomposition#Reduced_SVDs">reduced SVDs</a>.</p>
 </div>
-</div>
 <div class="section" id="algunas-propiedades">
 <h2>Algunas propiedades<a class="headerlink" href="#algunas-propiedades" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Los valores singulares dan el rank de la matriz.</p></li>
+</ul>
 <p>Existen diferentes propiedades de los valores y vectores singulares, aquí se enlistan algunas:</p>
 <ul class="simple">
 <li><p>Si <span class="math notranslate nohighlight">\(rank(A) = r\)</span> entonces <span class="math notranslate nohighlight">\(r \leq p\)</span> y <span class="math notranslate nohighlight">\(\sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_r &gt; \sigma_{r+1} = \sigma_{r+2} = \dots = \sigma_p =  0\)</span>.</p></li>
@@ -474,10 +469,7 @@ v_{12} &amp; v_{22}\\
 </div>
 <div class="section" id="metodos-numericos-para-calcular-svd">
 <h2>Métodos numéricos para calcular SVD<a class="headerlink" href="#metodos-numericos-para-calcular-svd" title="Permalink to this headline">¶</a></h2>
-<div class="margin sidebar">
-<p class="sidebar-title"></p>
 <p>En <em>NumPy</em> con <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html">numpy.linalg.svd</a> podemos calcular la SVD de <span class="math notranslate nohighlight">\(A\)</span>, obsérvese en la ayuda  que se regresa <span class="math notranslate nohighlight">\(V^T\)</span> y no <span class="math notranslate nohighlight">\(V\)</span>.</p>
-</div>
 <p>Algunos métodos para calcular la descomposición en valores singulares de una matriz son:</p>
 <ul class="simple">
 <li><p>Método de rotaciones de Jacobi <em><strong>one sided</strong></em>, ver <a class="reference internal" href="../2.3/Algoritmos_y_aplicaciones_de_eigenvalores_eigenvectores_de_una_matriz.html#rotjacmatsim"><span class="std std-ref">rotaciones de Jacobi para matrices simétricas</span></a> en el que se utiliza el <em><strong>two sided</strong></em>.</p></li>
@@ -522,8 +514,6 @@ v_{12} &amp; v_{22}\\
 </div></blockquote>
 <p><strong>hasta</strong> convergencia: satisfacer criterio de paro en el que se utiliza <span class="math notranslate nohighlight">\(num\text{_}columnas\text{_}ortogonales\)</span> y <span class="math notranslate nohighlight">\(maxsweeps\)</span>.</p>
 </div></blockquote>
-<div class="admonition-comentarios admonition">
-<p class="admonition-title">Comentarios</p>
 <ul class="simple">
 <li><p>En el método se hace mención de <strong>metodologías</strong> que ayudan a elegir los índices del renglón y columna del par de entradas de <span class="math notranslate nohighlight">\(A\)</span> que serán eliminadas (hacer cercanas a cero). Algunas de éstas son:</p>
 <ul>
@@ -567,7 +557,6 @@ v_{12} &amp; v_{22}\\
 <ul class="simple">
 <li><p>Al finalizar el método, los valores singulares calculados son las normas Euclidianas de cada columna de <span class="math notranslate nohighlight">\(A_k\)</span> y las columnas normalizadas de <span class="math notranslate nohighlight">\(A_k\)</span> son las columnas de <span class="math notranslate nohighlight">\(U\)</span>.</p></li>
 </ul>
-</div>
 <p><strong>Preguntas de comprehensión</strong></p>
 <p>1)¿Cómo se podría calcular el rank de una matriz si se han calculado previamente sus valores singulares?</p>
 <p>2)Verdadero o falso:</p>
